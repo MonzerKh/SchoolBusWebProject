@@ -4,6 +4,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { AccountService } from './services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -30,16 +31,16 @@ export class AppComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
-              // private authService: AuthService,
+               private accountService: AccountService,
               private router: Router) {}
 
 
   ngOnInit(): void {
-    // this.userSub = this.authService.currentUser$.subscribe(user => {
-    //   this.isAuthenticatedUser = !!user;
-    //   console.log(!user);
-    //   console.log(!!user);
-    // });
+    this.userSub = this.accountService.currentUser$.subscribe(user => {
+      this.isAuthenticatedUser = !!user;
+      console.log(!user);
+      console.log(!!user);
+    });
   }
 
   showLMenu() {
@@ -48,7 +49,7 @@ export class AppComponent {
 
   onlogout(){
     this.isAuthenticatedUser= false;
-    // this.authService.logout();
+    this.accountService.logout();
     this.router.navigateByUrl('/')
   }
 
