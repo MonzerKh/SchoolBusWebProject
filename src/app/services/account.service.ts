@@ -43,9 +43,8 @@ export class AccountService {
   }
 
   logout(){
-    this.isAuthedUser=false;
     localStorage.removeItem('user');
-    // this.currentUserSource.next(null);
+    //this.currentUserSource.next(null);
     this.currentUserSource = new ReplaySubject<SystemUserDto>();
     this.router.navigateByUrl('/sign-in');
   }

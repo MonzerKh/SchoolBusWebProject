@@ -12,7 +12,7 @@ import { SchoolDto } from '../../models/schoolDto';
 })
 export class CreateSchoolComponent implements OnInit {
 
-  school: SchoolDto  = {} as SchoolDto;
+  school: SchoolDto  = {id:0} as SchoolDto;
   editMode: boolean= false;
   id!: number;
   createScoolForm!: FormGroup;
@@ -64,9 +64,9 @@ export class CreateSchoolComponent implements OnInit {
 
   }
 
-  cancelRegister(){
+  cancel(){
     this.createScoolForm.reset();
-    this.router.navigate(['../school-data-table']);
+    this.router.navigate(['../school-list']);
   }
 
   resetForm() {

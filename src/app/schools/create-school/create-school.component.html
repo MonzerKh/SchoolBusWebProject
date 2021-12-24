@@ -4,7 +4,7 @@
       <div class="col-md-10">
         <div class="card">
           <div class="card-header card-header-danger">
-            <h4 class="card-title">Register School</h4>
+            <h4 class="card-title">School Creation</h4>
             <p class="card-category">Complete School profile </p>
           </div>
           <div class="card-body">
@@ -59,11 +59,10 @@
               </div>
               <div class="row buttons col-md-12">
                 <button class="col-md-4" mat-raised-button type="submit"
-                  color="primary" [disabled]="!createScoolForm.valid">Register
-                  School</button>&nbsp;&nbsp;
+                  color="primary" [disabled]="!createScoolForm.valid">Submit</button>&nbsp;&nbsp;
                 <button class="col-md-4" mat-raised-button type="button"
                   color="warn"
-                  routerLink="/school-list"><span>cancel</span></button>
+                  (click)="cancel()"><span>cancel</span></button>
                 <div class="clearfix"></div>
               </div>
             </form>

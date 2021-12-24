@@ -1,5 +1,6 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
+      *ngIf="isAuthenticatedUser"
       #drawer
       class="sidenav"
       fixedInViewport
@@ -80,7 +81,7 @@
       </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="warn" >
+    <mat-toolbar color="warn" *ngIf="isAuthenticatedUser">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -100,17 +101,16 @@
       <div>
         <a routerLinkActive="active" routerLink="/sign-in" mat-button *ngIf="">logout</a>
         <a routerLinkActive="active" routerLink="/sign-up" mat-button *ngIf="">Sign Up</a>
-        <button mat-button >
-          <a [routerLink]="['/sign-in']" *ngIf=""></a>
-          Logout
+        <button mat-button (click)="onLogout()"  *ngIf="isAuthenticatedUser">
+          {{ isAuthenticatedUser ? 'Logout' : 'Login' }}
         </button>
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <main>
+
       <ng-content></ng-content>
       <router-outlet></router-outlet>
-    </main>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
 

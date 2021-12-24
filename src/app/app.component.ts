@@ -21,7 +21,7 @@ export class AppComponent {
   sidebarBackgrount!:"../../assets/images/sidebar-4.jpg";
 
   private userSub!: Subscription;
-  isAuthenticatedUser= false;
+  isAuthenticatedUser = false;
 
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -47,10 +47,10 @@ export class AppComponent {
     this.trigger.openMenu();
   }
 
-  onlogout(){
+  onLogout(){
     this.isAuthenticatedUser= false;
     this.accountService.logout();
-    this.router.navigateByUrl('/')
+    this.router.navigateByUrl('/sign-in')
   }
 
 }

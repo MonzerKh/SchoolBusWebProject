@@ -1,0 +1,23 @@
+<div class="form-group example-form">
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>Email</mat-label>
+    <input
+    matInput
+      type="email"
+      id="email"
+      placeholder="Ex. pat@example.com"
+      [class.is-invalid]="ngControl.touched && ngControl.invalid"
+      [formControl]="ngControl.control"
+      [errorStateMatcher]="matcher">
+
+    <mat-error *ngIf="ngControl.control?.hasError('email') && !ngControl.control?.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="ngControl.control?.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+
+
+  </mat-form-field>
+</div>
+

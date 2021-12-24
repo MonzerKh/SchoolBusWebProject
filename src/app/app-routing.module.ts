@@ -8,10 +8,12 @@ import { SchoolListComponent } from './schools/school-list/school-list.component
 import { SignInComponent } from './sign-in/sign-in.component';
 
 const routes: Routes = [
+  // { path: '', component: AppComponent},
   { path: '', component: SignInComponent},
+  { path: 'sign-in', component: SignInComponent},
   { path:'home', component: AppComponent},
-  { path:  'school', component:CreateSchoolComponent},
 
+  { path:  'school', component:CreateSchoolComponent},
   { path:'school/new', component:CreateSchoolComponent},
   { path:'school/:id/edit', component:CreateSchoolComponent},
   { path: 'school-list', component:SchoolListComponent },

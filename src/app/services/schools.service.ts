@@ -40,11 +40,11 @@ export class SchoolsService {
     .subscribe({
       next: (v: any) =>{
         console.log(v);
-        this._snackBar.openSnackBar("School Registeration is Successed");
+        this._snackBar.openSnackBar("School Creation is Successed");
       },
         error: (e: any) => {
           console.log(e);
-          this._snackBar.openSnackBar("School Registeration was Faild");
+          this._snackBar.openSnackBar("School Creation was Faild");
         },
         complete: () => console.info('complete')
     })

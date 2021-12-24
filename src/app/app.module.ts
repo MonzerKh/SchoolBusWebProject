@@ -8,7 +8,7 @@ import { HomeComponent } from './home/home.component';
 
 import { MaterialModule } from './material/material.module';
 import { LayoutModule } from '@angular/cdk/layout';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -17,6 +17,8 @@ import { CreateSchoolComponent } from './schools/create-school/create-school.com
 import { SchoolListComponent } from './schools/school-list/school-list.component';
 import { CreateGuardianComponent } from './guardians/create-guardian/create-guardian.component';
 import { GuardianListComponent } from './guardians/guardian-list/guardian-list.component';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { EmailInputComponent } from './shared/sharedFormComponents/email-input/email-input.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { GuardianListComponent } from './guardians/guardian-list/guardian-list.c
     HomeComponent,
     SignInComponent,
     TextInputComponent,
+    EmailInputComponent,
     CreateSchoolComponent,
     SchoolListComponent,
     CreateGuardianComponent,
@@ -43,7 +46,11 @@ import { GuardianListComponent } from './guardians/guardian-list/guardian-list.c
 
 
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    // ,
+    // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

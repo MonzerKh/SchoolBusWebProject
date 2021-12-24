@@ -16,7 +16,7 @@ import { Observable, pipe } from 'rxjs';
 export class CreateGuardianComponent implements OnInit {
 
   guardianForm!: FormGroup;
-  guardian:GuardianDto = {} as GuardianDto;
+  guardian:GuardianDto = {id:0} as GuardianDto;
   id!:number;
   editMode= false ;
   message!: string;
