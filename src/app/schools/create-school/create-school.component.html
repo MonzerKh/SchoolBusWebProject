@@ -1,0 +1,75 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Register School</h4>
+            <p class="card-category">Complete School profile </p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]='createScoolForm'
+              (ngSubmit)="createScoolForm.valid && onSubmit()"
+              autocomplete="on">
+
+              <div class="row">
+                <div class="col-md-4 ">
+                  <app-text-input
+                    [formControl]='createScoolForm.controls["school_Name"]'
+                    [label]='"School Name"'></app-text-input>
+                </div>
+                <div class="col-md-4">
+                  <app-text-input
+                    [formControl]='createScoolForm.controls["manager"]'
+                    [label]='"Manager Name"'></app-text-input>
+                </div>
+                <div class="col-md-4">
+                  <!-- <app-email-input [formControl]='createScoolForm.controls["email"]'></app-email-input> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <app-text-input
+                    [formControl]='createScoolForm.controls["phone"]'
+                    [label]='"phone Numner"'></app-text-input>
+                </div>
+                <div class="col-md-9">
+                  <app-text-input
+                    [formControl]='createScoolForm.controls["schoolUrl"]'
+                    [label]='"School URL"'></app-text-input>
+                </div>
+              </div>
+              <div class="row">
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- <app-text-input [formControl]='createScoolForm.controls["userName"]' [label]='"User Name"'></app-text-input> -->
+                </div>
+                <div class="col-md-6">
+                  <!-- <app-text-input [formControl]='createScoolForm.controls["logo"]' [label]='"logo url"'></app-text-input> -->
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <app-text-input
+                    [formControl]='createScoolForm.controls["address"]'
+                    [label]='"Address"'></app-text-input>
+                </div>
+              </div>
+              <div class="row buttons col-md-12">
+                <button class="col-md-4" mat-raised-button type="submit"
+                  color="primary" [disabled]="!createScoolForm.valid">Register
+                  School</button>&nbsp;&nbsp;
+                <button class="col-md-4" mat-raised-button type="button"
+                  color="warn"
+                  routerLink="/school-list"><span>cancel</span></button>
+                <div class="clearfix"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>

@@ -32,7 +32,7 @@
               </mat-list-item>
             </mat-nav-list>
 <!--School list-->
-              <mat-list-item  routerLink="/school-data-table" >
+              <mat-list-item  routerLink="/school-list" >
               <mat-icon matListIcon class="mat-18">school</mat-icon>
               <button mat-button>School</button>
             </mat-list-item>
@@ -101,7 +101,7 @@
         <a routerLinkActive="active" routerLink="/sign-in" mat-button *ngIf="">logout</a>
         <a routerLinkActive="active" routerLink="/sign-up" mat-button *ngIf="">Sign Up</a>
         <button mat-button >
-          <a [routerLink]="['/sign-up']" *ngIf=""></a>
+          <a [routerLink]="['/sign-in']" *ngIf=""></a>
           Logout
         </button>
       </div>

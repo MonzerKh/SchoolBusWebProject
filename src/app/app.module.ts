@@ -13,6 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { TextInputComponent } from './shared/sharedFormComponents/text-input/text-input.component';
+import { CreateSchoolComponent } from './schools/create-school/create-school.component';
+import { SchoolListComponent } from './schools/school-list/school-list.component';
+import { CreateGuardianComponent } from './guardians/create-guardian/create-guardian.component';
+import { GuardianListComponent } from './guardians/guardian-list/guardian-list.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +24,10 @@ import { TextInputComponent } from './shared/sharedFormComponents/text-input/tex
     HomeComponent,
     SignInComponent,
     TextInputComponent,
+    CreateSchoolComponent,
+    SchoolListComponent,
+    CreateGuardianComponent,
+    GuardianListComponent,
   ],
   imports: [
 

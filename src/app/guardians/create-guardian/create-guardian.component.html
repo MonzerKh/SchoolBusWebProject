@@ -1,0 +1,81 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Register Guardian</h4>
+            <p class="card-category">Complete Guardian profile </p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]='guardianForm' (ngSubmit)="guardianForm.valid && onSubmit()">
+              <div class="row">
+                <div class="col-md-6">
+                  <app-text-input [formControl]='guardianForm.controls["nationality_Id"]' [label]='"nationality Id"'></app-text-input>
+                </div>
+                <div class="col-md-6">
+                  <app-text-input [formControl]='guardianForm.controls["full_Name"]' [label]='"Full Name"'></app-text-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <app-email-input [formControl]='guardianForm.controls["email"]'></app-email-input>
+                </div>
+                <div class="col-md-6">
+                  <app-text-input [formControl]='guardianForm.controls["phone"]' [label]='"phone"'></app-text-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- <app-text-input [formControl]='guardianForm.controls["userName"]' [label]='"User Name"'></app-text-input> -->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <app-text-input [formControl]='guardianForm.controls["imagePath"]' [label]='"Image Path"'></app-text-input>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <app-text-input [formControl]='guardianForm.controls["school_Id"]' [label]='"School Id"'></app-text-input>
+                </div>
+                <div class="col-md-6">
+                  <!-- <app-text-input [formControl]='guardianForm.controls["school_Name"]' [label]='"School Name"'></app-text-input> -->
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- <app-address [formControl]='guardianForm.controls["address"]'></app-address> -->
+                <div class="col-md-4">
+                  <app-text-input [formControl]='guardianForm.controls["country"]' [label]='"country"'></app-text-input>
+                </div>
+                <div class="col-md-4">
+                  <app-text-input [formControl]='guardianForm.controls["city"]' [label]='"City"'></app-text-input>
+                </div>
+                <div class="col-md-4">
+                  <app-text-input [formControl]='guardianForm.controls["town"]' [label]='"Town"'></app-text-input>
+                </div>
+                <div class="col-md-4">
+                  <app-text-input [formControl]='guardianForm.controls["street"]' [label]='"Street"'></app-text-input>
+                </div>
+                <div class="col-md-4">
+                  <app-text-input [formControl]='guardianForm.controls["boxNumber"]' [label]='"box Number"'></app-text-input>
+                </div>
+                <div class="col-md-4">
+                  <app-text-input [formControl]='guardianForm.controls["address"]' [label]='"Full Address"'></app-text-input>
+                </div>
+              </div>
+              <div class="row buttons col-md-12">
+                <button class="col-md-4" mat-raised-button type="submit" color="primary" [disabled]="!guardianForm.valid">Submit</button>&nbsp;&nbsp;
+                <button class="col-md-4" mat-raised-button type="button" color="warn" (click)="cancelRegister()"><span>cancel</span></button>
+                <div class="clearfix"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
