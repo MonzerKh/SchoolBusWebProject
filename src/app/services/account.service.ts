@@ -32,7 +32,7 @@ export class AccountService {
         this.isAuthedUser= true;
         this.setCurrentUser(user);
         this._snackBar.openSnackBar("log is Successed");
-        this.router.navigateByUrl('/main-nav')
+        this.router.navigateByUrl('/home')
         }
     })
   }

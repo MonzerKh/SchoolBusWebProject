@@ -11,11 +11,15 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { TextInputComponent } from './shared/sharedFormComponents/text-input/text-input.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    SignInComponent,
+    TextInputComponent,
   ],
   imports: [
 

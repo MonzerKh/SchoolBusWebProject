@@ -1,0 +1,30 @@
+<div class="form-group example-form">
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label>{{label}}</mat-label>
+    <input
+      matInput
+      placeholder="{{label}}"
+      type={{type}}
+      [class.is-invalid]="ngControl.touched && ngControl.invalid"
+      [formControl]="ngControl.control"
+    >
+
+    <mat-error *ngIf="ngControl.control?.errors?.required">
+      {{label}} is <strong>required</strong>
+    </mat-error>
+
+    <mat-error *ngIf="ngControl.control?.errors?.minlength">
+      {{label}} must be at least {{ngControl.control?.errors?.minlength['requiredLength']}}
+    </mat-error>
+
+  </mat-form-field>
+
+
+
+
+
+
+</div>
+
+
+
