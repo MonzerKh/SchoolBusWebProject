@@ -19,6 +19,7 @@ import { CreateGuardianComponent } from './guardians/create-guardian/create-guar
 import { GuardianListComponent } from './guardians/guardian-list/guardian-list.component';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { EmailInputComponent } from './shared/sharedFormComponents/email-input/email-input.component';
+import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/image-uploade.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { EmailInputComponent } from './shared/sharedFormComponents/email-input/e
     SchoolListComponent,
     CreateGuardianComponent,
     GuardianListComponent,
+    ImageUploadeComponent,
   ],
   imports: [
 

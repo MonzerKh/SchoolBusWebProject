@@ -1,9 +1,5 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+
 import { Component, ViewChild } from '@angular/core';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 import { AccountService } from './services/account.service';
 
 @Component({
@@ -12,45 +8,24 @@ import { AccountService } from './services/account.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'SchoolBus';
+  title = 'School Bus';
 
-  @ViewChild(MatMenuTrigger) trigger!: MatMenuTrigger;
-  @ViewChild(MatMenuTrigger) listitems!: MatMenuTrigger;
-
-  logoUrl: string="../..assets/images/img/angular2-logo-red.png";
-  sidebarBackgrount!:"../../assets/images/sidebar-4.jpg";
-
-  private userSub!: Subscription;
-  isAuthenticatedUser = false;
+   IsLogin :boolean= false;
 
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
-
-  constructor(private breakpointObserver: BreakpointObserver,
-               private accountService: AccountService,
-              private router: Router) {}
+  constructor(private accountService: AccountService) { }
 
 
   ngOnInit(): void {
-    this.userSub = this.accountService.currentUser$.subscribe(user => {
-      this.isAuthenticatedUser = !!user;
-      console.log(!user);
-      console.log(!!user);
-    });
+    this.accountService.getCurrentUser();
+     this.accountService.currentUser$.subscribe(user => {
+       this.IsLogin = !!user;
+     });
   }
 
-  showLMenu() {
-    this.trigger.openMenu();
-  }
 
-  onLogout(){
-    this.isAuthenticatedUser= false;
-    this.accountService.logout();
-    this.router.navigateByUrl('/sign-in')
-  }
+
+
+
 
 }
