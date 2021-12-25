@@ -1,7 +1,7 @@
 import { PaginationParams } from './paginationParams';
 
 
-export class SchoolParams extends PaginationParams{
+export class BusCompanyParams extends PaginationParams{
   school_Name! :string;
   address! :string;
   manager! :string;
@@ -12,7 +12,7 @@ export class SchoolParams extends PaginationParams{
   }
 
   getHttpParams( ) {
-    let schoolParams=this.getPaginationHeaders();
+    let busCompanyParams=this.getPaginationHeaders();
 
     // if(!this.school_Name){  schoolParams = schoolParams.append('school_Name', this.school_Name.toString());}
     // if(!this.address){  schoolParams = schoolParams.append('address', this.address.toString());}
@@ -21,7 +21,6 @@ export class SchoolParams extends PaginationParams{
     // if(!this.pageNumber){  schoolParams = schoolParams.append('pageNumber', this.pageNumber.toString());}
     // if(!this.pageSize){  schoolParams = schoolParams.append('pageSize', this.pageSize.toString());}
 
-    return schoolParams;
+    return busCompanyParams;
   }
 }
-

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { BusCompanyCreateComponent } from './bus-company/bus-company-create/bus-company-create.component';
+import { BusCompanyListComponent } from './bus-company/bus-company-list/bus-company-list.component';
 import { CreateGuardianComponent } from './guardians/create-guardian/create-guardian.component';
 import { GuardianListComponent } from './guardians/guardian-list/guardian-list.component';
 import { CreateSchoolComponent } from './schools/create-school/create-school.component';
@@ -17,6 +19,11 @@ const routes: Routes = [
   { path:'school/new', component:CreateSchoolComponent},
   { path:'school/:id/edit', component:CreateSchoolComponent},
   { path: 'school-list', component:SchoolListComponent },
+
+  { path:  'busCompany', component:BusCompanyCreateComponent},
+  { path:'busCompany/new', component:BusCompanyCreateComponent},
+  { path:'busCompany/:id/edit', component:BusCompanyCreateComponent},
+  { path: 'busCompany-list', component:BusCompanyListComponent },
 
   { path: 'guardian', component: CreateGuardianComponent},
   { path: 'guardian/new', component:CreateGuardianComponent},
