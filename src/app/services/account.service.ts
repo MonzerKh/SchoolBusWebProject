@@ -4,7 +4,7 @@ import { SnackBarService } from '../services/snack-bar.service';
 import { LoginDto } from '../models/loginDto';
 import { environment } from 'src/environments/environment';
 import { ReplaySubject } from 'rxjs';
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { SystemUserDto } from '../models/systemUserDto ';
 import { Router } from '@angular/router'
 
@@ -16,25 +16,22 @@ export class AccountService {
   baseUrl = environment.apiUrl;
   private currentUserSource = new ReplaySubject<SystemUserDto>(1);
   currentUser$ = this.currentUserSource.asObservable();
-  isAuthedUser= false;
 
-  constructor( private http: HttpClient, private _snackBar: SnackBarService, private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
-  login(loginDto: LoginDto){
+  login(loginDto: LoginDto) {
 
-    return  this.http.post(this.baseUrl +'Account/login',loginDto)
-    .subscribe((res: SystemUserDto| any)=>{
-      let user:SystemUserDto;
-      user=res;
-      console.log(user);
-      if(user){
-        this.isAuthedUser= true;
-        this.setCurrentUser(user);
-        this._snackBar.openSnackBar("log is Successed");
-        this.router.navigateByUrl('/home')
+    return this.http.post(this.baseUrl + 'Account/login', loginDto)
+      .subscribe((res: SystemUserDto | any) => {
+        let user: SystemUserDto;
+        user = res;
+        console.log(user);
+        if (user) {
+          this.setCurrentUser(user);
+        //  this.router.navigateByUrl('/home')
         }
-    })
+      })
   }
 
   setCurrentUser(user: SystemUserDto) {
@@ -42,10 +39,19 @@ export class AccountService {
     this.currentUserSource.next(user);
   }
 
-  logout(){
+  getCurrentUser() :boolean {
+    const user: SystemUserDto = JSON.parse(localStorage.getItem('user')!);
+    if (user) {
+      this.setCurrentUser(user);
+      return true;
+    }
+    return false;
+  }
+
+  logout() {
     localStorage.removeItem('user');
-    //this.currentUserSource.next(null);
-    this.currentUserSource = new ReplaySubject<SystemUserDto>();
+    this.currentUserSource.next(null!);
+    //this.currentUserSource = new ReplaySubject<SystemUserDto>(1);
     this.router.navigateByUrl('/sign-in');
   }
 }

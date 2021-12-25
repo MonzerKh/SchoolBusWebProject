@@ -1,63 +1,116 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+      #drawer
+      class="sidenav"
+      fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
 
-<mat-toolbar>
-  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
-    <mat-icon *ngIf="!sidenav.opened" >
-      menu
-    </mat-icon>
-    <mat-icon *ngIf="sidenav.opened" >
-      close
-    </mat-icon>
-  </button>
-    <span>Responsiv Sidebar Navigation</span>
-</mat-toolbar>
-
-<mat-sidenav-container>
-  <mat-sidenav  #sidenav="matSidenav">
-    <div class="image ">
-      <img class="avatar mat-elevation-z8" src="../../assets/3333.jpg" alt="user foto">
-    </div>
+      <div class="container-fluid">
+        <mat-toolbar>
+          <div class="logo">
+            <div class="logo-img">
+                <img src="/assets/images/img/angular2-logo-red.png"/>
+            </div>
+            <div class="logo-text">School & Bus</div>
+          </div>
+        </mat-toolbar>
 
 
-    <h4 class="name">Aufa Alkarfan</h4>
+        <mat-nav-list>
+<!-- user List-->
+            <mat-list-item routerLink="/user">
+                <mat-icon matListIcon  class="mat-18">person_pin</mat-icon>
+                <button mat-button >User</button>
+            </mat-list-item>
 
-    <p class="designation">Software Engineer</p>
+            <mat-nav-list>
+              <mat-list-item  routerLink="/user">
+                <mat-icon matListIcon class="mat-18">person</mat-icon>
+                <button mat-button>User</button>
+              </mat-list-item>
+            </mat-nav-list>
+<!--School list-->
+              <mat-list-item  routerLink="/school-list" >
+              <mat-icon matListIcon class="mat-18">school</mat-icon>
+              <button mat-button>School</button>
+            </mat-list-item>
 
-    <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button">
-      <mat-icon>ligature</mat-icon>
-      <span>Ligature</span>
-    </button>
+<!--Guardian  list-->
+            <mat-list-item routerLink="/guardian-list">
+              <mat-icon matListIcon  class="mat-18">person</mat-icon>
+              <button mat-button  >Guardian</button>
+            </mat-list-item>
 
-    <button mat-button class="menu-button">
-      <mat-icon>home</mat-icon>
-      <span>Home</span>
-    </button>
 
-    <button mat-button class="menu-button">
-      <mat-icon>person</mat-icon>
-      <span>Profile</span>
-    </button>
+<!--Student list-->
+            <mat-list-item routerLink="/student">
+              <mat-icon matListIcon  class="mat-18">person</mat-icon>
+              <button mat-button>Student</button>
+            </mat-list-item>
 
-    <button mat-button class="menu-button">
-      <mat-icon>info</mat-icon>
-      <span>about</span>
-    </button>
+<!--Supervisor list-->
+            <mat-list-item>
+              <mat-icon matListIcon class="mat-18">supervisor_account</mat-icon>
+              <button mat-button routerLink="/user" >supervisor</button>
+            </mat-list-item>
 
-    <mat-divider></mat-divider>
+<!--Bus Company list-->
+            <mat-list-item  routerLink="/bus-company" >
+              <mat-icon matListIcon class="mat-18">business</mat-icon>
+              <button mat-button >Bus Company</button>
+            </mat-list-item>
 
-    <button mat-button class="menu-button">
-      <mat-icon>help</mat-icon>
-      <span>Help</span>
-    </button>
+<!--Bus  list-->
+            <mat-list-item routerLink="/bus-register">
+              <mat-icon matListIcon class="mat-18">directions_bus</mat-icon>
+              <button mat-button>Bus</button>
+            </mat-list-item>
 
+
+<!--driver  list-->
+            <mat-list-item routerLink="/user">
+              <mat-icon matListIcon class="mat-18">person</mat-icon>
+              <button mat-button >Driver</button>
+            </mat-list-item>
+        </mat-nav-list>
+
+      </div>
   </mat-sidenav>
-
   <mat-sidenav-content>
-    <!-- Body -->
-    <div class="content mat-elevation-z4">
-      Main Content
-    </div>
-  </mat-sidenav-content>
+    <mat-toolbar color="warn">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>School Bus Web Project</span>
+      <div fxShow="true" fxHide.lt-md="true" fxFlex fxLayout>
+        <!-- The following menu items will be hidden on both SM and XS screen sizes -->
+        <a routerLinkActive="active" routerLink=""    mat-button>home</a>
+        <a routerLinkActive="active" routerLink=""   mat-button>About</a>
+        <a routerLinkActive="active" routerLink="" mat-button>Contact</a>
+      </div>
+      <span class="example-spacer"></span>
+      <div>
+        <a routerLinkActive="active" routerLink="/sign-in" mat-button *ngIf="">logout</a>
+        <a routerLinkActive="active" routerLink="/sign-up" mat-button *ngIf="">Sign Up</a>
+        <button mat-button (click)="onLogout()">
+           Logout
+        </button>
+      </div>
+    </mat-toolbar>
+    <!-- Add Content Here -->
 
+      <ng-content></ng-content>
+
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
 </mat-sidenav-container>
+
+
