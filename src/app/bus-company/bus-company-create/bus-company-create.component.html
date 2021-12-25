@@ -1,1 +1,56 @@
-<p>bus-company-create works!</p>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">School Creation</h4>
+            <p class="card-category">Complete School profile </p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]='BusCompanyForm'
+              (ngSubmit)="BusCompanyForm.valid && onSubmit()"
+              autocomplete="on">
+
+              <div class="row">
+                <div class="col-md-6 ">
+                  <app-text-input [formControl]='BusCompanyForm.controls["company"]'  [label]='"Company Name"'></app-text-input>
+                </div>
+                <div class="col-md-6">
+                  <app-text-input [formControl]='BusCompanyForm.controls["phone"]' [label]='"phone Numner"'></app-text-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-9">
+                  <!-- <app-image-uploade></app-image-uploade> -->
+                </div>
+                <div class="col-md-3">
+                   <app-text-input [formControl]='BusCompanyForm.controls["logoPath"]' [label]='"logo Pathe"'></app-text-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <app-text-input [formControl]='BusCompanyForm.controls["webSiteUrl"]' [label]='"webSite Url"'></app-text-input>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <app-text-input [formControl]='BusCompanyForm.controls["address"]' [label]='"address"'></app-text-input>
+                </div>
+              </div>
+
+              <div class="row buttons col-md-12">
+                <button class="col-md-4" mat-raised-button type="submit"
+                  color="primary" [disabled]="!BusCompanyForm.valid">Submit</button>&nbsp;&nbsp;
+                <button class="col-md-4" mat-raised-button type="button"
+                  color="warn"
+                  (click)="cancel()"><span>cancel</span></button>
+                <div class="clearfix"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+</div>

@@ -20,6 +20,8 @@ import { GuardianListComponent } from './guardians/guardian-list/guardian-list.c
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { EmailInputComponent } from './shared/sharedFormComponents/email-input/email-input.component';
 import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/image-uploade.component';
+import { BusCompanyListComponent } from './bus-company/bus-company-list/bus-company-list.component';
+import { BusCompanyCreateComponent } from './bus-company/bus-company-create/bus-company-create.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/im
     CreateGuardianComponent,
     GuardianListComponent,
     ImageUploadeComponent,
+    BusCompanyListComponent,
+    BusCompanyCreateComponent,
   ],
   imports: [
 

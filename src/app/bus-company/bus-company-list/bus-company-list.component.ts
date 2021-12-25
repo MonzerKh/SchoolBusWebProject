@@ -14,7 +14,7 @@ import { BusCompanyService } from 'src/app/services/bus-company.service';
   templateUrl: './bus-company-list.component.html',
   styleUrls: ['./bus-company-list.component.scss']
 })
-export class BusCompanyListComponent  implements AfterViewInit, OnInit {
+export class BusCompanyListComponent   implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<BusCompanyDto>;
@@ -64,13 +64,13 @@ export class BusCompanyListComponent  implements AfterViewInit, OnInit {
     console.log(BusCompany.id);
   }
 
-  onAddSchool(){
+  onAddBusCompany(){
     // this.router.navigate(['../school-register/new'], {relativeTo: this.route});
   }
 
   onEditBusCompany(BusCompany:BusCompanyDto){
     this.id= BusCompany.id;
-    this.router.navigate(['../busCompany/'+this.id+'/edit'], {relativeTo: this.route});
+    this.router.navigate(['../busCompany/edit/'+this.id], {relativeTo: this.route});
   }
 
   findBusCompanyByName(school_Name: HTMLInputElement){
@@ -88,6 +88,4 @@ export class BusCompanyListComponent  implements AfterViewInit, OnInit {
     // this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-
 }
-

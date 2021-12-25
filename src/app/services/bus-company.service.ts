@@ -40,7 +40,7 @@ export class BusCompanyService {
     .subscribe({
       next: (v: any) =>{
         console.log(v);
-        this._snackBar.openSnackBar("Bus Company Creation is Successed");
+        this._snackBar.openSnackBar("Bus Company  is created");
       },
         error: (e: any) => {
           console.log(e);
