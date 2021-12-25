@@ -29,9 +29,10 @@ const routes: Routes = [
       { path: 'guardian/new', component: CreateGuardianComponent },
       { path: 'guardian/:id/edit', component: CreateGuardianComponent },
       { path: 'guardian-list', component: GuardianListComponent },
-      { path:  'busCompany', component:BusCompanyCreateComponent},
-      { path:'busCompany/new', component:BusCompanyCreateComponent},
-      { path:'busCompany/:id/edit', component:BusCompanyCreateComponent},
+      
+      { path: 'busCompany', component:BusCompanyCreateComponent},
+      { path: 'busCompany/new', component:BusCompanyCreateComponent},
+      { path: 'busCompany/:id/edit', component:BusCompanyCreateComponent},
       { path: 'busCompany-list', component:BusCompanyListComponent },
 
       { path: 'guardian', component: CreateGuardianComponent},
