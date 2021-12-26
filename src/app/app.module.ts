@@ -22,6 +22,8 @@ import { EmailInputComponent } from './shared/sharedFormComponents/email-input/e
 import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/image-uploade.component';
 import { BusCompanyListComponent } from './bus-company/bus-company-list/bus-company-list.component';
 import { BusCompanyCreateComponent } from './bus-company/bus-company-create/bus-company-create.component';
+import { ItemUploadComponent } from './shared/ImageComponents/item-upload/item-upload.component';
+import { ImageUploadComponent } from './shared/ImageComponents/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { BusCompanyCreateComponent } from './bus-company/bus-company-create/bus-
     ImageUploadeComponent,
     BusCompanyListComponent,
     BusCompanyCreateComponent,
+    ItemUploadComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,
