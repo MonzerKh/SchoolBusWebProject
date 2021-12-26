@@ -39,7 +39,6 @@ import { BusCompanyCreateComponent } from './bus-company/bus-company-create/bus-
     BusCompanyCreateComponent,
   ],
   imports: [
-
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,

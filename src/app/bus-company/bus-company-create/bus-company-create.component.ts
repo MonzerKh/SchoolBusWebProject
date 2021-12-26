@@ -40,6 +40,7 @@ export class BusCompanyCreateComponent implements OnInit {
       'phone': [ this.busCompany.phone, Validators.required],
       'webSiteUrl': [this.busCompany.webSiteUrl, Validators.required],
       'address': [this.busCompany.address, Validators.required],
+      ''
     });
 
   }

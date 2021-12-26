@@ -1,0 +1,29 @@
+<div class="card">
+  <div class="card-header">
+    File Upload
+  </div>
+  <div class="card-body">
+    <mat-form-field>
+      <div>
+        <mat-toolbar>
+          <!-- Display files names -->
+          <input matInput [(ngModel)]="fileAttr" readonly name="name" />
+
+          <!-- Browse Button -->
+          <button mat-flat-button color="primary">
+            Browse File
+          </button>
+        </mat-toolbar>
+
+        <!-- Fetch selected filed on change -->
+        <input type="file" #fileInput id="uploadFile"
+          (change)="uploadFileEvt($event)" name="uploadFile" multiple="multiple"
+          accept="image/*" />
+      </div>
+    </mat-form-field>
+  </div>
+
+  <div class="card-footer">
+    <div><img src="{{dataimage}}" width="300px"></div>
+  </div>
+</div>
