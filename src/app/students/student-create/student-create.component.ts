@@ -50,24 +50,24 @@ export class StudentCreateComponent implements OnInit {
 
   intitStudenForm() {
     if (this.editMode) {
-      // this.studentService.getstudentById(this.id).subscribe((data) => {
-      //   this.student = data;
-      //   console.log(this.student);
-      //   this.loadForm();
-      // });
+      this.studentService.getstudentById(this.id).subscribe((data) => {
+        this.student = data;
+        console.log(this.student);
+        this.loadForm();
+      });
 
-      forkJoin([
-        this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
-        // this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
-        this.studentService.getstudentById(this.id).subscribe(response=> this.student= response),
-      ])
-      console.log(this.schools);console.log(this.student);
+      // forkJoin([
+      //   this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
+      //   // this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
+      //   this.studentService.getstudentById(this.id).subscribe(response=> this.student= response),
+      // ])
+      // console.log(this.schools);console.log(this.student);
       this.loadForm();
     } else {
-      forkJoin([
-        this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
-        this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
-      ])
+      // forkJoin([
+      //   this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
+      //   this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
+      // ])
       this.loadForm();
 
     }
