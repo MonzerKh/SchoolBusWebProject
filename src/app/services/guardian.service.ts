@@ -17,7 +17,7 @@ export class GuardianService {
   guardianCache = new Map();
   guardianParams!: GuardianParams;
   guardians: GuardianDto[]=[];
-  guardian: GuardianDto = {} as GuardianDto;
+  guardian: GuardianDto = {id:0} as GuardianDto;
 
   constructor(private http: HttpClient, private _snackBar: SnackBarService) { }
 

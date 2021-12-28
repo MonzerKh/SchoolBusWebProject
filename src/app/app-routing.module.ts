@@ -10,6 +10,8 @@ import { CreateSchoolComponent } from './schools/create-school/create-school.com
 import { SchoolListComponent } from './schools/school-list/school-list.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { BusCompanyListComponent } from './bus-company/bus-company-list/bus-company-list.component';
+import { StudentCreateComponent } from './students/student-create/student-create.component';
+import { StudentListComponent } from './students/student-list/student-list.component';
 
 const routes: Routes = [
 
@@ -34,6 +36,11 @@ const routes: Routes = [
       { path: 'busCompany/new', component:BusCompanyCreateComponent},
       { path: 'busCompany/edit/:id', component:BusCompanyCreateComponent},
       { path: 'busCompany-list', component:BusCompanyListComponent },
+
+      { path: 'student', component:StudentCreateComponent},
+      { path: 'student/new', component:StudentCreateComponent},
+      { path: 'student/edit/:id', component:StudentCreateComponent},
+      { path: 'student-list', component:StudentListComponent },
 
       { path: 'guardian', component: CreateGuardianComponent},
       { path: 'guardian/new', component:CreateGuardianComponent},
