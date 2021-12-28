@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { SnackBarService } from '../services/snack-bar.service';
+import { SnackBarService } from './snack-bar.service';
 import { LoginDto } from '../models/loginDto';
 import { environment } from 'src/environments/environment';
 import { ReplaySubject } from 'rxjs';

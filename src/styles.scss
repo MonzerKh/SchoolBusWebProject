@@ -99,3 +99,19 @@ body {
   height: 100%;
   width: 100%;
 }
+
+
+
+
+.btn-bwm {
+  background-color: #F44336;
+  border-color: #F44336;
+  color: white;
+  padding: 15px 30px;
+  font-size: 20px;
+
+  &:hover, &:focus, &:active {
+    border-color: #F44336 ;
+    background-color: #F44336 ;
+  }
+}

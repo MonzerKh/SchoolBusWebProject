@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { SnackBarService } from 'src/app/services/snack-bar.service';
-import { SchoolsService } from '../../services/schools.service';
+import { SnackBarService } from 'src/app/_services/snack-bar.service';
+import { SchoolsService } from '../../_services/schools.service';
 import { SchoolDto } from '../../models/schoolDto';
 
 @Component({
@@ -18,9 +18,11 @@ export class CreateSchoolComponent implements OnInit {
   createScoolForm!: FormGroup;
   message!: string;
 
-  constructor(private fb: FormBuilder, private schoolsService: SchoolsService,
-              private route: ActivatedRoute, private router: Router,
-              private _snackBar: SnackBarService) { }
+  constructor(
+    private fb: FormBuilder,
+    private schoolsService: SchoolsService,
+    private route: ActivatedRoute, private router: Router,
+    private _snackBar: SnackBarService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
@@ -38,7 +40,7 @@ export class CreateSchoolComponent implements OnInit {
       'school_Name': [ this.school.school_Name, Validators.required],
       'manager': [ this.school.manager, Validators.required],
       'phone': [ this.school.phone, Validators.required],
-      'schoolUrl': [this.school.schoolUrl, Validators.required],
+      'schoolImage': [this.school.schoolImage],
       'address': [this.school.address, Validators.required],
     });
 

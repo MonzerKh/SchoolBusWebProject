@@ -1,3 +1,4 @@
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -17,9 +18,10 @@ import { CreateSchoolComponent } from './schools/create-school/create-school.com
 import { SchoolListComponent } from './schools/school-list/school-list.component';
 import { CreateGuardianComponent } from './guardians/create-guardian/create-guardian.component';
 import { GuardianListComponent } from './guardians/guardian-list/guardian-list.component';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { EmailInputComponent } from './shared/sharedFormComponents/email-input/email-input.component';
 import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/image-uploade.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -45,11 +47,12 @@ import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/im
     BrowserAnimationsModule,
     MaterialModule,
     LayoutModule,
-
+    NgxSpinnerModule,
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
     // ,
     // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }
   ],
