@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-// import { merge, Observable, Subscription } from 'rxjs';
-// import { map, mergeAll, switchMap } from 'rxjs/operators';
-import { GuardianDto } from 'src/app/models/guardianDto';
-import { SchoolDto } from 'src/app/models/schoolDto';
-import { StudentDto } from 'src/app/models/studentDto';
-import { GuardianService } from 'src/app/services/guardian.service';
-import { SnackBarService } from 'src/app/services/snack-bar.service';
-import { StudentService } from 'src/app/services/student.service';
+import { GuardianDto } from '../../models/guardianDto';
+import { SchoolDto } from '../../models/schoolDto';
+import { StudentDto } from '../../models/studentDto';
+import { GuardianService } from '../../services/guardian.service';
+import { SnackBarService } from '../../services/snack-bar.service';
+import { StudentService } from '../../services/student.service';
 import { SchoolsService } from '../../services/schools.service';
 import { forkJoin } from 'rxjs';
 
@@ -52,33 +50,26 @@ export class StudentCreateComponent implements OnInit {
     if (this.editMode) {
       this.studentService.getstudentById(this.id).subscribe((data) => {
         this.student = data;
-        console.log(this.student);
+        // console.log(this.student);
         this.loadForm();
       });
 
-      // forkJoin([
-      //   this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
-      //   // this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
-      //   this.studentService.getstudentById(this.id).subscribe(response=> this.student= response),
-      // ])
-      // console.log(this.schools);console.log(this.student);
       this.loadForm();
     } else {
-      // forkJoin([
-      //   this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
-      //   this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
-      // ])
+
       this.loadForm();
 
     }
   }
 
-  // private async getInitData(){
-  //   forkJoin([
-  //     this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
-  //     this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
-  //     this.studentService.getstudentById(this.id).subscribe(response=> this.student= response),
-  //   ])
+  //  private getScoolsData(){
+  //     this.schoolService.getSchools().subscribe(res=> this.schools=res.result)
+  //     console.log(this.schools);
+  // }
+
+  // private getGuardianData(){
+  //   this.guardianService.getGuardians().subscribe(data=>this.guardians=data.result )
+  //   console.log(this.guardians);
   // }
 
   private loadForm() {
@@ -107,7 +98,7 @@ export class StudentCreateComponent implements OnInit {
   onSubmit() {
     let studentDto: StudentDto = this.studentForm.value;
     this.studentService.createStudent(studentDto);
-    console.log(studentDto);
+    // console.log(studentDto);
     this.message = 'the model was sent';
     this._snackBar.openSnackBar(this.message);
   }

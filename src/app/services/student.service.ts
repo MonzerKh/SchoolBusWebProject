@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { environment } from '../../environments/environment.prod';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, ReplaySubject, Subject } from 'rxjs';
+import { map} from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { StudentDto } from '../models/studentDto';
 import { StudentParams } from '../models/studentParams';
 import { getPaginatedResult } from './paginationHelper';
@@ -12,7 +12,7 @@ import { SnackBarService } from './snack-bar.service';
   providedIn: 'root'
 })
 export class StudentService {
-  student: StudentDto  = {id:0} as StudentDto;
+  student!: StudentDto;
   students: StudentDto[] = [];
   studentCache = new Map();
   baseUrl = environment.apiUrl;
@@ -50,7 +50,7 @@ export class StudentService {
     // let response= this.studentCache.get(Object.values(this.studentParams).join('-'));
     // if(response){
     //   return of(response);
-    // }
+    //
 
     return getPaginatedResult<StudentDto[]>(this.baseUrl +'Student/GetStudent', this.studentParams.getHttpParams(),this.http)
     .pipe(
