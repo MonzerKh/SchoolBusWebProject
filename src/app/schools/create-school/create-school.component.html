@@ -5,39 +5,39 @@
         <div class="card">
           <div class="card-header card-header-danger">
             <h4 class="card-title">School Creation</h4>
-            <p class="card-category">Complete School profile </p>
           </div>
           <div class="card-body">
-            <form [formGroup]='createScoolForm'
-              (ngSubmit)="createScoolForm.valid && onSubmit()"
-              autocomplete="on">
+            <form [formGroup]='createScoolForm' (ngSubmit)="createScoolForm.valid && onSubmit()" autocomplete="on">
 
               <div class="row">
                 <div class="col-md-4 ">
-                  <app-text-input
-                    [formControl]='createScoolForm.controls["school_Name"]'
-                    [label]='"School Name"'></app-text-input>
+                  <app-text-input [formControl]='createScoolForm.controls["school_Name"]' [label]='"School Name"'>
+                  </app-text-input>
                 </div>
                 <div class="col-md-4">
-                  <app-text-input
-                    [formControl]='createScoolForm.controls["manager"]'
-                    [label]='"Manager Name"'></app-text-input>
+                  <app-text-input [formControl]='createScoolForm.controls["manager"]' [label]='"Manager Name"'>
+                  </app-text-input>
                 </div>
                 <div class="col-md-4">
-                  <!-- <app-email-input [formControl]='createScoolForm.controls["email"]'></app-email-input> -->
+                  <app-text-input [formControl]='createScoolForm.controls["phone"]' [label]='"phone Numner"'>
+                  </app-text-input>
                 </div>
               </div>
               <div class="row">
+
                 <div class="col-md-3">
-                  <app-text-input
-                    [formControl]='createScoolForm.controls["phone"]'
-                    [label]='"phone Numner"'></app-text-input>
-                </div>
-                <div class="col-md-9">
                   <!-- <app-text-input
                     [formControl]='createScoolForm.controls["schoolUrl"]'
                     [label]='"School URL"'></app-text-input> -->
+<<<<<<< HEAD
                     <!-- <app-image-uploade></app-image-uploade> -->
+=======
+                  <app-image-uploade
+                  [formControl]='createScoolForm.controls["schoolImage"]'
+                  [label]='"Select Image"'
+                  >
+                  </app-image-uploade>
+>>>>>>> c25f1b98e18efa15cb12f9c9c61adce5f2fbbbcb
                 </div>
               </div>
               <div class="row">
@@ -53,16 +53,14 @@
               </div>
               <div class="row">
                 <div class="col-md-12">
-                  <app-text-input
-                    [formControl]='createScoolForm.controls["address"]'
-                    [label]='"Address"'></app-text-input>
+                  <app-text-input [formControl]='createScoolForm.controls["address"]' [label]='"Address"'>
+                  </app-text-input>
                 </div>
               </div>
               <div class="row buttons col-md-12">
-                <button class="col-md-4" mat-raised-button type="submit"
-                  color="primary" [disabled]="!createScoolForm.valid">Submit</button>&nbsp;&nbsp;
-                <button class="col-md-4" mat-raised-button type="button"
-                  color="warn"
+                <button class="col-md-4" mat-raised-button type="submit" color="primary"
+                  [disabled]="!createScoolForm.valid">Submit</button>&nbsp;&nbsp;
+                <button class="col-md-4" mat-raised-button type="button" color="warn"
                   (click)="cancel()"><span>cancel</span></button>
                 <div class="clearfix"></div>
               </div>
@@ -72,4 +70,4 @@
 
       </div>
     </div>
-</div>
+  </div>

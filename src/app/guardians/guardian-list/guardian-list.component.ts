@@ -4,7 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { GuardianDto } from '../../models/guardianDto';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GuardianService } from 'src/app/services/guardian.service';
+import { GuardianService } from 'src/app/_services/guardian.service';
 import { Pagination } from 'src/app/models/pagination';
 import { GuardianParams } from '../../models/guardianParams';
 import { Subscription } from 'rxjs';
