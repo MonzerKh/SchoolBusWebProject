@@ -22,7 +22,11 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "bootstrap": "^5.1.3",
+<<<<<<< HEAD
     "ngx-material-file-input": "^3.0.0",
+=======
+    "ngx-spinner": "^13.0.0",
+>>>>>>> c25f1b98e18efa15cb12f9c9c61adce5f2fbbbcb
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
