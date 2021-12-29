@@ -1,7 +1,11 @@
+
 import { NgModule } from "@angular/core";
 import { LayoutModule } from "@angular/cdk/layout";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+
+import { LoadingInterceptor } from './_interceptors/loading.interceptor';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule } from "@angular/router";
@@ -22,6 +26,11 @@ import { TextInputComponent } from "./shared/sharedFormComponents/text-input/tex
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { StudentCreateComponent } from "./students/student-create/student-create.component";
 import { StudentListComponent } from "./students/student-list/student-list.component";
+
+
+
+import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/image-uploade.component';
+// import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -50,10 +59,13 @@ import { StudentListComponent } from "./students/student-list/student-list.compo
     RouterModule,
     FormsModule,
     MaterialModule,
-    LayoutModule
+    LayoutModule,
+    LayoutModule,
+    // NgxSpinnerModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
     // ,
     // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }
   ],
