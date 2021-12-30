@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-// import { merge, Observable, Subscription } from 'rxjs';
-// import { map, mergeAll, switchMap } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators, FormControl,} from '@angular/forms';
 import { GuardianDto } from 'src/app/models/guardianDto';
 import { SchoolDto } from 'src/app/models/schoolDto';
 import { StudentDto } from 'src/app/models/studentDto';
-import { GuardianService } from 'src/app/services/guardian.service';
-import { SnackBarService } from 'src/app/services/snack-bar.service';
-import { StudentService } from 'src/app/services/student.service';
-import { SchoolsService } from '../../services/schools.service';
+import { StudentService } from 'src/app/_services/student.service';
+import { SnackBarService } from 'src/app/_services/snack-bar.service';
+import { SchoolsService } from 'src/app/_services/schools.service';
+import { GuardianService } from 'src/app/_services/guardian.service';
 import { forkJoin } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-student-create',
@@ -18,6 +18,8 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./student-create.component.scss'],
 })
 export class StudentCreateComponent implements OnInit {
+  baseUrl = environment.apiUrl;
+  school_IdControl = new FormControl();
   student: StudentDto = { id: 0 } as StudentDto;
   schools: SchoolDto[] = [];
   guardians: GuardianDto[] = [];
@@ -25,8 +27,8 @@ export class StudentCreateComponent implements OnInit {
   studentForm!: FormGroup;
   id!: number;
   message!: string;
-
   constructor(
+    private http: HttpClient,
     private fb: FormBuilder,
     private studentService: StudentService,
     private route: ActivatedRoute,
@@ -42,45 +44,43 @@ export class StudentCreateComponent implements OnInit {
       console.log(this.id);
       if (this.id) {
         this.editMode = true;
+        console.log(this.editMode);
       }
-      console.log(this.editMode);
       this.intitStudenForm();
     });
   }
 
   intitStudenForm() {
     if (this.editMode) {
-      this.studentService.getstudentById(this.id).subscribe((data) => {
-        this.student = data;
-        console.log(this.student);
+      const student$ = this.http.get<StudentDto>(
+        this.baseUrl + 'Student/GetStudent/' + this.id
+      );
+      const schools$ = this.http.get<SchoolDto[]>(
+        this.baseUrl + 'School/GetSchool'
+      );
+      const guardians$ = this.http.get<GuardianDto[]>(
+        this.baseUrl + 'Guardian/GetGuardian'
+      );
+      return forkJoin([student$, schools$, guardians$]).subscribe((data) => {
+        this.student = data[0];
+        this.schools = data[1];
+        this.guardians = data[2];
         this.loadForm();
       });
-
-      // forkJoin([
-      //   this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
-      //   // this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
-      //   this.studentService.getstudentById(this.id).subscribe(response=> this.student= response),
-      // ])
-      // console.log(this.schools);console.log(this.student);
-      this.loadForm();
     } else {
-      // forkJoin([
-      //   this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
-      //   this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
-      // ])
-      this.loadForm();
-
+      const schools$ = this.http.get<SchoolDto[]>(
+        this.baseUrl + 'School/GetSchool'
+      );
+      const guardians$ = this.http.get<GuardianDto[]>(
+        this.baseUrl + 'Guardian/GetGuardian'
+      );
+      return forkJoin([schools$, guardians$]).subscribe((data) => {
+        this.schools = data[0];
+        this.guardians = data[1];
+        this.loadForm();
+      });
     }
   }
-
-  // private async getInitData(){
-  //   forkJoin([
-  //     this.schoolService.getSchools().subscribe(res=> this.schools=res.result),
-  //     this.guardianService.getGuardians().subscribe(data=> this.guardians=data.result),
-  //     this.studentService.getstudentById(this.id).subscribe(response=> this.student= response),
-  //   ])
-  // }
-
   private loadForm() {
     this.studentForm = this.fb.group({
       id: [this.student.id],
@@ -123,3 +123,4 @@ export class StudentCreateComponent implements OnInit {
 
   ngOnDestroy() {}
 }
+

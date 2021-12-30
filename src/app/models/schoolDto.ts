@@ -9,11 +9,12 @@ export interface SchoolDto {
   schoolUrl: string;
   phone: string;
   // email:string;
-  // logo: string;
+  schoolImage: string;
   userName: string;
   createdBy: number;
   updateBy: number;
   createUser_Id:number;
+
 
   // email: string;// have to  added to backend
   // country :string;

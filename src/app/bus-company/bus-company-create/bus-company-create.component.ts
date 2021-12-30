@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BusCompanyDto } from 'src/app/models/busCompanyDto';
-import { BusCompanyService } from 'src/app/services/bus-company.service';
-import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { BusCompanyService } from 'src/app/_services/bus-company.service';
+import { SnackBarService } from 'src/app/_services/snack-bar.service';
 
 @Component({
   selector: 'app-bus-company-create',
@@ -18,9 +18,10 @@ export class BusCompanyCreateComponent implements OnInit {
   BusCompanyForm!: FormGroup;
   message!: string;
 
-  constructor(private fb: FormBuilder, private busCompnyService: BusCompanyService,
-              private route: ActivatedRoute, private router: Router,
-              private _snackBar: SnackBarService) { }
+  constructor(  private fb: FormBuilder,
+                private busCompnyService: BusCompanyService,
+                private route: ActivatedRoute, private router: Router,
+                private _snackBar: SnackBarService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {

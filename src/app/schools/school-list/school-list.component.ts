@@ -2,14 +2,14 @@ import { AfterViewInit, Component, ViewChild, OnInit, Output, EventEmitter } fro
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { SchoolsService } from 'src/app/services/schools.service';
+import { SchoolsService } from 'src/app/_services/schools.service';
 // import { SchoolDataTableDataSource, SchoolDataTableItem } from './school-data-table-datasource';
 import {MatTableDataSource} from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { SchoolDto } from '../../models/schoolDto';
 import { Pagination } from 'src/app/models/pagination';
 import { SchoolParams } from 'src/app/models/schoolParams';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -34,7 +34,7 @@ export class SchoolListComponent implements AfterViewInit, OnInit {
   id!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'school_Name', 'manager', 'address', 'phone', 'logo', 'email', 'schoolUrl', 'edit'];
+  displayedColumns = ['id','schoolImage', 'school_Name', 'manager', 'address', 'phone', 'email', 'edit'];
 
 
   constructor(private schoolsService: SchoolsService,private route: ActivatedRoute, private router: Router){
@@ -59,6 +59,7 @@ export class SchoolListComponent implements AfterViewInit, OnInit {
     // this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
   }
+
   pageChanged(event: any) {
     this.schoolParams.pageNumber = event.page;
     this.schoolsService.setSchoolParams(this.schoolParams);
