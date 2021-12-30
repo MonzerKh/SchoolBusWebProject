@@ -111,7 +111,6 @@ export class StudentCreateComponent implements OnInit {
   onSubmit() {
     let studentDto: StudentDto = this.studentForm.value;
     this.studentService.createStudent(studentDto);
-    // console.log(studentDto);
     this.message = 'the model was sent';
     this._snackBar.openSnackBar(this.message);
   }
