@@ -1,3 +1,4 @@
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl,} from '@angular/forms';
@@ -8,6 +9,7 @@ import { StudentService } from 'src/app/_services/student.service';
 import { SnackBarService } from 'src/app/_services/snack-bar.service';
 import { SchoolsService } from 'src/app/_services/schools.service';
 import { GuardianService } from 'src/app/_services/guardian.service';
+
 import { forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -52,6 +54,7 @@ export class StudentCreateComponent implements OnInit {
 
   intitStudenForm() {
     if (this.editMode) {
+
       const student$ = this.http.get<StudentDto>(
         this.baseUrl + 'Student/GetStudent/' + this.id
       );
@@ -81,6 +84,7 @@ export class StudentCreateComponent implements OnInit {
       });
     }
   }
+
   private loadForm() {
     this.studentForm = this.fb.group({
       id: [this.student.id],
@@ -107,7 +111,7 @@ export class StudentCreateComponent implements OnInit {
   onSubmit() {
     let studentDto: StudentDto = this.studentForm.value;
     this.studentService.createStudent(studentDto);
-    console.log(studentDto);
+    // console.log(studentDto);
     this.message = 'the model was sent';
     this._snackBar.openSnackBar(this.message);
   }
