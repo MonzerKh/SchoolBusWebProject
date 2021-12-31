@@ -13,6 +13,9 @@ import { GuardianService } from 'src/app/_services/guardian.service';
 import { forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CreateGuardianComponent } from 'src/app/guardians/create-guardian/create-guardian.component';
 
 @Component({
   selector: 'app-student-create',
@@ -36,6 +39,7 @@ export class StudentCreateComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private _snackBar: SnackBarService,
+    public dialog: MatDialog,
     private schoolService: SchoolsService,
     private guardianService: GuardianService
   ) {}
@@ -120,7 +124,15 @@ export class StudentCreateComponent implements OnInit {
     this.router.navigate(['../student-list']);
   }
 
-  openDialog() {}
+  openDialog() {
+    const dialogRef=this.dialog.open(CreateGuardianComponent,{
+      width:'800px', // height:'800px',
+      data:{}
+    });
+    dialogRef.afterClosed().subscribe(res=>{
+      console.timeLog("dialog is closed")
+    });
+  }
 
   resetForm() {}
 
