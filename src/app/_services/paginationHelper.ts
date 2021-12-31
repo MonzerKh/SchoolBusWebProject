@@ -1,3 +1,5 @@
+import { PaginationSource } from './../models/pagination';
+import { MatTableDataSource } from '@angular/material/table';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,7 +11,7 @@ export function getPaginatedResult<T>(url: string, params: any, http: HttpClient
       map(response => {
         paginatedResult.result = response.body!;
         if (response.headers.get('Pagination') !== null) {
-          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination')!);
+          paginatedResult.Pagination = JSON.parse(response.headers.get('Pagination')!) as PaginationSource;
         }
         return paginatedResult;
       })

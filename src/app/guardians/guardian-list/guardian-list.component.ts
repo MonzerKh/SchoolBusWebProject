@@ -5,7 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { GuardianDto } from '../../models/guardianDto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GuardianService } from 'src/app/_services/guardian.service';
-import { Pagination } from 'src/app/models/pagination';
+import { PaginationSource } from 'src/app/models/pagination';
 import { GuardianParams } from '../../models/guardianParams';
 import { Subscription } from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
@@ -22,7 +22,7 @@ export class GuardianListComponent implements AfterViewInit {
   // dataSource: GuardianListDataSource;
 
   guardians!:GuardianDto[];
-  pagination!:Pagination;
+  pagination!:PaginationSource;
   guardianParams:GuardianParams= new GuardianParams;
 
   dataSource!: GuardianDto[];
@@ -45,7 +45,7 @@ export class GuardianListComponent implements AfterViewInit {
     this.guardianService.setGuardianParams(this.guardianParams); console.log(this.guardianParams);
     this.guardianService.getGuardians().subscribe(response=>{
       this.dataSource = response.result;
-      this.pagination = response.pagination;
+      this.pagination = response.Pagination;
     })
   }
   ngAfterViewInit(): void {

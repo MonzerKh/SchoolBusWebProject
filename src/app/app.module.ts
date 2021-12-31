@@ -22,6 +22,11 @@ import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { EmailInputComponent } from './shared/sharedFormComponents/email-input/email-input.component';
 import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/image-uploade.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ListSchoolComponent } from './schools/list-school/list-school.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -35,6 +40,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CreateGuardianComponent,
     GuardianListComponent,
     ImageUploadeComponent,
+    ListSchoolComponent,
   ],
   imports: [
 
@@ -48,7 +54,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MaterialModule,
     LayoutModule,
     NgxSpinnerModule,
-
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,3 +1,4 @@
+import { PaginationSource } from './../../models/pagination';
 import { AfterViewInit, Component, ViewChild, OnInit, Output, EventEmitter } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -8,7 +9,7 @@ import { SchoolsService } from 'src/app/_services/schools.service';
 import {MatTableDataSource} from '@angular/material/table';
 import { Subscription } from 'rxjs';
 import { SchoolDto } from '../../models/schoolDto';
-import { Pagination } from 'src/app/models/pagination';
+
 import { SchoolParams } from 'src/app/models/schoolParams';
 
 
@@ -26,7 +27,7 @@ export class SchoolListComponent implements AfterViewInit, OnInit {
   // @Output() editMode!: boolean;
   // dataSource!: SchoolDataTableDataSource;
   schools!: SchoolDto[];
-  pagination!: Pagination;
+  pagination!: PaginationSource;
   schoolParams: SchoolParams= new SchoolParams();
 
   dataSource!: SchoolDto[];
@@ -34,7 +35,15 @@ export class SchoolListComponent implements AfterViewInit, OnInit {
   id!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id','schoolImage', 'school_Name', 'manager', 'address', 'phone', 'email', 'edit'];
+  displayedColumns = [
+    'id',
+    'schoolImage',
+    'school_Name',
+    'manager',
+    'address',
+    'phone',
+    'email',
+    'edit'];
 
 
   constructor(private schoolsService: SchoolsService,private route: ActivatedRoute, private router: Router){
@@ -46,11 +55,11 @@ export class SchoolListComponent implements AfterViewInit, OnInit {
   }
 
   loadSchools() {
-    this.schoolsService.setSchoolParams(this.schoolParams);
-    this.schoolsService.getSchools().subscribe(response => {
+    // this.schoolsService.setSchoolParams(this.schoolParams);
+    this.schoolsService.getSchools(this.schoolParams).subscribe(response => {
 
       this.dataSource = response.result;
-      this.pagination = response.pagination;
+      this.pagination = response.Pagination;
     })
   }
 
@@ -61,8 +70,8 @@ export class SchoolListComponent implements AfterViewInit, OnInit {
   }
 
   pageChanged(event: any) {
-    this.schoolParams.pageNumber = event.page;
-    this.schoolsService.setSchoolParams(this.schoolParams);
+    this.schoolParams.Pagination.currentPage = event.page;
+    //this.schoolsService.setSchoolParams(this.schoolParams);
     this.loadSchools();
   }
 

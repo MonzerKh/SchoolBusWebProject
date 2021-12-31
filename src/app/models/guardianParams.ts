@@ -1,8 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { PaginationParams } from './paginationParams';
+import { PaginationSource } from './pagination';
+//import { PaginationParams } from './paginationParams';
 
 
-export class GuardianParams extends PaginationParams{
+export class GuardianParams extends PaginationSource{
   gardian_Name! :string;
   address! :string;
   email! :string;
@@ -13,7 +14,7 @@ export class GuardianParams extends PaginationParams{
   }
 
   getHttpParams( ) {
-    let guardianParams=this.getPaginationHeaders();
+   // let guardianParams=this.getPaginationHeaders();
 
     // if(!this.gardian_Name){  guardianParams = guardianParams.append('gardian_Name', this.gardian_Name.toString());}
     // if(!this.address){  guardianParams = guardianParams.append('address', this.address.toString());}
@@ -22,6 +23,6 @@ export class GuardianParams extends PaginationParams{
     // if(!this.pageNumber){  guardianParams = guardianParams.append('pageNumber', this.pageNumber.toString());}
     // if(!this.pageSize){  guardianParams = guardianParams.append('pageSize', this.pageSize.toString());}
 
-    return guardianParams;
+   // return guardianParams;
   }
 }

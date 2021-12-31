@@ -1,3 +1,5 @@
+import { MatTableDataSource } from '@angular/material/table';
+import { SchoolDto } from './../models/schoolDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, ReplaySubject, Subject } from 'rxjs';
@@ -5,7 +7,6 @@ import { map} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { getPaginatedResult } from './paginationHelper';
 import { SchoolParams } from '../models/schoolParams';
-import { SchoolDto } from '../models/schoolDto';
 import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
@@ -15,7 +16,6 @@ export class SchoolsService {
 
   schoolCache = new Map();
   baseUrl = environment.apiUrl;
-  schoolParams!: SchoolParams;
   schools: SchoolDto[] = [];
   school!: SchoolDto;
 
@@ -26,13 +26,13 @@ export class SchoolsService {
   constructor( private http: HttpClient, private _snackBar: SnackBarService) { }
 
 
-  getSchoolParams() {
-    return this.schoolParams;
-  }
+  // getSchoolParams() {
+  //   return this.schoolParams;
+  // }
 
-  setSchoolParams(params: SchoolParams) {
-    this.schoolParams = params;
-  }
+  // setSchoolParams(params: SchoolParams) {
+  //   this.schoolParams = params;
+  // }
 
   async createSchool(schoolDto: SchoolDto){
     console.log(schoolDto);
@@ -50,13 +50,21 @@ export class SchoolsService {
     })
   }
 
-  getSchools() {
+  getSchools(Params:SchoolParams) {
     // let response= this.schoolCache.get(Object.values(this.schoolParams).join('-'));
     // if(response){
     //   return of(response);
     // }
 
-    return getPaginatedResult<SchoolDto[]>(this.baseUrl + 'School/GetSchool', this.schoolParams.getHttpParams(), this.http)
+    return getPaginatedResult<SchoolDto[]>(this.baseUrl + 'School/GetSchool', Params.getHttpParams(), this.http)
+      .pipe(map(response => {
+      //  this.schoolCache.set(Object.values(this.schoolParams).join('-'),response);
+        return response;
+      }))
+  }
+
+  getSchoolsPaging(Params:SchoolParams) {
+    return getPaginatedResult<SchoolDto[]>(this.baseUrl + 'School/GetSchoolPaging', Params.getHttpParams(), this.http)
       .pipe(map(response => {
       //  this.schoolCache.set(Object.values(this.schoolParams).join('-'),response);
         return response;
@@ -70,4 +78,9 @@ export class SchoolsService {
         return this.school
       }));
   }
+
+
+
+
+
 }

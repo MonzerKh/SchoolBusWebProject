@@ -1,3 +1,4 @@
+import { ListSchoolComponent } from './schools/list-school/list-school.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { NgModule } from '@angular/core';
@@ -20,6 +21,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent},
       { path: 'school', component: CreateSchoolComponent },
+      { path: 'school2', component: ListSchoolComponent },
       { path: 'school/new', component: CreateSchoolComponent },
       { path: 'school/:id/edit', component: CreateSchoolComponent },
       { path: 'school-list', component: SchoolListComponent },
