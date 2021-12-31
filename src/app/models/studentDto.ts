@@ -2,9 +2,9 @@
 // import { PersonalCard } from "./personalCard";
 
 export interface StudentDto{
-  id: string;
+  id: number;
 
-  nationality_id: number;
+  national_Number: number;
 
   full_Name :string;
 
@@ -16,25 +16,26 @@ export interface StudentDto{
 
   mother :string;
 
-  guardian_Name: string;
-
   birthDate :Date;
 
   gender: string;
 
   imagePath :File;
 
-  address: string;
+  guardian_Id :number;
+
+  school_Id :number;
+
+  guardian_Name?: string;
+
 
   userName? :string;
 
-  school_Id? :number;
+  systemUser_Id? :number;
+
 
   school_Name? :string;
 
-  guardian_Id? :number;
-
-  systemUser_Id? :number;
 
   createdBy?: number;
 
@@ -43,10 +44,19 @@ export interface StudentDto{
   createTime?:Date;
   updateTime?:Date;
 
-  // country :string;
-  // city :string;
-  // town :string;
-  // street :string;
-  // boxNumber :number;
-  // full_Address:string;
+  country :string;
+  city :string;
+  town :string;
+  street :string;
+  address: string;
+  boxNumber :string;
+  full_Address:string;
 }
+
+
+
+
+
+
+
+

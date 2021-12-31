@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginDto } from '../models/loginDto';
-import { AccountService } from '../_services/account.service';
+import { AccountService } from '../services/account.service';
 
 @Component({
   selector: 'app-sign-in',

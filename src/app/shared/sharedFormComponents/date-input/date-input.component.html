@@ -1,0 +1,14 @@
+<div class="form-group example-form">
+    <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>{{label}}</mat-label>
+        <input
+        matInput
+        [matDatepicker]="picker1"
+        [class.is-invalid]='ngControl.touched && ngControl.invalid'
+        [formControl]='ngControl.control'
+        placeholder="{{dateInput|date}}">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <div *ngIf="ngControl.control?.errors?.required" class="invalid-feedback">{{label}} is required</div>
+</div>

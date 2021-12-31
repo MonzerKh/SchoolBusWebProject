@@ -13,7 +13,6 @@ export class TextInputComponent implements ControlValueAccessor, OnDestroy {
   @Input() label!: string;
   @Input() type = 'text';
 
-
   textInput:FormControl;
   subscriptions: Subscription[] = [];
 

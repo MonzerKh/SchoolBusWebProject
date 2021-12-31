@@ -1,11 +1,11 @@
-import { Component, Input, Self, OnDestroy } from '@angular/core';
+import { Component, Input, Self, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import {FormControl, FormGroup, FormBuilder, FormGroupDirective, NgControl, NgForm, ControlValueAccessor, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {ErrorStateMatcher} from '@angular/material/core';
 
-export interface emailInputValues{
-  email: string
-}
+// export interface emailInputValues{
+//   email: string
+// }
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -18,36 +18,39 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-email-input',
   templateUrl: './email-input.component.html',
-  styleUrls: ['./email-input.component.scss']
+  styleUrls: ['./email-input.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EmailInputComponent implements ControlValueAccessor, OnDestroy {
 
 @Input() label!: string;
   @Input() type = 'text';
 
-  emailInputForm: FormGroup;
+  // emailInputForm: FormGroup;
   email!: FormControl;
   subscriptions: Subscription[] = [];
 
   matcher = new MyErrorStateMatcher();
 
-  get value(): emailInputValues{
-    return this.emailInputForm.value;
+  get value(): string{
+    return this.email.value;
   }
 
-  set value(value: emailInputValues){
-    this.emailInputForm.setValue(value);
+  set value(value: string){
+    this.email.setValue(value);
     this.onChange(value);
     this.onTouched();
   }
 
   constructor(@Self() public ngControl: NgControl, private fb: FormBuilder) {
     this.ngControl.valueAccessor = this;
-    this.emailInputForm= this.fb.group({
-      'email':['',[ Validators.required, Validators.email]],
-    });
+    // this.email= this.fb.group({
+    //   'email':['',[ Validators.required, Validators.email]],
+    // });
+
+    this.email= new FormControl('',[ Validators.required, Validators.email])
     this.subscriptions.push(
-      this.emailInputForm.valueChanges.subscribe( value=>{
+      this.email.valueChanges.subscribe( value=>{
         this.onChange(value);
         this.onTouched();
       })
@@ -55,10 +58,6 @@ export class EmailInputComponent implements ControlValueAccessor, OnDestroy {
   }
 
   ngOnInit(){}
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(s => s.unsubscribe());
-  }
 
   onChange: any = () => {};
   onTouched: any = () => {};
@@ -69,7 +68,7 @@ export class EmailInputComponent implements ControlValueAccessor, OnDestroy {
     }
 
     if (value === null) {
-      this.emailInputForm.reset();
+      this.email.reset();
     }
   }
 
@@ -83,12 +82,15 @@ export class EmailInputComponent implements ControlValueAccessor, OnDestroy {
 
 
   validate(_: FormControl) {
-    return this.emailInputForm.valid ? null : { email: { valid: false } };
+    return this.email.valid ? null : { email: { valid: false } };
   }
 
   reset() {
-  this.emailInputForm.reset();
+  this.email.reset();
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(s => s.unsubscribe());
+  }
 
 }
