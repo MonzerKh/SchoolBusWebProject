@@ -1,3 +1,4 @@
+import { PaginationSource } from 'src/app/models/pagination';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -6,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BusCompanyDto } from 'src/app/models/busCompanyDto';
 import { BusCompanyParams } from 'src/app/models/busCompanyParams';
-import { Pagination } from 'src/app/models/pagination';
+
 import { BusCompanyService } from 'src/app/services/bus-company.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class BusCompanyListComponent   implements AfterViewInit, OnInit {
   @ViewChild(MatTable) table!: MatTable<BusCompanyDto>;
 
   BusCompanys!: BusCompanyDto[];
-  pagination!: Pagination;
+  pagination!: PaginationSource;
   busCompanyParams: BusCompanyParams= new BusCompanyParams();
 
   dataSource!: BusCompanyDto[];
