@@ -9,7 +9,7 @@ export function getPaginatedResult<T>(url: string, params: any, http: HttpClient
       map(response => {
         paginatedResult.result = response.body!;
         if (response.headers.get('Pagination') !== null) {
-          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination')!);
+          paginatedResult.Pagination = JSON.parse(response.headers.get('Pagination')!);
         }
         return paginatedResult;
       })

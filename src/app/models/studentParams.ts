@@ -1,26 +1,31 @@
-import { PaginationParams } from './paginationParams';
+import { PaginationSource } from 'src/app/models/pagination';
 
 
-export class StudentParams extends PaginationParams{
+export class StudentParams {
   full_Name! :string;
   address! :string;
   email! :string;
   phone! :string;
-
+  Pagination!:PaginationSource;
   constructor() {
-    super();
+    this.Pagination = new PaginationSource();
   }
 
-  getHttpParams( ) {
-    let studentParams=this.getPaginationHeaders();
+  getHttpParams() {
+    let Params = this.Pagination.getPaginationHeaders();
 
-    // if(!this.full_Name){  studentParams = studentParams.append('full_Name', this.full_Name.toString());}
-    // if(!this.address){  studentParams = studentParams.append('address', this.address.toString());}
-    // if(!this.email){  studentParams = studentParams.append('email', this.email.toString());}
-    // if(!this.phone){  studentParams = studentParams.append('phone', this.phone.toString());}
-    // if(!this.pageNumber){  studentParams = studentParams.append('pageNumber', this.pageNumber.toString());}
-    // if(!this.pageSize){  studentParams = studentParams.append('pageSize', this.pageSize.toString());}
+    if (this.full_Name) { Params = Params.append('school_Name', this.full_Name.toString()); }
+    if (this.address) { Params = Params.append('address', this.address.toString()); }
+    if (this.email) { Params = Params.append('manager', this.email.toString()); }
+    if (this.phone) { Params = Params.append('phone', this.phone.toString()); }
 
-    return studentParams;
+    return Params;
+  }
+
+  setPagination(page:PaginationSource){
+    this.Pagination.currentPage = page.currentPage;
+    this.Pagination.totalItems = page.totalItems;
+    this.Pagination.totalPages = page.totalPages;
+    this.Pagination.itemsPerPage = page.itemsPerPage;
   }
 }

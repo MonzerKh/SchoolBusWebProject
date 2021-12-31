@@ -44,7 +44,7 @@ export class BusCompanyListComponent   implements AfterViewInit, OnInit {
     this.busCompanyService.getBusCompany().subscribe(response => {
 
       this.dataSource = response.result;
-      this.pagination = response.pagination;
+      this.pagination = response.Pagination;
     })
   }
 
@@ -54,7 +54,7 @@ export class BusCompanyListComponent   implements AfterViewInit, OnInit {
     this.table.dataSource = this.dataSource;
   }
   pageChanged(event: any) {
-    this.busCompanyParams.pageNumber = event.page;
+    this.busCompanyParams.Pagination.currentPage = event.page;
     this.busCompanyService.setBusCompanyParams(this.busCompanyParams);
     this.loadBusCompanys();
   }

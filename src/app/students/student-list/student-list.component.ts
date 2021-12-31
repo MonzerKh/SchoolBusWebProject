@@ -1,10 +1,11 @@
+import { PaginationSource } from 'src/app/models/pagination';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Pagination } from 'src/app/models/pagination';
+
 import { StudentDto } from 'src/app/models/studentDto';
 import { StudentParams } from 'src/app/models/studentParams';
 import { StudentService } from 'src/app/services/student.service';
@@ -23,7 +24,7 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
   // @Output() editMode!: boolean;
   // dataSource!: SchoolDataTableDataSource;
   schools!: StudentDto[];
-  pagination!: Pagination;
+  pagination!: PaginationSource;
   studentParams: StudentParams= new StudentParams();
 
   dataSource!: StudentDto[];
@@ -52,7 +53,7 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
     this.studentService.getStudents().subscribe(response => {
 
       this.dataSource = response.result;
-      this.pagination = response.pagination;
+      this.pagination = response.Pagination;
     })
   }
 
@@ -62,7 +63,7 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
     this.table.dataSource = this.dataSource;
   }
   pageChanged(event: any) {
-    this.studentParams.pageNumber = event.page;
+    this.studentParams.Pagination.currentPage = event.page;
     this.studentService.setStudentParams(this.studentParams);
     this.loadStudents();
   }

@@ -24,11 +24,12 @@ export class PaginationSource {
 export class PaginatedResult<T> extends PaginationSource{
   result!: T;
   Pagination!:PaginationSource;
-  dataSource! :  MatTableDataSource<T>
+ // dataSource! :  MatTableDataSource<T>
 
   constructor(){
     super();
-     this.dataSource = new MatTableDataSource();
+   //  this.dataSource = new MatTableDataSource();
+   //  this.dataSource.data
     //this.Pagination = new PaginationSource();
   }
 
