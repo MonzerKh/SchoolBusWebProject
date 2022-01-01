@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BusCompanyDto } from 'src/app/models/busCompanyDto';
 import { BusCompanyParams } from 'src/app/models/busCompanyParams';
-import { Pagination } from 'src/app/models/pagination';
+
 import { BusCompanyService } from 'src/app/_services/bus-company.service';
 
 @Component({
@@ -42,7 +42,7 @@ export class BusCompanyListComponent   implements AfterViewInit, OnInit {
 
   loadBusCompanys() {
     this.busCompanyService.setBusCompanyParams(this.busCompanyParams);
-    this.busCompanyService.getBusCompany().subscribe((response: { result: BusCompanyDto[]; pagination: Pagination; }) => {
+    this.busCompanyService.getBusCompany().subscribe((response) => {
 
       this.dataSource = response.result;
       this.pagination = response.Pagination;

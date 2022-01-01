@@ -44,7 +44,7 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
 
   loadStudents() {
     this.studentService.setStudentParams(this.studentParams);
-    this.studentService.getStudents().subscribe((response: { result: StudentDto[]; pagination: Pagination; }) => {
+    this.studentService.getStudents().subscribe((response) => {
       this.dataSource = response.result;
       this.pagination = response.Pagination;
     })
