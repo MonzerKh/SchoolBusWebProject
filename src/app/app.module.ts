@@ -27,8 +27,6 @@ import { SignInComponent } from "./sign-in/sign-in.component";
 import { StudentCreateComponent } from "./students/student-create/student-create.component";
 import { StudentListComponent } from "./students/student-list/student-list.component";
 
-
-
 import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/image-uploade.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ListSchoolComponent } from './schools/list-school/list-school.component';
@@ -36,7 +34,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-// import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -73,11 +70,10 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule
-    // NgxSpinnerModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true }
     // ,
     // { provide: HTTP_INTERCEPTORS, useClass: CachingInterceptor, multi: true }
   ],

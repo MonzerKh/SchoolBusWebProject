@@ -25,10 +25,10 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent},
       { path: 'school', component: CreateSchoolComponent },
-      { path: 'school2', component: ListSchoolComponent },
+      { path: 'school2', component: SchoolListComponent },
       { path: 'school/new', component: CreateSchoolComponent },
       { path: 'school/:id/edit', component: CreateSchoolComponent },
-      { path: 'school-list', component: SchoolListComponent },
+      { path: 'school-list', component: ListSchoolComponent },
       { path: 'guardian', component: CreateGuardianComponent },
       { path: 'guardian/new', component: CreateGuardianComponent },
       { path: 'guardian/:id/edit', component: CreateGuardianComponent },

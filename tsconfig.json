@@ -27,13 +27,7 @@
     "enableIvy": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": false,
-<<<<<<< HEAD
-    "fullTemplateTypeCheck": true,
+    "strictTemplates": false
 
-=======
-
-    // "strictNullChecks": false
->>>>>>> 3ff511643eaafd95b1e72bf6de8cf6a46d0d5358
   }
 }
