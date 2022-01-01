@@ -7,8 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BusCompanyDto } from 'src/app/models/busCompanyDto';
 import { BusCompanyParams } from 'src/app/models/busCompanyParams';
-
-import { BusCompanyService } from 'src/app/services/bus-company.service';
+import { Pagination } from 'src/app/models/pagination';
+import { BusCompanyService } from 'src/app/_services/bus-company.service';
 
 @Component({
   selector: 'app-bus-company-list',
@@ -42,7 +42,7 @@ export class BusCompanyListComponent   implements AfterViewInit, OnInit {
 
   loadBusCompanys() {
     this.busCompanyService.setBusCompanyParams(this.busCompanyParams);
-    this.busCompanyService.getBusCompany().subscribe(response => {
+    this.busCompanyService.getBusCompany().subscribe((response: { result: BusCompanyDto[]; pagination: Pagination; }) => {
 
       this.dataSource = response.result;
       this.pagination = response.Pagination;
@@ -71,7 +71,7 @@ export class BusCompanyListComponent   implements AfterViewInit, OnInit {
 
   onEditBusCompany(BusCompany:BusCompanyDto){
     this.id= BusCompany.id;
-    this.router.navigate(['../busCompany/edit/'+this.id], {relativeTo: this.route});
+    this.router.navigate(['../busCompany/edit/'+this.id]);
   }
 
   findBusCompanyByName(school_Name: HTMLInputElement){

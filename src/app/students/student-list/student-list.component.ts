@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 
 import { StudentDto } from 'src/app/models/studentDto';
 import { StudentParams } from 'src/app/models/studentParams';
-import { StudentService } from 'src/app/services/student.service';
+import { StudentService } from 'src/app/_services/student.service';
 
 @Component({
   selector: 'app-student-list',
@@ -34,12 +34,6 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id','national_Number',  'full_Name', 'guardian_Name', 'school_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit'];
 
-
-
-
-
-
-
   constructor(private studentService: StudentService,private route: ActivatedRoute, private router: Router){
     // this.dataSource = new SchoolDataTableDataSource();
   }
@@ -50,8 +44,7 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
 
   loadStudents() {
     this.studentService.setStudentParams(this.studentParams);
-    this.studentService.getStudents().subscribe(response => {
-
+    this.studentService.getStudents().subscribe((response: { result: StudentDto[]; pagination: Pagination; }) => {
       this.dataSource = response.result;
       this.pagination = response.Pagination;
     })

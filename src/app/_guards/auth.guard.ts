@@ -2,8 +2,8 @@ import { map } from 'rxjs/operators';
 import { SnackBarService } from 'src/app/_services/snack-bar.service';
 import { AccountService } from '../_services/account.service';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CanActivate } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'

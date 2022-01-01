@@ -1,5 +1,5 @@
-import { NgControl, FormGroup, FormBuilder, ControlValueAccessor, Validators, FormControl } from '@angular/forms';
 import { Component, Input, Self, OnInit } from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
 class ImageSnippet {
   pending: boolean = false;

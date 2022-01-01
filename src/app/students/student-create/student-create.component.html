@@ -10,54 +10,55 @@
           <div class="card-body">
             <form [formGroup]='studentForm'
             (ngSubmit)="studentForm.valid && onSubmit()" autocomplete="on">
-            <div class="row">
 
-              <div class="col-md-4">
-                <app-text-input [formControl]='studentForm.controls["father"]' [label]='"father"'></app-text-input>
-              </div>
-              <div class="col-md-4">
+            <div class="row">
+              <div class="col-md-6">
                 <app-text-input [formControl]='studentForm.controls["national_Number"]' [label]='"national Number"'></app-text-input>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <app-text-input [formControl]='studentForm.controls["full_Name"]' [label]='"Full Name"'></app-text-input>
               </div>
             </div>
 
-            <!-- <mat-divider></mat-divider> -->
             <div class="row">
-              <div class="col-md-4">
-                <!-- <app-text-input [formControl]='studentForm.controls[""]' [label]='"Father Name"'></app-text-input> -->
+              <div class="col-md-6">
+                <app-text-input [formControl]='studentForm.controls["father"]' [label]='"Father Name"'></app-text-input>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <app-text-input [formControl]='studentForm.controls["mother"]' [label]='"Mother Name"'></app-text-input>
               </div>
-              <div class="col-md-2">
-                <app-text-input [formControl]='studentForm.controls["guardian_Id"]' [label]='"Guardian Id"'></app-text-input>
-              </div>
-              <!-- <div class="col-md-2">
-                <button mat-raised-button type="button" (click)="openDialog()"> Add Guardian</button>
-              </div> -->
-
             </div>
 
             <div class="row">
-              <div class="col-md-12">
-                <app-text-input [formControl]='studentForm.controls["imagePath"]' [label]='"imagePath"'></app-text-input>
-              </div>
-              <div class="col-md-12">
-                <app-text-input [formControl]='studentForm.controls["school_Id"]' [label]='"School Id"'></app-text-input>
-                <!-- <mat-form-field appearance="outline">
+              <div class="col-md-4">
+                <mat-form-field class="dropList" appearance="outline">
                   <mat-label>School Name</mat-label>
-                  [formControl]='studentForm.controls["school_Name"]'
-                  <mat-select [formControlName]='["school_Id"]'>
-                    <mat-option *ngFor="let school of schools" [value]="school.id">
-                      {{school.school_Name}}
-                    </mat-option>
+                  <mat-select [formControl]='studentForm.controls["school_Id"]'>
+                      <mat-option *ngFor="let school of schools" [value]="school.id">{{school.school_Name}}</mat-option>
                   </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
+              </div>
+              <div class="col-md-4">
+                <mat-form-field class="dropList" appearance="outline">
+                  <mat-label>Guardian Name</mat-label>
+                  <mat-select [formControl]='studentForm.controls["guardian_Id"]'>
+                      <mat-option *ngFor="let guardian of guardians" [value]="guardian.id">{{guardian.full_Name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-4">
+                <button mat-raised-button color="primary" (click)="openDialog()">Add Guardian</button>
               </div>
             </div>
-            <!-- <mat-divider></mat-divider> -->
+
+            <div class="row">
+              <div class="col-md-4">
+                <app-image-uploade [formControl]='studentForm.controls["imagePath"]' [label]='"Select Image"'>
+                </app-image-uploade>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-md-4">
                 <app-text-input [formControl]='studentForm.controls["phone"]' [label]='"Phone Number"'></app-text-input>
@@ -69,47 +70,24 @@
                 <app-date-input [formControl]='studentForm.controls["birthDate"]'></app-date-input>
               </div>
             </div>
-            <!-- <mat-divider></mat-divider> -->
 
-            <!-- <div class="row">
-              <div class="col-xs-4">
-                <mat-label> Student Gender : </mat-label>&nbsp;
-                <mat-radio-group  [formControl]='studentForm.controls["gender"]' aria-label="Select an option">
-                  <mat-radio-button value='male'>Male </mat-radio-button>&nbsp;&nbsp;
-                  <mat-radio-button value='female'>Female </mat-radio-button>
-                </mat-radio-group>
-              </div>
-            </div> -->
-            <!-- <mat-divider></mat-divider> -->
-            <!-- <div class="row">
-              <div class="col-md-12">
-                <mat-form-field class="example-full-width" appearance="outline">
-                  <ngx-mat-file-input [formControl]='studentForm.controls["imagePath"]'multiple="multiple" accept="image/*" color="primary">
-                    <mat-icon ngxMatFileInputIcon>image</mat-icon>
-                    <mat-hint>Your Image</mat-hint>
-                  </ngx-mat-file-input>
-                </mat-form-field>
-              </div>
-            </div> -->
-
-            <!-- <mat-divider></mat-divider> -->
             <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <app-text-input [formControl]='studentForm.controls["country"]'[label]='"Country"'></app-text-input>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <app-text-input [formControl]='studentForm.controls["city"]' [label]='"City"'></app-text-input>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <app-text-input [formControl]='studentForm.controls["town"]' [label]='"Town"'></app-text-input>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <app-text-input [formControl]='studentForm.controls["street"]' [label]='"Street"'></app-text-input>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <app-text-input [formControl]='studentForm.controls["address"]' [label]='"address"'></app-text-input>
               </div>
-              <div class="col-md-3">
+              <div class="col-md-4">
                 <app-text-input [formControl]='studentForm.controls["boxNumber"]' [label]='"Post Code"'></app-text-input>
               </div>
 
@@ -124,6 +102,7 @@
                 (click)="cancel()"><span>cancel</span></button>
               <div class="clearfix"></div>
             </div>
+
           </form>
         </div>
       </div>

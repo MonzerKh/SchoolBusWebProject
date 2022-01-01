@@ -3,7 +3,6 @@ import { AfterViewInit, Component, ViewChild, OnInit, Output, EventEmitter } fro
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SchoolsService } from 'src/app/_services/schools.service';
 // import { SchoolDataTableDataSource, SchoolDataTableItem } from './school-data-table-datasource';
 import {MatTableDataSource} from '@angular/material/table';
@@ -11,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { SchoolDto } from '../../models/schoolDto';
 
 import { SchoolParams } from 'src/app/models/schoolParams';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
