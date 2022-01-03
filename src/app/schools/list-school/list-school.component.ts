@@ -47,6 +47,7 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
 
       this.dataSource.data = response.result;
       this.schoolParams.setPagination(response.Pagination);
+      this.Paginations = response.Pagination;
       this.dataSource.paginator = this.paginator;
       this.isLoading = false;
 

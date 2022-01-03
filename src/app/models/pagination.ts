@@ -10,7 +10,7 @@ export class PaginationSource {
 
   constructor(){
     this.currentPage = 1;
-    this.itemsPerPage = 8;
+    this.itemsPerPage = 7;
   }
 
   getPaginationHeaders() {

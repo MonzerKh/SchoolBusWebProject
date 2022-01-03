@@ -81,12 +81,18 @@
 
         </table>
 
-        <mat-paginator #paginator [length]="schoolParams.Pagination.totalItems"
-          [pageIndex]="schoolParams.Pagination.currentPage - 1" [pageSize]="schoolParams.Pagination.itemsPerPage"
-          [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+        <mat-paginator
+        [pageSizeOptions]="[7, 10, 20]"
+        showFirstLastButtons
+        (page)="pageChanged($event)"
+        [pageSize]="Paginations.itemsPerPage"
+        [length]="Paginations.totalItems * Paginations.itemsPerPage"
+        [pageIndex]="Paginations.currentPage"
+          aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>
 
+      currentPage : {{Paginations.currentPage}} - totalItems : {{Paginations.totalItems}} - itemsPerPage : {{Paginations.itemsPerPage}}
 
 
     </div>
