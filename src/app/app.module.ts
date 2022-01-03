@@ -32,42 +32,41 @@ import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/im
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SignInComponent,
-    TextInputComponent,
-    EmailInputComponent,
-    CreateSchoolComponent,
-    SchoolListComponent,
-    CreateGuardianComponent,
-    GuardianListComponent,
-    ImageUploadeComponent,
-    ListSchoolComponent,
-    BusCompanyListComponent,
-    BusCompanyCreateComponent,
-    DateInputComponent,
-    StudentListComponent,
-    StudentCreateComponent,
-    ImageUploadeComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    RouterModule,
-    FormsModule,
-    MaterialModule,
-    LayoutModule,
-    NgxSpinnerModule,
-  ],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
-  ],
-  entryComponents:[CreateGuardianComponent],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        SignInComponent,
+        TextInputComponent,
+        EmailInputComponent,
+        CreateSchoolComponent,
+        SchoolListComponent,
+        CreateGuardianComponent,
+        GuardianListComponent,
+        ImageUploadeComponent,
+        ListSchoolComponent,
+        BusCompanyListComponent,
+        BusCompanyCreateComponent,
+        DateInputComponent,
+        StudentListComponent,
+        StudentCreateComponent,
+        ImageUploadeComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        RouterModule,
+        FormsModule,
+        MaterialModule,
+        LayoutModule,
+        NgxSpinnerModule,
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
