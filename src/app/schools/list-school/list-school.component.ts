@@ -7,6 +7,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { PaginatedResult, PaginationSource } from 'src/app/models/pagination';
 import { SelectionModel, DataSource } from '@angular/cdk/collections';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-list-school',
@@ -24,10 +25,12 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
   schoolParams: SchoolParams = new SchoolParams();
 
   dataSource :  MatTableDataSource<SchoolDto> = new MatTableDataSource();
-  Paginations!:PaginationSource;
+  Paginations:PaginationSource = new PaginationSource();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
+
+  totalitem! : number ;
 
 
 
@@ -36,6 +39,7 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
   }
 
   ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
     Promise.resolve().then(()=> this.isLoading = true);
     this.loadSchools();
   }
@@ -47,8 +51,11 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
 
       this.dataSource.data = response.result;
       this.schoolParams.setPagination(response.Pagination);
-      this.Paginations = response.Pagination;
-      this.dataSource.paginator = this.paginator;
+      this.Paginations.totalItems = response.Pagination.totalItems;
+      this.Paginations.totalPages = response.Pagination.totalPages;
+      this.Paginations.currentPage = response.Pagination.currentPage;
+      this.totalitem = response.Pagination.totalItems;
+    //
       this.isLoading = false;
 
 

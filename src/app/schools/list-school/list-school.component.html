@@ -86,8 +86,8 @@
         showFirstLastButtons
         (page)="pageChanged($event)"
         [pageSize]="Paginations.itemsPerPage"
-        [length]="Paginations.totalItems * Paginations.itemsPerPage"
-        [pageIndex]="Paginations.currentPage"
+        [length]="totalitem"
+        [pageIndex]="Paginations.currentPage "
           aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>

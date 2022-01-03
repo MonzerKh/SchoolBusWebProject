@@ -28,7 +28,11 @@ import { StudentListComponent } from './students/student-list/student-list.compo
 import { StudentCreateComponent } from './students/student-create/student-create.component';
 import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/image-uploade.component';
 
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -62,6 +66,11 @@ import { ImageUploadeComponent } from './shared/ImageComponents/image-uploade/im
         MaterialModule,
         LayoutModule,
         NgxSpinnerModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatCheckboxModule,
+        MatProgressBarModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

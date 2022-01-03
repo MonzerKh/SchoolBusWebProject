@@ -9,7 +9,7 @@ export class PaginationSource {
   totalPages: number = 0;
 
   constructor(){
-    this.currentPage = 1;
+    this.currentPage = 0;
     this.itemsPerPage = 7;
   }
 
