@@ -85,14 +85,14 @@
         [pageSizeOptions]="[7, 10, 20]"
         showFirstLastButtons
         (page)="pageChanged($event)"
-        [pageSize]="Paginations.itemsPerPage"
-        [length]="totalitem"
-        [pageIndex]="Paginations.currentPage "
+        [pageSize]="schoolParams.Pagination.itemsPerPage"
+        [length]="schoolParams.Pagination.totalItems"
+        [pageIndex]="schoolParams.Pagination.currentPage "
           aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>
 
-      currentPage : {{Paginations.currentPage}} - totalItems : {{Paginations.totalItems}} - itemsPerPage : {{Paginations.itemsPerPage}}
+      currentPage : {{schoolParams.Pagination.currentPage}} - totalItems : {{schoolParams.Pagination.totalItems}} - itemsPerPage : {{schoolParams.Pagination.itemsPerPage}}
 
 
     </div>

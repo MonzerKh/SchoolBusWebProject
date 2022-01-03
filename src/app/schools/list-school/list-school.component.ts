@@ -25,7 +25,7 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
   schoolParams: SchoolParams = new SchoolParams();
 
   dataSource :  MatTableDataSource<SchoolDto> = new MatTableDataSource();
-  Paginations:PaginationSource = new PaginationSource();
+  //Paginations:PaginationSource = new PaginationSource();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -51,10 +51,8 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
 
       this.dataSource.data = response.result;
       this.schoolParams.setPagination(response.Pagination);
-      this.Paginations.totalItems = response.Pagination.totalItems;
-      this.Paginations.totalPages = response.Pagination.totalPages;
-      this.Paginations.currentPage = response.Pagination.currentPage;
-      this.totalitem = response.Pagination.totalItems;
+     /// this.Paginations = response.Pagination.totalItems;
+
     //
       this.isLoading = false;
 
