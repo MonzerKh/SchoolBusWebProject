@@ -33,7 +33,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
     declarations: [
@@ -70,7 +70,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         MatPaginatorModule,
         MatSortModule,
         MatCheckboxModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyC2SQnvRvx0B820_DWvYNZDwMgbnQzl79w'
+        })
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
