@@ -33,7 +33,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule,AgmMap } from '@agm/core';
 // import { google } from "google-maps";
 
 @NgModule({
@@ -73,7 +73,7 @@ import { AgmCoreModule } from '@agm/core';
         MatCheckboxModule,
         MatProgressBarModule,
          AgmCoreModule.forRoot({
-           apiKey: 'AIzaSyC2SQnvRvx0B820_DWvYNZDwMgbnQzl79w'
+           apiKey: 'AIzaSyBpJBNX9OPoIRr3DFBKS1m2gPa_FFBh9yk'
          }),
 
     ],

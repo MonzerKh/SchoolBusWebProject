@@ -107,10 +107,10 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
   //   // this.router.navigate(['../school-register/new'], {relativeTo: this.route});
   // }
 
-  // onEditStudent(student:StudentDto){
-  //   this.id= student.id;
-  //   this.router.navigate(['../student/'+'edit/'+this.id], {relativeTo: this.route});
-  // }
+   onEditStudent(student:StudentDto){
+     this.id= student.id;
+     this.router.navigate(['../student/'+'edit/'+this.id], {relativeTo: this.route});
+   }
 
   // findStudentByid(full_Name: HTMLInputElement){
   //   this.applyeFilter(full_Name.value);

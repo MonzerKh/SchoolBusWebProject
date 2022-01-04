@@ -12,25 +12,21 @@
             (ngSubmit)="studentForm.valid && onSubmit()" autocomplete="on">
 
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <app-text-input [formControl]='studentForm.controls["national_Number"]' [label]='"national Number"'></app-text-input>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <app-text-input [formControl]='studentForm.controls["full_Name"]' [label]='"Full Name"'></app-text-input>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <app-text-input [formControl]='studentForm.controls["father"]' [label]='"Father Name"'></app-text-input>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-3">
                 <app-text-input [formControl]='studentForm.controls["mother"]' [label]='"Mother Name"'></app-text-input>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <mat-form-field class="dropList" appearance="outline">
                   <mat-label>School Name</mat-label>
                   <mat-select [formControl]='studentForm.controls["school_Id"]'>
@@ -38,7 +34,7 @@
                   </mat-select>
                 </mat-form-field>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <mat-form-field class="dropList" appearance="outline">
                   <mat-label>Guardian Name</mat-label>
                   <mat-select [formControl]='studentForm.controls["guardian_Id"]'>
@@ -47,12 +43,10 @@
                 </mat-form-field>
               </div>
 
-              <div class="col-md-4">
+              <div class="col-md-2">
                 <button mat-raised-button color="primary" (click)="openDialog()">Add Guardian</button>
               </div>
-            </div>
 
-            <div class="row">
               <div class="col-md-4">
                 <app-image-uploade [formControl]='studentForm.controls["imagePath"]' [label]='"Select Image"'>
                 </app-image-uploade>
@@ -90,6 +84,15 @@
               <div class="col-md-4">
                 <app-text-input [formControl]='studentForm.controls["boxNumber"]' [label]='"Post Code"'></app-text-input>
               </div>
+
+              <div class="col-md-12">
+                <agm-map [latitude]="lat" [longitude]="lng" (mapClick)="onChooseLocation($event)">
+                  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+
+                </agm-map>
+              </div>
+
+
 
             </div>
 

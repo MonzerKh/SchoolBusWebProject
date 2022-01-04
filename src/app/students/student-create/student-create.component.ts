@@ -32,6 +32,9 @@ export class StudentCreateComponent implements OnInit {
   studentForm!: FormGroup;
   id!: number;
   message!: string;
+  lat = 51.678418;
+  lng = 7.809007;
+
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
@@ -137,5 +140,12 @@ export class StudentCreateComponent implements OnInit {
   resetForm() {}
 
   ngOnDestroy() {}
+
+  onChooseLocation(event:any){
+    // this.lat = event.coords.lat;
+    // this.lng = event.coords.lng;
+    console.log(event);
+
+  }
 }
 
