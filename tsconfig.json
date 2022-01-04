@@ -7,6 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "checkJs": true,
+    // "types": ["googlemaps"],
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
