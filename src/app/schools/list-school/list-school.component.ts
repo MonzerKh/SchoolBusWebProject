@@ -84,9 +84,6 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
 
 
 
-
-
-
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   allowMultiSelect = true;
   selection: SelectionModel<SchoolDto>;
@@ -119,8 +116,6 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
       return numSelected == numRows;
     }
     return false;
-
-
   }
 
 }

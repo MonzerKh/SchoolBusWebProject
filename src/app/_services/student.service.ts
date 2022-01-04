@@ -61,6 +61,15 @@ export class StudentService {
     );
   }
 
+  getStudentsPaging(Params:StudentParams) {
+    return getPaginatedResult<StudentDto[]>(this.baseUrl + 'Student/GetStudentPaging', Params.getHttpParams(), this.http)
+      .pipe(map(response => {
+      //  this.studentCache.set(Object.values(this.studentParams).join('-'),response);
+        return response;
+      }))
+  }
+
+
   getstudentById(id: number): Observable<any> {
     return this.http
       .get<StudentDto>(this.baseUrl + 'Student/GetStudent/'+id)
