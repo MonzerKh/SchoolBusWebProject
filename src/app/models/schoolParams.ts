@@ -2,7 +2,6 @@ import { PaginationSource } from './pagination';
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-
 export class SchoolParams {
   school_Name!: string;
   address!: string;

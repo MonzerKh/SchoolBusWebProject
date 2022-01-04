@@ -6,6 +6,10 @@ export class StudentParams {
   address! :string;
   email! :string;
   phone! :string;
+  national_Number!:number;
+
+
+
   Pagination!:PaginationSource;
   constructor() {
     this.Pagination = new PaginationSource();
@@ -14,10 +18,11 @@ export class StudentParams {
   getHttpParams() {
     let Params = this.Pagination.getPaginationHeaders();
 
-    if (this.full_Name) { Params = Params.append('school_Name', this.full_Name.toString()); }
+    if (this.full_Name) { Params = Params.append('full_Name', this.full_Name.toString()); }
     if (this.address) { Params = Params.append('address', this.address.toString()); }
-    if (this.email) { Params = Params.append('manager', this.email.toString()); }
+    if (this.email) { Params = Params.append('email', this.email.toString()); }
     if (this.phone) { Params = Params.append('phone', this.phone.toString()); }
+    if (this.national_Number) { Params = Params.append('national_Number', this.national_Number.toString()); }
 
     return Params;
   }

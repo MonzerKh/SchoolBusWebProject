@@ -1,14 +1,15 @@
 import { PaginationSource } from 'src/app/models/pagination';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { StudentDto } from 'src/app/models/studentDto';
 import { StudentParams } from 'src/app/models/studentParams';
 import { StudentService } from 'src/app/_services/student.service';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-student-list',
@@ -16,79 +17,110 @@ import { StudentService } from 'src/app/_services/student.service';
   styleUrls: ['./student-list.component.scss']
 })
 export class StudentListComponent  implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<StudentDto>;
-
-  // @Output() editModSchool!: SchoolDto;
-  // @Output() editMode!: boolean;
-  // dataSource!: SchoolDataTableDataSource;
-  schools!: StudentDto[];
-  pagination!: PaginationSource;
+  isLoading = false;
+  totalitem! : number ;
   studentParams: StudentParams= new StudentParams();
+  dataSource :  MatTableDataSource<StudentDto> = new MatTableDataSource();
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  // @ViewChild(MatSort) sort!: MatSort;
+  // @ViewChild(MatTable) table!: MatTable<StudentDto>;
 
-  dataSource!: StudentDto[];
-  subscribe!: Subscription;
+  // students!: StudentDto[];
+  // pagination!: PaginationSource;
+  // subscribe!: Subscription;
   id!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id','national_Number',  'full_Name', 'guardian_Name', 'school_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit'];
+  displayedColumns = ['select','id','national_Number',  'full_Name', 'guardian_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit'];
 
   constructor(private studentService: StudentService,private route: ActivatedRoute, private router: Router){
+    this.selection = new SelectionModel<StudentDto>(this.allowMultiSelect, []);
     // this.dataSource = new SchoolDataTableDataSource();
   }
 
   ngOnInit(): void {
+    this.dataSource.paginator = this.paginator;
+    Promise.resolve().then(()=> this.isLoading = true);
     this.loadStudents();
   }
 
   loadStudents() {
-    this.studentService.setStudentParams(this.studentParams);
-    this.studentService.getStudents().subscribe((response) => {
-      this.dataSource = response.result;
-      this.pagination = response.Pagination;
+    // this.studentService.setStudentParams(this.studentParams);
+    this.studentService.getStudentsPaging(this.studentParams).subscribe((response) => {
+      this.dataSource.data = response.result;
+      this.studentParams.setPagination(response.Pagination);
+      this.isLoading = false;
+      // this.pagination = response.Pagination;
+    }, error => {
+      this.isLoading = false;
+      console.log(error);
     })
   }
 
   ngAfterViewInit(): void {
     // this.dataSource.sort = this.sort;
     // this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+    // this.table.dataSource = this.dataSource;
   }
-  pageChanged(event: any) {
-    this.studentParams.Pagination.currentPage = event.page;
-    this.studentService.setStudentParams(this.studentParams);
+  pageChanged(event: PageEvent) {
+    this.studentParams.Pagination.itemsPerPage = event.pageSize;
+    this.studentParams.Pagination.currentPage = event.pageIndex;
+    // this.studentService.setStudentParams(this.studentParams);
     this.loadStudents();
   }
 
-  onClickedRow(student:StudentDto){
-    this.id= student.id;
-    console.log(student.id);
-  }
-
-  onAddStudent(){
-    // this.router.navigate(['../school-register/new'], {relativeTo: this.route});
-  }
-
-  onEditStudent(student:StudentDto){
-    this.id= student.id;
-    this.router.navigate(['../student/'+'edit/'+this.id], {relativeTo: this.route});
-  }
-
-  findStudentByid(full_Name: HTMLInputElement){
-    this.applyeFilter(full_Name.value);
-  }
-
-  applyeFilter(filterValue: string){
-    filterValue= filterValue.trim();
-    filterValue= filterValue.toLowerCase();
-    // this.data = filterValue;
-  }
-
   applyFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.studentParams.full_Name = filterValue;
+    this.studentParams.phone = filterValue;
+    this.loadStudents();
   }
 
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    allowMultiSelect = true;
+    selection!: SelectionModel<StudentDto>;
 
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+    this.selection.select(...this.dataSource.data);
+  }
+
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    if (this.dataSource) {
+      const numRows = this.dataSource.data.length;
+      return numSelected == numRows;
+    }
+    return false;
+  }
+
+  // onClickedRow(student:StudentDto){
+  //   this.id= student.id;
+  //   console.log(student.id);
+  // }
+
+  // onAddStudent(){
+  //   // this.router.navigate(['../school-register/new'], {relativeTo: this.route});
+  // }
+
+  // onEditStudent(student:StudentDto){
+  //   this.id= student.id;
+  //   this.router.navigate(['../student/'+'edit/'+this.id], {relativeTo: this.route});
+  // }
+
+  // findStudentByid(full_Name: HTMLInputElement){
+  //   this.applyeFilter(full_Name.value);
+  // }
+
+    /** The label for the checkbox on the passed row */
+    checkboxLabel(row?: StudentDto): string {
+      if (!row) {
+        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+      }
+      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+    }
 }
