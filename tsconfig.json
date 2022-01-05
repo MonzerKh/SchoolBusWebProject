@@ -7,7 +7,7 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "checkJs": true,
-    // "types": ["googlemaps"],
+     "types": ["googlemaps"],
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
@@ -20,7 +20,8 @@
     "module": "es2020",
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+
     ]
   },
   "angularCompilerOptions": {

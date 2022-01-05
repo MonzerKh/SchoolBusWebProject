@@ -1,3 +1,4 @@
+
 import { ListSchoolComponent } from './schools/list-school/list-school.component';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -34,7 +35,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AgmCoreModule,AgmMap } from '@agm/core';
-// import { google } from "google-maps";
+import { google } from 'google-maps';
 
 @NgModule({
     declarations: [
@@ -76,6 +77,7 @@ import { AgmCoreModule,AgmMap } from '@agm/core';
            apiKey: 'AIzaSyC2SQnvRvx0B820_DWvYNZDwMgbnQzl79w',
            libraries: ['places']
          }),
+
 
     ],
     providers: [

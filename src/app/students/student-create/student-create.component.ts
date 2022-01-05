@@ -1,4 +1,3 @@
-
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl, } from '@angular/forms';
@@ -16,7 +15,8 @@ import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateGuardianComponent } from 'src/app/guardians/create-guardian/create-guardian.component';
-import { Geocoder, MapsAPILoader } from '@agm/core';
+import { MapsAPILoader, Geocoder } from '@agm/core';
+import {} from 'google-maps';
 
 @Component({
   selector: 'app-student-create',
@@ -36,7 +36,10 @@ export class StudentCreateComponent implements OnInit {
   lat = 51.678418;
   lng = 7.809007;
   zoom = 15;
-  private geoCoder!: google.maps.Geocoder;
+  //private geoCoder :google.maps.Geocoder = new google.maps.Geocoder;
+
+
+
 
   @ViewChild('search')
   public searchElementRef!: ElementRef;
@@ -55,7 +58,11 @@ export class StudentCreateComponent implements OnInit {
     private ngZone: NgZone
   ) { }
 
+  geocoder!: google.maps.Geocoder;
   ngOnInit(): void {
+
+
+
 
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
@@ -65,6 +72,7 @@ export class StudentCreateComponent implements OnInit {
         console.log(this.editMode);
       }
       this.intitStudenForm();
+
     });
   }
 
@@ -112,7 +120,7 @@ export class StudentCreateComponent implements OnInit {
       father: [this.student.father],
       mother: [this.student.mother],
       birthDate: [this.student.birthDate],
-      PersonalImage: [this.student.PersonalImage],
+      personalImage: [this.student.personalImage],
       guardian_Id: [this.student.guardian_Id],
       school_Id: [this.student.school_Id],
       country: [this.student.country, Validators.required],
@@ -183,13 +191,14 @@ export class StudentCreateComponent implements OnInit {
 
 
   getAddress(latitude: number, longitude: number) {
-    this.geoCoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+    this.geocoder = new google.maps.Geocoder();
+    this.geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
       console.log(results);
       console.log(status);
       if (status === 'OK') {
-        if (results[0]) {
+        if (results![0]) {
           this.zoom = 12;
-          this.student.address = results[0].formatted_address;
+          this.student.address = results![0].formatted_address;
         } else {
           window.alert('No results found');
         }

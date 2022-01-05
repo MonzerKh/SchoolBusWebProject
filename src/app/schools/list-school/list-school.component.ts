@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SchoolParams } from 'src/app/models/schoolParams';
 import { SchoolsService } from 'src/app/_services/schools.service';
@@ -19,7 +20,7 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
   isLoading = false;
 
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns = ['select', 'id', 'schoolImage', 'school_Name', 'address', 'manager', 'phone'];
+  displayedColumns = ['select', 'id', 'schoolImage', 'school_Name', 'address', 'manager', 'phone','edit'];
 
   //GridDataSource: PaginatedResult<SchoolDto> = new PaginatedResult()
   schoolParams: SchoolParams = new SchoolParams();
@@ -88,7 +89,7 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
   allowMultiSelect = true;
   selection: SelectionModel<SchoolDto>;
 
-  constructor(private schoolsService: SchoolsService) {
+  constructor(private schoolsService: SchoolsService,private route: ActivatedRoute, private router: Router) {
     this.selection = new SelectionModel<SchoolDto>(this.allowMultiSelect, []);
   }
 
@@ -117,5 +118,10 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
     }
     return false;
   }
+
+  onEditSchool(school:SchoolDto){
+    this.router.navigate(['../school/'+school.id+'/edit'], {relativeTo: this.route});
+  }
+
 
 }
