@@ -23,18 +23,15 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
   dataSource :  MatTableDataSource<StudentDto> = new MatTableDataSource();
   pageSizeOptions: number[] = [5, 10, 25, 100];
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  // @ViewChild(MatSort) sort!: MatSort;
-  // @ViewChild(MatTable) table!: MatTable<StudentDto>;
 
-  // students!: StudentDto[];
-  // pagination!: PaginationSource;
-  // subscribe!: Subscription;
   id!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['select','id','personalImage','national_Number',  'full_Name', 'guardian_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit'];
 
-  constructor(private studentService: StudentService,private route: ActivatedRoute, private router: Router){
+  constructor(private studentService: StudentService,
+    private route: ActivatedRoute,
+    private router: Router){
     this.selection = new SelectionModel<StudentDto>(this.allowMultiSelect, []);
     // this.dataSource = new SchoolDataTableDataSource();
   }
@@ -46,7 +43,6 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
   }
 
   loadStudents() {
-    // this.studentService.setStudentParams(this.studentParams);
     this.studentService.getStudentsPaging(this.studentParams).subscribe((response) => {
       this.dataSource.data = response.result;
       this.studentParams.setPagination(response.Pagination);
@@ -63,6 +59,7 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
     // this.dataSource.paginator = this.paginator;
     // this.table.dataSource = this.dataSource;
   }
+
   pageChanged(event: PageEvent) {
     this.studentParams.Pagination.itemsPerPage = event.pageSize;
     this.studentParams.Pagination.currentPage = event.pageIndex;

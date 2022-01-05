@@ -2,8 +2,8 @@
   <div class="row GridView">
     <div class="mat-filter col-md-12 row">
       <div class="col-md-8">
-        <button mat-raised-button routerLink="/student/new" color="primary">Add
-          Student</button>&nbsp;&nbsp;
+        <button mat-raised-button routerLink="/supervisor/new" color="primary">Add
+          Supervisor</button>&nbsp;&nbsp;
       </div>
       <div class=" col-md-4">
         <mat-form-field appearance="outline">
@@ -22,58 +22,34 @@
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading">
         </mat-progress-bar>
 
-        <table mat-table class="data-table full-width-table"
-          [dataSource]="dataSource" matSort aria-label="Elements">
+        <table mat-table class="data-table full-width-table" [dataSource]="dataSource"
+          matSort aria-label="Elements">
 
-          <!-- Checkbox Column -->
-          <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null"
-                [checked]="selection.hasValue() && isAllSelected()"
-                [indeterminate]="selection.hasValue() && !isAllSelected()"
-                [aria-label]="checkboxLabel()">
-              </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
-                (change)="$event ? selection.toggle(row) : null"
-                [checked]="selection.isSelected(row)"
-                [aria-label]="checkboxLabel(row)">
-              </mat-checkbox>
-            </td>
-          </ng-container>
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                      <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                      </th>
+                      <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                        </mat-checkbox>
+                      </td>
+                    </ng-container>
           <!-- Id Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
             <td mat-cell *matCellDef="let row">{{row.id}}</td>
-          </ng-container>national_Id
-
-          <ng-container matColumnDef="personalImage">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
-            <td mat-cell *matCellDef="let row"> <img
-                style="width: 50px; height: 50px;" [src]="row.personalImage" />
-            </td>
-          </ng-container>
-
-          <!-- national_Number Column -->
-          <ng-container matColumnDef="national_Number">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>nationalNumber
-            </th>
-            <td mat-cell *matCellDef="let row">{{row.national_Number}}</td>
           </ng-container>
 
           <!-- full_Name Column -->
           <ng-container matColumnDef="full_Name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Student Name
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Supervisor Name
             </th>
             <td mat-cell *matCellDef="let row">{{row.full_Name}}</td>
-          </ng-container>
-
-          <!-- guardian_Name Column -->
-          <ng-container matColumnDef="guardian_Name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Guardian Name
-            </th>
-            <td mat-cell *matCellDef="let row">{{row.guardian_Name}}</td>
           </ng-container>
 
           <!-- phone Column -->
@@ -93,13 +69,6 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>School Name
             </th>
             <td mat-cell *matCellDef="let row">{{row.school_Name}}</td>
-          </ng-container>
-
-          <!-- birthDate Column -->
-          <ng-container matColumnDef="birthDate">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Birth Date
-            </th>
-            <td mat-cell *matCellDef="let row">{{row.birthDate}}</td>
           </ng-container>
 
           <!-- full_Address Column -->
@@ -125,16 +94,16 @@
 
         <mat-paginator [pageSizeOptions]="[7, 10, 20]" showFirstLastButtons
           (page)="pageChanged($event)"
-          [pageSize]="studentParams.Pagination.itemsPerPage"
-          [length]="studentParams.Pagination.totalItems"
-          [pageIndex]="studentParams.Pagination.currentPage "
+          [pageSize]="supervisorParams.Pagination.itemsPerPage"
+          [length]="supervisorParams.Pagination.totalItems"
+          [pageIndex]="supervisorParams.Pagination.currentPage "
           aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>
 
-      currentPage : {{studentParams.Pagination.currentPage}} - totalItems :
-      {{studentParams.Pagination.totalItems}} - itemsPerPage :
-      {{studentParams.Pagination.itemsPerPage}}
+      currentPage : {{supervisorParams.Pagination.currentPage}} - totalItems :
+      {{supervisorParams.Pagination.totalItems}} - itemsPerPage :
+      {{supervisorParams.Pagination.itemsPerPage}}
 
     </div>
   </div>

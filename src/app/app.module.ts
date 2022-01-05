@@ -34,6 +34,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AgmCoreModule,AgmMap } from '@agm/core';
+import { SupervisorCreateComponent } from './supervisor/supervisor-create/supervisor-create.component';
+import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor-list.component';
 // import { google } from "google-maps";
 
 @NgModule({
@@ -54,7 +56,9 @@ import { AgmCoreModule,AgmMap } from '@agm/core';
         DateInputComponent,
         StudentListComponent,
         StudentCreateComponent,
-        ImageUploadeComponent
+        ImageUploadeComponent,
+        SupervisorCreateComponent,
+        SupervisorListComponent
     ],
     imports: [
         BrowserModule,

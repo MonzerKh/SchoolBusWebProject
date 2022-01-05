@@ -1,28 +1,33 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { PaginationSource } from './pagination';
-//import { PaginationParams } from './paginationParams';
 
-
-export class GuardianParams extends PaginationSource{
-  gardian_Name! :string;
+export class GuardianParams{
+  full_Name! :string;
   address! :string;
   email! :string;
   phone! :string;
 
+  Pagination!:PaginationSource;
+
   constructor() {
-    super();
+    this.Pagination = new PaginationSource();
   }
 
   getHttpParams( ) {
-   // let guardianParams=this.getPaginationHeaders();
+    let Params = this.Pagination.getPaginationHeaders();
 
-    // if(!this.gardian_Name){  guardianParams = guardianParams.append('gardian_Name', this.gardian_Name.toString());}
-    // if(!this.address){  guardianParams = guardianParams.append('address', this.address.toString());}
-    // if(!this.email){  guardianParams = guardianParams.append('email', this.email.toString());}
-    // if(!this.phone){  guardianParams = guardianParams.append('phone', this.phone.toString());}
-    // if(!this.pageNumber){  guardianParams = guardianParams.append('pageNumber', this.pageNumber.toString());}
-    // if(!this.pageSize){  guardianParams = guardianParams.append('pageSize', this.pageSize.toString());}
+    if(this.full_Name){  Params = Params.append('full_Name', this.full_Name.toString());}
+    if(this.address){  Params = Params.append('address', this.address.toString());}
+    if(this.email){  Params = Params.append('email', this.email.toString());}
+    if(this.phone){  Params = Params.append('phone', this.phone.toString());}
 
-   // return guardianParams;
+   return Params;
+  }
+
+  setPagination(page:PaginationSource){
+    this.Pagination.currentPage = page.currentPage;
+    this.Pagination.totalItems = page.totalItems;
+    this.Pagination.totalPages = page.totalPages;
+    this.Pagination.itemsPerPage = page.itemsPerPage;
   }
 }
+

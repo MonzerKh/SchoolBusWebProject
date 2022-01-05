@@ -13,6 +13,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { BusCompanyListComponent } from './bus-company/bus-company-list/bus-company-list.component';
 import { StudentCreateComponent } from './students/student-create/student-create.component';
 import { StudentListComponent } from './students/student-list/student-list.component';
+import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor-list.component';
+import { SupervisorCreateComponent } from './supervisor/supervisor-create/supervisor-create.component';
 
 const routes: Routes = [
 
@@ -47,8 +49,16 @@ const routes: Routes = [
       { path: 'guardian', component: CreateGuardianComponent},
       { path: 'guardian/new', component:CreateGuardianComponent},
       {path: 'guardian/:id/edit', component:CreateGuardianComponent},
-      { path: 'guardian-list', component: GuardianListComponent},],
+      { path: 'guardian-list', component: GuardianListComponent},
+
+
+      { path: 'supervisor', component: SupervisorCreateComponent},
+      { path: 'supervisor/new', component: SupervisorCreateComponent},
+      { path: 'supervisor/edit/:id', component: SupervisorCreateComponent},
+      { path: 'supervisor-list', component: SupervisorListComponent},
+    ],
   },
+
 
 
 ];

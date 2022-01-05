@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SnackBarService } from './snack-bar.service';
 import { GuardianParams} from '../models/guardianParams';
-import { environment } from '../../environments/environment.prod';
 import { GuardianDto } from '../models/guardianDto';
 import { getPaginatedResult } from './paginationHelper';
 import { map } from 'rxjs/operators';
 import { Observable, of, pipe } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +54,14 @@ export class GuardianService {
     return getPaginatedResult<GuardianDto[]>(this.baseUrl + 'Guardian/GetGuardian', this.guardianParams.getHttpParams(), this.http)
       .pipe(map(response => {
       //  this.guardianCache.set(Object.values(this.guardianParams).join('-'),response);
+        return response;
+      }))
+  }
+
+  getGuardiansPaging(Params:GuardianParams) {
+    return getPaginatedResult<GuardianDto[]>(this.baseUrl + 'Guardian/GetGuardianPaging', Params.getHttpParams(), this.http)
+      .pipe(map(response => {
+      //  this.guardiantCache.set(Object.values(this.studentParams).join('-'),response);
         return response;
       }))
   }

@@ -27,6 +27,7 @@ export class BusCompanyListComponent   implements AfterViewInit, OnInit {
   dataSource!: BusCompanyDto[];
   subscribe!: Subscription;
   id!: number;
+  isLoading = false;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'company', 'address', 'phone', 'logoPath', 'webSiteUrl', 'edit'];

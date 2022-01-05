@@ -1,25 +1,26 @@
-<div class="main-content">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
+<div class="container-fluid">
+  <div class="row GridView">
+    <div class="mat-filter col-md-12 row">
+      <div class="col-md-8">
+        <button mat-raised-button routerLink="/student/new" color="primary">Add
+          Student</button>&nbsp;&nbsp;
+      </div>
+      <div class=" col-md-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Filter</mat-label>
+          <input class="form-control" matInput (keyup)="applyFilter($event)"
+            placeholder="Search" #input>
+          <mat-icon matSuffix>find_in_page_sharp</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
 
-            <div class="demo-button-container">
-              <div >
-                <button mat-raised-button routerLink="/busCompany/new" color="primary">Add School</button>&nbsp;&nbsp;
-              </div>
-              <!-- <div>
-                <mat-form-field>
-                      <input matInput placeholder="Find School" #school_Name (keyup)="findSchoolByName(school_Name)">
-                </mat-form-field>
-              </div> -->
-              <div>
-                <mat-form-field appearance="standard">
-                  <mat-label>Filter</mat-label>
-                  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="mat-elevation-z8">
+
+
+    <div class="col-md-12">
+      <div class="mat-elevation-z8">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading">
+        </mat-progress-bar>
               <table mat-table class="full-width-table" [dataSource]="dataSource" matSort  aria-label="Elements">
                 <!-- Id Column -->
                 <ng-container matColumnDef="id">
@@ -71,22 +72,19 @@
                 <tr mat-row matRipple  *matRowDef="let row; columns: displayedColumns;" (click)="onClickedRow(row)"></tr>
               </table>
 
-              <mat-paginator
-                #paginator
-                [length]="dataSource?.length"
-                [pageIndex]="0"
-                [pageSize]="10"
-                [pageSizeOptions]="[5, 10, 20]"
-                aria-label="Select page">
-              </mat-paginator>
-            </div>
-
-
+              <mat-paginator [pageSizeOptions]="[7, 10, 20]" showFirstLastButtons
+              (page)="pageChanged($event)"
+              [pageSize]="busCompanyParams.Pagination.itemsPerPage"
+              [length]="busCompanyParams.Pagination.totalItems"
+              [pageIndex]="busCompanyParams.Pagination.currentPage "
+              aria-label="Select page of periodic elements">
+            </mat-paginator>
           </div>
-          <!--body-->
-        </div>
 
+          currentPage : {{busCompanyParams.Pagination.currentPage}} - totalItems :
+          {{busCompanyParams.Pagination.totalItems}} - itemsPerPage :
+          {{busCompanyParams.Pagination.itemsPerPage}}
+
+        </div>
       </div>
-    <!-- </div> -->
-  <!-- </div> -->
-</div>
+    </div>
