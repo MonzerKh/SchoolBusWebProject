@@ -32,7 +32,7 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
   id!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['select','id','national_Number',  'full_Name', 'guardian_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit'];
+  displayedColumns = ['select','id','personalImage','national_Number',  'full_Name', 'guardian_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit'];
 
   constructor(private studentService: StudentService,private route: ActivatedRoute, private router: Router){
     this.selection = new SelectionModel<StudentDto>(this.allowMultiSelect, []);

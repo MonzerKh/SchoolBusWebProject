@@ -102,7 +102,7 @@ export class StudentCreateComponent implements OnInit {
       father: [this.student.father],
       mother: [this.student.mother],
       birthDate: [this.student.birthDate],
-      imagePath: [this.student.imagePath],
+      PersonalImage: [this.student.PersonalImage],
       guardian_Id: [this.student.guardian_Id],
       school_Id: [this.student.school_Id],
       country: [this.student.country, Validators.required],
@@ -111,7 +111,7 @@ export class StudentCreateComponent implements OnInit {
       street: [this.student.street, Validators.required],
       address: [this.student.address, Validators.required],
       boxNumber: [this.student.boxNumber, Validators.required],
-      // gender:[this.student.gender],
+      createdBy:[this.student.createdBy],
     });
   }
 

@@ -20,7 +20,7 @@ export interface StudentDto{
 
   gender: string;
 
-  imagePath :File;
+  PersonalImage :string;
 
   guardian_Id :number;
 
