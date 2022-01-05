@@ -66,10 +66,10 @@ export class StudentCreateComponent implements OnInit {
         this.baseUrl + 'Student/GetStudent/' + this.id
       );
       const schools$ = this.http.get<SchoolDto[]>(
-        this.baseUrl + 'School/GetSchool'
+        this.baseUrl + 'School/GetSchoolList'
       );
       const guardians$ = this.http.get<GuardianDto[]>(
-        this.baseUrl + 'Guardian/GetGuardian'
+        this.baseUrl + 'Guardian/GetGuardianList'
       );
       return forkJoin([student$, schools$, guardians$]).subscribe((data) => {
         this.student = data[0];
@@ -79,10 +79,10 @@ export class StudentCreateComponent implements OnInit {
       });
     } else {
       const schools$ = this.http.get<SchoolDto[]>(
-        this.baseUrl + 'School/GetSchool'
+        this.baseUrl + 'School/GetSchoolList'
       );
       const guardians$ = this.http.get<GuardianDto[]>(
-        this.baseUrl + 'Guardian/GetGuardian'
+        this.baseUrl + 'Guardian/GetGuardianList'
       );
       return forkJoin([schools$, guardians$]).subscribe((data) => {
         this.schools = data[0];
