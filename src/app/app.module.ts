@@ -73,7 +73,8 @@ import { AgmCoreModule,AgmMap } from '@agm/core';
         MatCheckboxModule,
         MatProgressBarModule,
          AgmCoreModule.forRoot({
-           apiKey: 'AIzaSyBpJBNX9OPoIRr3DFBKS1m2gPa_FFBh9yk'
+           apiKey: 'AIzaSyC2SQnvRvx0B820_DWvYNZDwMgbnQzl79w',
+           libraries: ['places']
          }),
 
     ],
