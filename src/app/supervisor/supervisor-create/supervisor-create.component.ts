@@ -25,8 +25,7 @@ export class SupervisorCreateComponent implements OnInit {
   supervisorForm!: FormGroup;
   id!: number;
   message!: string;
-  lat = 51.678418;
-  lng = 7.809007;
+
 
   constructor(
     private http: HttpClient,

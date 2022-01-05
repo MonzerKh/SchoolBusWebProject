@@ -15,6 +15,8 @@ import { StudentCreateComponent } from './students/student-create/student-create
 import { StudentListComponent } from './students/student-list/student-list.component';
 import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor-list.component';
 import { SupervisorCreateComponent } from './supervisor/supervisor-create/supervisor-create.component';
+import { BusCreateComponent } from './buses/bus-create/bus-create.component';
+import { BusListComponent } from './buses/bus-list/bus-list.component';
 
 const routes: Routes = [
 
@@ -56,6 +58,11 @@ const routes: Routes = [
       { path: 'supervisor/new', component: SupervisorCreateComponent},
       { path: 'supervisor/edit/:id', component: SupervisorCreateComponent},
       { path: 'supervisor-list', component: SupervisorListComponent},
+
+      { path: 'bus', component: BusCreateComponent},
+      { path: 'bus/new', component: BusCreateComponent},
+      { path: 'bus/edit/:id', component: BusCreateComponent},
+      { path: 'bus-list', component: BusListComponent},
     ],
   },
 

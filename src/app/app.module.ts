@@ -39,6 +39,8 @@ import { SupervisorCreateComponent } from './supervisor/supervisor-create/superv
 import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor-list.component';
 // import { google } from "google-maps";
 import { google } from 'google-maps';
+import { BusCreateComponent } from './buses/bus-create/bus-create.component';
+import { BusListComponent } from './buses/bus-list/bus-list.component';
 
 @NgModule({
     declarations: [
@@ -60,7 +62,9 @@ import { google } from 'google-maps';
         StudentCreateComponent,
         ImageUploadeComponent,
         SupervisorCreateComponent,
-        SupervisorListComponent
+        SupervisorListComponent,
+        BusCreateComponent,
+        BusListComponent
     ],
     imports: [
         BrowserModule,

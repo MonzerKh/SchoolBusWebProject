@@ -89,7 +89,7 @@ export class SupervisorListComponent implements AfterViewInit, OnInit {
     return false;
   }
 
-  onEditStudent(supervisor: SupervisorDto){
+  onEditSupervisor(supervisor: SupervisorDto){
     this.id= supervisor.id;
     this.router.navigate(['../supervisor/'+'edit/'+this.id], {relativeTo: this.route});
   }

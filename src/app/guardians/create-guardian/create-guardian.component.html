@@ -8,7 +8,7 @@
             <p class="card-category">Complete Guardian profile </p>
           </div>
           <div class="card-body">
-            <form [formGroup]='guardianForm' (ngSubmit)="guardianForm.valid && onSubmit()">
+            <form [formGroup]='guardianForm' *ngIf="guardianForm" (ngSubmit)="guardianForm.valid && onSubmit()">
               <div class="row">
                 <div class="col-md-6">
                   <app-text-input [formControl]='guardianForm.controls["nationality_Id"]' [label]='"nationality Id"'></app-text-input>
@@ -26,20 +26,23 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-12">
-                  <!-- <app-text-input [formControl]='guardianForm.controls["userName"]' [label]='"User Name"'></app-text-input> -->
+                <div class="col-md-4">
+                  <app-text-input [formControl]='guardianForm.controls["createdBy"]' [label]='"created By"'></app-text-input>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
+              <!-- </div>
+              <div class="row"> -->
+                <div class="col-md-4">
                   <app-text-input [formControl]='guardianForm.controls["imagePath"]' [label]='"Image Path"'></app-text-input>
                 </div>
-              </div>
-
-
-              <div class="row">
-                <div class="col-md-6">
-                  <app-text-input [formControl]='guardianForm.controls["school_Id"]' [label]='"School Id"'></app-text-input>
+              <!-- </div>
+              <div class="row"> -->
+                <div class="col-md-4">
+                  <mat-form-field class="dropList" appearance="outline">
+                    <mat-label>School Name</mat-label>
+                    <mat-select [formControl]='guardianForm.controls["school_Id"]'>
+                      <mat-option *ngFor="let school of schools" [value]="school.id">{{school.school_Name}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
                 <div class="col-md-6">
                   <!-- <app-text-input [formControl]='guardianForm.controls["school_Name"]' [label]='"School Name"'></app-text-input> -->

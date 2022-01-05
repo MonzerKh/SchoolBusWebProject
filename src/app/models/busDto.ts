@@ -1,7 +1,5 @@
 
 export interface BusDto{
-  createdBy: number;
-  updateBy: number;
   id: number;
   number: string;
   marka: string;
@@ -10,4 +8,6 @@ export interface BusDto{
   large: number;
   busCompany_Id: number;
   company: string;
+  createdBy: number;
+  updateBy: number;
 }
