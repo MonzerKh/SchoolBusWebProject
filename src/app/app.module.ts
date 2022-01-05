@@ -1,3 +1,4 @@
+
 import { ListSchoolComponent } from './schools/list-school/list-school.component';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { AgmCoreModule,AgmMap } from '@agm/core';
 import { SupervisorCreateComponent } from './supervisor/supervisor-create/supervisor-create.component';
 import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor-list.component';
 // import { google } from "google-maps";
+import { google } from 'google-maps';
 
 @NgModule({
     declarations: [
@@ -77,8 +79,10 @@ import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor
         MatCheckboxModule,
         MatProgressBarModule,
          AgmCoreModule.forRoot({
-           apiKey: 'AIzaSyBpJBNX9OPoIRr3DFBKS1m2gPa_FFBh9yk'
+           apiKey: 'AIzaSyC2SQnvRvx0B820_DWvYNZDwMgbnQzl79w',
+           libraries: ['places']
          }),
+
 
     ],
     providers: [

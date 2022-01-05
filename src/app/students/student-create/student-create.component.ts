@@ -1,7 +1,6 @@
-
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl,} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, } from '@angular/forms';
 import { GuardianDto } from 'src/app/models/guardianDto';
 import { SchoolDto } from 'src/app/models/schoolDto';
 import { StudentDto } from 'src/app/models/studentDto';
@@ -16,6 +15,8 @@ import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateGuardianComponent } from 'src/app/guardians/create-guardian/create-guardian.component';
+import { MapsAPILoader, Geocoder } from '@agm/core';
+import {} from 'google-maps';
 
 @Component({
   selector: 'app-student-create',
@@ -34,6 +35,14 @@ export class StudentCreateComponent implements OnInit {
   message!: string;
   lat = 51.678418;
   lng = 7.809007;
+  zoom = 15;
+  //private geoCoder :google.maps.Geocoder = new google.maps.Geocoder;
+
+
+
+
+  @ViewChild('search')
+  public searchElementRef!: ElementRef;
 
   constructor(
     private http: HttpClient,
@@ -44,10 +53,17 @@ export class StudentCreateComponent implements OnInit {
     private _snackBar: SnackBarService,
     public dialog: MatDialog,
     private schoolService: SchoolsService,
-    private guardianService: GuardianService
-  ) {}
+    private guardianService: GuardianService,
+    public mapsAPILoader: MapsAPILoader,
+    private ngZone: NgZone
+  ) { }
 
+  geocoder!: google.maps.Geocoder;
   ngOnInit(): void {
+
+
+
+
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       console.log(this.id);
@@ -56,6 +72,7 @@ export class StudentCreateComponent implements OnInit {
         console.log(this.editMode);
       }
       this.intitStudenForm();
+
     });
   }
 
@@ -76,6 +93,7 @@ export class StudentCreateComponent implements OnInit {
         this.schools = data[1];
         this.guardians = data[2];
         this.loadForm();
+        this.setCurrentLocation();
       });
     } else {
       const schools$ = this.http.get<SchoolDto[]>(
@@ -102,7 +120,7 @@ export class StudentCreateComponent implements OnInit {
       father: [this.student.father],
       mother: [this.student.mother],
       birthDate: [this.student.birthDate],
-      PersonalImage: [this.student.PersonalImage],
+      personalImage: [this.student.personalImage],
       guardian_Id: [this.student.guardian_Id],
       school_Id: [this.student.school_Id],
       country: [this.student.country, Validators.required],
@@ -111,12 +129,16 @@ export class StudentCreateComponent implements OnInit {
       street: [this.student.street, Validators.required],
       address: [this.student.address, Validators.required],
       boxNumber: [this.student.boxNumber, Validators.required],
-      createdBy:[this.student.createdBy],
+      lat: [this.student.lat],
+      lng: [this.student.lng],
+      createdBy: [this.student.createdBy],
     });
   }
 
   onSubmit() {
     let studentDto: StudentDto = this.studentForm.value;
+    studentDto.lat = this.student.lat;
+    studentDto.lng = this.student.lng;
     this.studentService.createStudent(studentDto);
     this.message = 'the model was sent';
     this._snackBar.openSnackBar(this.message);
@@ -128,24 +150,63 @@ export class StudentCreateComponent implements OnInit {
   }
 
   openDialog() {
-    const dialogRef=this.dialog.open(CreateGuardianComponent,{
-      width:'800px', // height:'800px',
-      data:{}
+    const dialogRef = this.dialog.open(CreateGuardianComponent, {
+      width: '800px', // height:'800px',
+      data: {}
     });
-    dialogRef.afterClosed().subscribe(res=>{
+    dialogRef.afterClosed().subscribe(res => {
       console.timeLog("dialog is closed")
     });
   }
 
-  resetForm() {}
+  resetForm() { }
 
-  ngOnDestroy() {}
+  ngOnDestroy() { }
 
-  onChooseLocation(event:any){
-    // this.lat = event.coords.lat;
-    // this.lng = event.coords.lng;
+  mapClicked(event: any) {
     console.log(event);
+    this.student.lat = event.coords.lat;
+    this.student.lng = event.coords.lng;
+    this.getAddress(this.student.lat!, this.student.lng!);
+  }
 
+  markerDragEnd(event: any) {
+    console.log(event);
+    this.student.lat = event.coords.lat;
+    this.student.lng = event.coords.lng;
+    this.getAddress(this.student.lat!, this.student.lng!);
+  }
+
+
+  private setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = this.student.lat! > 0 ? this.student.lat! : position.coords.latitude;
+        this.lng = this.student.lng! > 0 ? this.student.lng! : position.coords.longitude;
+        this.zoom = 15;
+      });
+    }
+  }
+
+
+
+  getAddress(latitude: number, longitude: number) {
+    this.geocoder = new google.maps.Geocoder();
+    this.geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
+      console.log(results);
+      console.log(status);
+      if (status === 'OK') {
+        if (results![0]) {
+          this.zoom = 12;
+          this.student.address = results![0].formatted_address;
+        } else {
+          window.alert('No results found');
+        }
+      } else {
+        window.alert('Geocoder failed due to: ' + status);
+      }
+
+    });
   }
 }
 

@@ -7,7 +7,7 @@
             <h4 class="card-title">School Creation</h4>
           </div>
           <div class="card-body">
-            <form [formGroup]='createScoolForm' (ngSubmit)="createScoolForm.valid && onSubmit()" autocomplete="on">
+            <form [formGroup]='createScoolForm' *ngIf="createScoolForm" (ngSubmit)="createScoolForm.valid && onSubmit()" autocomplete="on">
 
               <div class="row">
                 <div class="col-md-4 ">

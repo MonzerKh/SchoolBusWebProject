@@ -20,7 +20,7 @@ export interface StudentDto{
 
   gender: string;
 
-  PersonalImage :string;
+  personalImage :string;
 
   guardian_Id :number;
 
@@ -40,6 +40,10 @@ export interface StudentDto{
   createdBy?: number;
 
   udateBy?: number;
+  lat?: number;
+
+  lng?: number;
+
 
   createTime?:Date;
   updateTime?:Date;
