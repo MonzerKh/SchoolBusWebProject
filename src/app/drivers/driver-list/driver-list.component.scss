@@ -1,0 +1,59 @@
+.GridView {
+  background-color: #fff;
+  margin: 1px auto 1px auto;
+  box-sizing: border-box;
+  border-radius: 0.4rem;
+  box-shadow: 2px 2px #888888;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-filter {
+  margin: 0.1rem;
+  box-shadow: 1px 1px #888888;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 25vw;
+}
+
+.data-table {
+  width: 100%;
+}
+
+.mat-column-schoolImage img {
+  width: 50px;
+  height: 50px;
+  margin: 5px auto 5px auto;
+}
+
+.mat-cell {
+  font-size: 1.1rem !important;
+  vertical-align: middle;
+  padding: 5px 5px  !important;
+}
+
+.mat-header-cell {
+  font-size: 1.3rem !important;
+  text-align: center;
+  vertical-align: middle;
+  color: rgb(80, 76, 76);
+  padding: 5px 5px  !important;
+  .mat-cell {
+    color: blue;
+
+  }
+}
+
+.mat-sort-cell {
+  font-size: 1.3rem !important;
+  text-align: center;
+  vertical-align: middle;
+
+  .mat-cell {
+    margin: 5px;
+  }
+}

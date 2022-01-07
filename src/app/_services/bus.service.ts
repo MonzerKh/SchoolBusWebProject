@@ -64,4 +64,13 @@ export class BusService {
       }));
   }
 
+
+  getBusist(busCompany_Id:number = 0) {
+    return this.http.get<BusDto[]>(this.baseUrl + 'Bus/GetBus?BusCompany_Id='+busCompany_Id).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
 }

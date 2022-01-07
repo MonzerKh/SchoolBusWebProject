@@ -63,12 +63,30 @@ export class BusCompanyService {
       }))
   }
 
+  getBusCompanysPaging(Params:BusCompanyParams) {
+    return getPaginatedResult<BusCompanyDto[]>(this.baseUrl + 'BusCompany/GetBusCompanyPaging', Params.getHttpParams(), this.http)
+      .pipe(map(response => {
+      //  this.busCompanyCache.set(Object.values(this.busCompanyParams).join('-'),response);
+        return response;
+      }))
+  }
+
   getBusCompanyById(id: number): Observable<any>{
     return this.http.get<BusCompanyDto>(this.baseUrl+'BusCompany/GetBusCompany/'+id)
       .pipe(map(response=>{
         this.school= response;
         return this.school
       }));
+  }
+
+  getBusCompanyList() {
+    return this.http
+      .get<BusCompanyDto[]>(this.baseUrl + 'BusCompany/GetBusCompanyList')
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
   }
 
 }

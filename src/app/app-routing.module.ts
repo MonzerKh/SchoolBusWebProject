@@ -17,6 +17,9 @@ import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor
 import { SupervisorCreateComponent } from './supervisor/supervisor-create/supervisor-create.component';
 import { BusCreateComponent } from './buses/bus-create/bus-create.component';
 import { BusListComponent } from './buses/bus-list/bus-list.component';
+import { DriverCreateComponent } from './drivers/driver-create/driver-create.component';
+import { DriverListComponent } from './drivers/driver-list/driver-list.component';
+import { StudentBusComponent } from './students-buses/student-bus/student-bus.component';
 
 const routes: Routes = [
 
@@ -63,6 +66,13 @@ const routes: Routes = [
       { path: 'bus/new', component: BusCreateComponent},
       { path: 'bus/edit/:id', component: BusCreateComponent},
       { path: 'bus-list', component: BusListComponent},
+
+      { path: 'driver', component: DriverCreateComponent},
+      { path: 'driver/new', component: DriverCreateComponent},
+      { path: 'driver/edit/:id', component: DriverCreateComponent},
+      { path: 'driver-list', component: DriverListComponent},
+
+      { path: 'student-bus', component: StudentBusComponent}
     ],
   },
 

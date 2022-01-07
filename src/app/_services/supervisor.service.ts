@@ -53,12 +53,12 @@ export class SupervisorService {
       }))
   }
 
-  getSupervisors() {
+  getSupervisors(Params:SupervisorParams) {
     // let response= this.supervisorCache.get(Object.values(this.supervisorParams).join('-'));
     // if(response){
     //   return of(response);
     // }
-    return getPaginatedResult<SupervisorDto[]>(this.baseUrl +'Supervisor/GetSupervisor', this.supervisorParams.getHttpParams(),this.http)
+    return getPaginatedResult<SupervisorDto[]>(this.baseUrl +'Supervisor/GetSupervisor', Params.getHttpParams(),this.http)
     .pipe(
       map((response) => {
         //  this.supervisorCache.set(Object.values(this.supervisorParams).join('-'),response);

@@ -1,6 +1,7 @@
 export interface DriverDto{
   id: number;
   full_Name:string;
+  national_Number:string;
   email: string;
   phone: string;
   company: string;

@@ -60,10 +60,6 @@ export class StudentCreateComponent implements OnInit {
 
   geocoder!: google.maps.Geocoder;
   ngOnInit(): void {
-
-
-
-
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       console.log(this.id);

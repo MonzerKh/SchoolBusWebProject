@@ -28,6 +28,10 @@ export interface StudentDto{
 
   guardian_Name?: string;
 
+  lat?: number;
+
+  lng?: number;
+
 
   userName? :string;
 
@@ -40,9 +44,7 @@ export interface StudentDto{
   createdBy?: number;
 
   udateBy?: number;
-  lat?: number;
 
-  lng?: number;
 
 
   createTime?:Date;

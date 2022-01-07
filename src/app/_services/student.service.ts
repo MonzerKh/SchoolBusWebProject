@@ -3,21 +3,23 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
+import { StudentBusDto } from '../models/studentBusDto';
 import { StudentDto } from '../models/studentDto';
 import { StudentParams } from '../models/studentParams';
 import { getPaginatedResult } from './paginationHelper';
 import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StudentService {
-  student: StudentDto  = {id:0} as StudentDto;
+  student: StudentDto = { id: 0 } as StudentDto;
   students: StudentDto[] = [];
   studentCache = new Map();
   baseUrl = environment.apiUrl;
   studentParams!: StudentParams;
   editMode!: boolean;
+  studentBus: StudentBusDto[] = [];
 
   constructor(private http: HttpClient, private _snackBar: SnackBarService) {}
 
@@ -32,7 +34,7 @@ export class StudentService {
   createStudent(studentDto: StudentDto) {
     console.log(studentDto);
     return this.http
-      .post<any>(this.baseUrl +'Student/SetStudent',studentDto)
+      .post<any>(this.baseUrl + 'Student/SetStudent', studentDto)
       .subscribe({
         next: (v: any) => {
           console.log(v);
@@ -52,8 +54,11 @@ export class StudentService {
     //   return of(response);
     // }
 
-    return getPaginatedResult<StudentDto[]>(this.baseUrl +'Student/GetStudent', this.studentParams.getHttpParams(),this.http)
-    .pipe(
+    return getPaginatedResult<StudentDto[]>(
+      this.baseUrl + 'Student/GetStudent',
+      this.studentParams.getHttpParams(),
+      this.http
+    ).pipe(
       map((response) => {
         //  this.studentCache.set(Object.values(this.studentParams).join('-'),response);
         return response;
@@ -61,23 +66,36 @@ export class StudentService {
     );
   }
 
-  getStudentsPaging(Params:StudentParams) {
-    return getPaginatedResult<StudentDto[]>(this.baseUrl + 'Student/GetStudentPaging', Params.getHttpParams(), this.http)
-      .pipe(map(response => {
-      //  this.studentCache.set(Object.values(this.studentParams).join('-'),response);
+  getStudentsPaging(Params: StudentParams) {
+    return getPaginatedResult<StudentDto[]>(
+      this.baseUrl + 'Student/GetStudentPaging',
+      Params.getHttpParams(),
+      this.http
+    ).pipe(
+      map((response) => {
+        //  this.studentCache.set(Object.values(this.studentParams).join('-'),response);
         return response;
-      }))
+      })
+    );
   }
-
 
   getstudentById(id: number): Observable<any> {
     return this.http
-      .get<StudentDto>(this.baseUrl + 'Student/GetStudent/'+id)
+      .get<StudentDto>(this.baseUrl + 'Student/GetStudent/' + id)
       .pipe(
         map((response) => {
           this.student = response;
           return this.student;
         })
       );
+  }
+
+  getStudentlist(school_Id:number = 0) {
+    return this.http.get<StudentBusDto[]>(this.baseUrl + 'Student/GetStudentList?school_Id='+school_Id).pipe(
+      map((response) => {
+        //  this.studentCache.set(Object.values(this.studentParams).join('-'),response);
+        return response;
+      })
+    );
   }
 }

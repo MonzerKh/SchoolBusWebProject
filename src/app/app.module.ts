@@ -41,6 +41,9 @@ import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor
 import { google } from 'google-maps';
 import { BusCreateComponent } from './buses/bus-create/bus-create.component';
 import { BusListComponent } from './buses/bus-list/bus-list.component';
+import { DriverCreateComponent } from './drivers/driver-create/driver-create.component';
+import { DriverListComponent } from './drivers/driver-list/driver-list.component';
+import { StudentBusComponent } from './students-buses/student-bus/student-bus.component';
 
 @NgModule({
     declarations: [
@@ -64,7 +67,10 @@ import { BusListComponent } from './buses/bus-list/bus-list.component';
         SupervisorCreateComponent,
         SupervisorListComponent,
         BusCreateComponent,
-        BusListComponent
+        BusListComponent,
+        DriverCreateComponent,
+        DriverListComponent,
+        StudentBusComponent
     ],
     imports: [
         BrowserModule,
