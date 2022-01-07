@@ -38,10 +38,10 @@
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <!-- <app-text-input [formControl]='createScoolForm.controls["userName"]' [label]='"User Name"'></app-text-input> -->
+                  <app-text-input [formControl]='createScoolForm.controls["lat"]' [label]='"lat"'></app-text-input>
                 </div>
                 <div class="col-md-6">
-                  <!-- <app-text-input [formControl]='createScoolForm.controls["logo"]' [label]='"logo url"'></app-text-input> -->
+                  <app-text-input [formControl]='createScoolForm.controls["lng"]' [label]='"lng"'></app-text-input>
                 </div>
 
               </div>
@@ -51,13 +51,36 @@
                   </app-text-input>
                 </div>
               </div>
-              <div class="row buttons col-md-12">
-                <button class="col-md-4" mat-raised-button type="submit" color="primary"
-                  [disabled]="!createScoolForm.valid">Submit</button>&nbsp;&nbsp;
-                <button class="col-md-4" mat-raised-button type="button" color="warn"
-                  (click)="cancel()"><span>cancel</span></button>
-                <div class="clearfix"></div>
+
+              <!--map component-->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label>Enter address</label>
+                    <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
+                  </div>
+                  <agm-map  mapTypeControl="satellite" [latitude]="school.lat" [longitude]="school.lng" (mapClick)="mapClicked($event)" [zoom]="zoom">
+                    <agm-marker draggable="true" [latitude]='school.lat' [longitude]='school.lng'
+                    [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+                  </agm-map>
+                </div>
+
+                <div class='agm-map-container-inner sebm-google-map-container-inner'></div>
+                <div class='agm-map-content'>
+                  <ng-content></ng-content>
+                </div>
               </div>
+              <mat-divider></mat-divider>
+              <div class="row">
+                <div class="row buttons col-md-12">
+                  <button class="col-md-4" mat-raised-button type="submit" color="primary"
+                    [disabled]="!createScoolForm.valid">Submit</button>&nbsp;&nbsp;
+                  <button class="col-md-4" mat-raised-button type="button" color="warn"
+                    (click)="cancel()"><span>cancel</span></button>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+
             </form>
           </div>
         </div>

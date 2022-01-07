@@ -15,6 +15,10 @@ export interface SchoolDto {
   updateBy: number;
   createUser_Id:number;
 
+  lat?: number;
+
+  lng?: number;
+
 
   // email: string;// have to  added to backend
   // country :string;
