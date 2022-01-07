@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators';
 import { StudentBusDto } from 'src/app/models/studentBusDto';
 import { BusCompanyDto } from 'src/app/models/busCompanyDto';
 import { BusCompanyService } from 'src/app/_services/bus-company.service';
+import { BulkStudentBusDto } from 'src/app/models/bulkStudentBus';
+import { StudentBusService } from 'src/app/_services/student-bus.service';
 
 @Component({
   selector: 'app-student-bus',
@@ -19,26 +21,51 @@ import { BusCompanyService } from 'src/app/_services/bus-company.service';
   styleUrls: ['./student-bus.component.scss']
 })
 export class StudentBusComponent implements OnInit {
+  id!: number;
+  busNumber!: string;
   isLoading: boolean= false;
-  busCompanies:BusCompanyDto[]=[];
+
+  school: SchoolDto= {} as SchoolDto;
+
   schools: SchoolDto[]=[];
+
+  busCompanies:BusCompanyDto[]=[];
+
   buses: BusDto[]=[];
-  students: StudentDto[]=[];
+
+  bus: BusDto= {} as BusDto;
+
+  studentbus: StudentBusDto[]=[];
+
+  bulksStudentBus:BulkStudentBusDto[]=[];
+
+  bulkStudentBus:BulkStudentBusDto= {} as BulkStudentBusDto;
+
+  message!: string;
+  lat: number = 51.678418;
+  lng: number = 7.809007;
+  zoom = 13;
+  geocoder!: google.maps.Geocoder;
+
   dataSource :  MatTableDataSource<StudentBusDto> = new MatTableDataSource();
   busDataSource :  MatTableDataSource<BusDto> = new MatTableDataSource();
+
   allowMultiSelect = true;
   selection!: SelectionModel<StudentBusDto>;
 
-  displayedStudentColumns = ['select','full_Name', 'full_Address'];
-  displayedBustColumns = ['number', 'capacity','minimum','large'];
+  displayedStudentColumns = ['select', 'id','full_Name', 'full_Address'];
+  displayedBustColumns = ['select','number', 'capacity','minimum','large'];
   constructor(private studentService: StudentService,
     private schoolService: SchoolsService,
     private busService : BusService,
-    private busCompanyService: BusCompanyService) {
+    private busCompanyService: BusCompanyService,
+    private studentBusService: StudentBusService) {
     this.selection = new SelectionModel<StudentBusDto>(this.allowMultiSelect, []);
   }
 
   ngOnInit(): void {
+    this.lat = 51.678418;
+    this.lng = 7.809007;
     this.loadSchoolList();
     this.loadBusCompanyList();
   }
@@ -46,6 +73,9 @@ export class StudentBusComponent implements OnInit {
   private loadSchoolList(){
     this.schoolService.getSchoolList().subscribe(res=>{
       this.schools = res;
+      this.isLoading = false;
+    },error=>{
+      this.isLoading = false;
     })
   }
 
@@ -61,7 +91,7 @@ export class StudentBusComponent implements OnInit {
   private loadStudentlist(school_Id:number){
     this.studentService.getStudentlist(school_Id).subscribe(response=>{
       this.dataSource.data= response;
-      console.log(this.students);
+      this.studentbus= response;
       this.isLoading = false;
     },error=>{
       this.isLoading = false;
@@ -81,6 +111,9 @@ export class StudentBusComponent implements OnInit {
 
   changeSchool($event:any){
     this.loadStudentlist($event.value);
+    this.schoolService.getSchoolById($event.value).subscribe(response=>{
+      this.school= response;
+    })
   }
 
   changeBusCompany($event:any){
@@ -93,6 +126,7 @@ export class StudentBusComponent implements OnInit {
       return;
     }
     this.selection.select(...this.dataSource.data);
+    console.log(this.selection);
   }
 
   /** The label for the checkbox on the passed row */
@@ -110,6 +144,31 @@ export class StudentBusComponent implements OnInit {
       return numSelected == numRows;
     }
     return false;
+  }
+
+  mapClicked(event: any) {}
+
+  clickedMarker(label: string, index: number) {
+    console.log(`clicked the marker: ${label || index}`)
+  }
+
+  markerDragEnd(event: any){
+    console.log("marker DragEnd event"+event);
+  }
+
+  setBulkStudentBus(){
+    this.studentbus= this.selection.selected.slice();
+    this.bulkStudentBus.students= this.studentbus;
+    this.bulkStudentBus.bus= this.bus;
+    this.studentBusService.createBulkStudentBus(  this.bulkStudentBus);
+
+  }
+  onClickedRow(row: BusDto){
+    this.id= row.id;
+    this.busService.getBusById(this.id).subscribe(response=>{
+      this.bus= response;
+      console.log(this.bus);
+    })
   }
 
 }

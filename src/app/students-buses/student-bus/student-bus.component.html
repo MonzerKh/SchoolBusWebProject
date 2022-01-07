@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row">
+    <div class="row ">
       <!-- <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-danger">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 school_column">
         <div class="row">
           <div class="col-md-12">
             <mat-form-field class="dropList" appearance="outline">
@@ -38,23 +38,29 @@
               [dataSource]="dataSource" matSort aria-label="Elements">
 
               <!-- Checkbox Column -->
-          <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-              <mat-checkbox (change)="$event ? masterToggle() : null"
-                [checked]="selection.hasValue() && isAllSelected()"
-                [indeterminate]="selection.hasValue() && !isAllSelected()"
-                [aria-label]="checkboxLabel()">
-              </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-              <mat-checkbox (click)="$event.stopPropagation()"
-                (change)="$event ? selection.toggle(row) : null"
-                [checked]="selection.isSelected(row)"
-                [aria-label]="checkboxLabel(row)">
-              </mat-checkbox>
-            </td>
-          </ng-container>
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    [aria-label]="checkboxLabel()">
+                  </mat-checkbox>
+                </th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+                  </mat-checkbox>
+                </td>
+              </ng-container>
 
+              <!-- id Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+                <td mat-cell *matCellDef="let row"> {{row.id}}
+                </td>
+              </ng-container>
               <!-- personalImage Column -->
               <ng-container matColumnDef="personalImage">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
@@ -95,7 +101,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 busCompany_column">
         <div class="row">
           <div class="col-md-12">
             <mat-form-field class="dropList" appearance="outline">
@@ -117,23 +123,21 @@
               <table mat-table class="data-table full-width-table"
                 [dataSource]="busDataSource" matSort aria-label="Elements">
 
-                <!-- Checkbox Column
-            <ng-container matColumnDef="select">
-              <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
-                  [checked]="selection.hasValue() && isAllSelected()"
-                  [indeterminate]="selection.hasValue() && !isAllSelected()"
-                  [aria-label]="checkboxLabel()">
-                </mat-checkbox>
-              </th>
-              <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()"
-                  (change)="$event ? selection.toggle(row) : null"
-                  [checked]="selection.isSelected(row)"
-                  [aria-label]="checkboxLabel(row)">
-                </mat-checkbox>
-              </td>
-            </ng-container> -->
+
+                <!-- number Column -->
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Selected
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-radio-group aria-labelledby="example-radio-group-label"
+                      class="example-radio-group" [(ngModel)]="row.number">
+                      <mat-radio-button class="example-radio-button"
+                        [value]="number">
+
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </td>
+                </ng-container>
 
                 <!-- number Column -->
                 <ng-container matColumnDef="number">
@@ -176,21 +180,38 @@
       </div>
     </div>
     <div class="row">
-      <!-- <div class="col-md-12">
-        <div class="form-group">
-          <label>Enter address</label>
-          <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
-        </div>
-        <agm-map  mapTypeControl="satellite" [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)" [zoom]="zoom">
-          <agm-marker draggable="true" [id]="" (markerClick)="markerclick($event)" [latitude]='student.lat' [longitude]='student.lng' [markerClickable]="true"
-          [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+      <div class="col-md-12 buttons">
+        <button mat-raised-button color="primary"
+          (click)="setBulkStudentBus()">assigned Students to bus</button>
+      </div>
+    </div>
+    <!--google Mape row-->
+    <div class="row google_map">
+      <div class="col-md-12">
+        <agm-map mapTypeControl="satellite" [latitude]="school.lat"
+          [longitude]="school.lng" (mapClick)="mapClicked($event)"
+          [zoom]="zoom">
+
+          <agm-marker [latitude]='school.lat' [longitude]='school.lng'
+            [label]="school.school_Name"
+            [iconUrl]="'/assets/images/empty_image.png'"></agm-marker>
+          <agm-marker *ngFor="let m of dataSource.data; let i = index"
+            (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
+            [longitude]="m.lng" [label]="m.full_Name">
+
+            <agm-info-window>
+              <strong>InfoWindow content</strong>
+            </agm-info-window>
+
+          </agm-marker>
         </agm-map>
       </div>
 
-      <div class='agm-map-container-inner sebm-google-map-container-inner'></div>
+      <div class='agm-map-container-inner sebm-google-map-container-inner'>
+      </div>
       <div class='agm-map-content'>
         <ng-content></ng-content>
-      </div> -->
+      </div>
     </div>
   </div>
 </div>

@@ -1,3 +1,14 @@
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--bs-gutter-y));
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  /* margin-left: calc(-0.5 * var(--bs-gutter-x)); */
+}
+
 .dropList{
   width: 100%;
 }
@@ -58,5 +69,29 @@ table {
 
   .mat-cell {
     margin: 5px;
+  }
+}
+
+
+agm-map{
+  height: 40vh;
+}
+
+.agm-map-container-inner { width: inherit; height: inherit; } .agm-map-content { display:none; }
+
+.container-fluid{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.school_column,.busCompany_column{
+  height: 55vh;
+}
+
+.buttons{
+  width: 100%;
+  .mat-raised-button{
+    width: 100%;
   }
 }
