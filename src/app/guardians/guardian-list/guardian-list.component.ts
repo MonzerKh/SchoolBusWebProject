@@ -31,7 +31,7 @@ export class GuardianListComponent implements AfterViewInit {
   selection!: SelectionModel<GuardianDto>;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['select','id','nationality_Id', 'full_Name','phone', 'email', 'school_Id', 'edit'];
+  displayedColumns = ['select','id','nationality_Id', 'full_Name','phone', 'email', 'school_Id', 'edit', 'delete'];
 
   constructor(private guardianService: GuardianService,
               private route: ActivatedRoute,
@@ -103,6 +103,12 @@ export class GuardianListComponent implements AfterViewInit {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  }
+
+  onDeleteGuardian(guardian : GuardianDto){
+    this.guardianService.deleteGuardian(guardian.id).subscribe(response=>{
+      this.loadGuardians();
+    });
   }
 
 }

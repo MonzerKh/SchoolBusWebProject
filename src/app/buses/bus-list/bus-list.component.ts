@@ -6,47 +6,64 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BusDto } from 'src/app/models/busDto';
 import { BusParams } from 'src/app/models/busParams';
 import { BusService } from '../../_services/bus.service';
+import { of, pipe } from 'rxjs';
 
 @Component({
   selector: 'app-bus-list',
   templateUrl: './bus-list.component.html',
-  styleUrls: ['./bus-list.component.scss']
+  styleUrls: ['./bus-list.component.scss'],
 })
 export class BusListComponent implements OnInit {
   id!: number;
   isLoading = false;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  busParams: BusParams= new BusParams;
-  dataSource :  MatTableDataSource<BusDto> = new MatTableDataSource();
+  busParams: BusParams = new BusParams();
+  dataSource: MatTableDataSource<BusDto> = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  totalitem! : number;
+  totalitem!: number;
 
-    /** Selects all rows if they are not all selected; otherwise clear selection. */
-    allowMultiSelect = true;
-    selection!: SelectionModel<BusDto>;
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  allowMultiSelect = true;
+  selection!: SelectionModel<BusDto>;
 
-    displayedColumns = ['select', 'id', 'number', 'marka', 'capacity', 'minimum', 'large', 'company','edit'];
+  displayedColumns = [
+    'select',
+    'id',
+    'number',
+    'marka',
+    'capacity',
+    'minimum',
+    'large',
+    'company',
+    'edit',
+    'delete',
+  ];
 
-
-
-  constructor( private busService: BusService,private route:        ActivatedRoute, private router: Router) {
-    this.selection = new SelectionModel<BusDto>(this.allowMultiSelect, []); }
+  constructor(
+    private busService: BusService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.selection = new SelectionModel<BusDto>(this.allowMultiSelect, []);
+  }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
-    Promise.resolve().then(()=> this.isLoading = true);
+    Promise.resolve().then(() => (this.isLoading = true));
     this.loadBuses();
   }
 
-  private loadBuses(){
-    this.busService.getBusesPaging(this.busParams).subscribe(response => {
-      this.dataSource.data = response.result;
-      this.busParams.setPagination(response.Pagination);
-      this.isLoading = false;
-    }, error => {
-      this.isLoading = false;
-      console.log(error);
-    }
+  private loadBuses() {
+    this.busService.getBusesPaging(this.busParams).subscribe(
+      (response) => {
+        this.dataSource.data = response.result;
+        this.busParams.setPagination(response.Pagination);
+        this.isLoading = false;
+      },
+      (error) => {
+        this.isLoading = false;
+        console.log(error);
+      }
     );
   }
 
@@ -79,7 +96,9 @@ export class BusListComponent implements OnInit {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
-    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.id + 1
+    }`;
   }
 
   isAllSelected() {
@@ -91,9 +110,16 @@ export class BusListComponent implements OnInit {
     return false;
   }
 
-  onEditBus(bus:BusDto){
-    this.id= bus.id;
-    this.router.navigate(['../bus/'+'edit/'+this.id], {relativeTo: this.route});
+  onEditBus(bus: BusDto) {
+    this.id = bus.id;
+    this.router.navigate(['../bus/' + 'edit/' + this.id], {
+      relativeTo: this.route,
+    });
   }
 
+  onDeleteBus(bus: BusDto) {
+    this.busService.deleteBus(bus.id).subscribe(() => {
+      this.loadBuses();
+    });
+  }
 }

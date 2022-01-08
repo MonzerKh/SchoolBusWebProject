@@ -29,16 +29,7 @@ export class BusCompanyListComponent implements AfterViewInit, OnInit {
   totalitem!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = [
-    'select',
-    'id',
-    'company',
-    'address',
-    'phone',
-    'logoPath',
-    'webSiteUrl',
-    'edit',
-  ];
+  displayedColumns = ['select', 'id', 'company', 'address', 'phone', 'logoPath', 'webSiteUrl', 'edit','delete'];
 
   allowMultiSelect = true;
   selection: SelectionModel<BusCompanyDto>;
@@ -128,4 +119,13 @@ export class BusCompanyListComponent implements AfterViewInit, OnInit {
     }
     return false;
   }
+
+  onDeleteBusCompany(company: BusCompanyDto){
+    this.busCompanyService.deleteBusCompany(company.id).subscribe(() => {
+      this.loadBusCompanys();
+    });
+  }
+
+
+
 }

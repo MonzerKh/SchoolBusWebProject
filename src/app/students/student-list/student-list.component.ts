@@ -1,5 +1,5 @@
 import { PaginationSource } from 'src/app/models/pagination';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -17,17 +17,17 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./student-list.component.scss']
 })
 export class StudentListComponent  implements AfterViewInit, OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   isLoading = false;
   totalitem! : number ;
   studentParams: StudentParams= new StudentParams();
   dataSource :  MatTableDataSource<StudentDto> = new MatTableDataSource();
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+  student: StudentDto= {id:0} as StudentDto;
   id!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['select','id','personalImage','national_Number',  'full_Name', 'guardian_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit'];
+  displayedColumns = ['select','id','personalImage','national_Number',  'full_Name', 'guardian_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit', 'delete'];
 
   constructor(private studentService: StudentService,
     private route: ActivatedRoute,
@@ -113,11 +113,17 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
   //   this.applyeFilter(full_Name.value);
   // }
 
-    /** The label for the checkbox on the passed row */
-    checkboxLabel(row?: StudentDto): string {
-      if (!row) {
-        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-      }
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: StudentDto): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
+  }
+
+  onDeleteStudent(student: StudentDto){
+    this.studentService.deleteStudent(student.id).subscribe(() => {
+      this.loadStudents();
+    });
+  }
 }

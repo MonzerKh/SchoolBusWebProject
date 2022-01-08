@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment.prod';
+import { ImageDto } from '../models/imageDto';
 import { StudentBusDto } from '../models/studentBusDto';
 import { StudentDto } from '../models/studentDto';
 import { StudentParams } from '../models/studentParams';
@@ -90,6 +91,13 @@ export class StudentService {
       );
   }
 
+
+  getStudentImage(id: number):Observable<ImageDto>{
+    return this.http.get<ImageDto>(this.baseUrl+'Student/GetStudentImage/'+id).pipe(map(response=>{
+      return response;
+    }))
+  }
+
   getStudentlist(school_Id:number = 0) {
     return this.http.get<StudentBusDto[]>(this.baseUrl + 'Student/GetStudentList?school_Id='+school_Id).pipe(
       map((response) => {
@@ -97,5 +105,11 @@ export class StudentService {
         return response;
       })
     );
+  }
+
+  deleteStudent(id: number){
+    return this.http.delete(this.baseUrl+'Student/DelStudent/'+id).pipe(map((res)=>{
+      return res;
+    }));
   }
 }

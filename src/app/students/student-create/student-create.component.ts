@@ -151,6 +151,8 @@ export class StudentCreateComponent implements OnInit {
       data: {}
     });
     dialogRef.afterClosed().subscribe(res => {
+      this.router.navigate(['../guardian-new']);
+
       console.timeLog("dialog is closed")
     });
   }

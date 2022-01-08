@@ -51,8 +51,7 @@
           <!-- personalImage Column -->
           <ng-container matColumnDef="personalImage">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
-            <td mat-cell *matCellDef="let row"> <img
-                style="width: 50px; height: 50px;" [src]="row.personalImage" />
+            <td mat-cell *matCellDef="let row"> <app-image [id]="row.id"></app-image>
             </td>
           </ng-container>
 
@@ -115,6 +114,15 @@
             <td mat-cell *matCellDef="let row">
               <button mat-icon-button (click)="onEditStudent(row)">
                 <mat-icon class="mat-18">edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="onDeleteStudent(row)">
+                <mat-icon class="mat-18">delete</mat-icon>
               </button>
             </td>
           </ng-container>

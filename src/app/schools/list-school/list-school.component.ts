@@ -20,7 +20,7 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
   isLoading = false;
 
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  displayedColumns = ['select', 'id', 'schoolImage', 'school_Name', 'address', 'manager', 'phone','edit'];
+  displayedColumns = ['select', 'id', 'schoolImage', 'school_Name', 'address', 'manager', 'phone','edit', 'delete'];
 
   //GridDataSource: PaginatedResult<SchoolDto> = new PaginatedResult()
   schoolParams: SchoolParams = new SchoolParams();
@@ -121,6 +121,13 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
 
   onEditSchool(school:SchoolDto){
     this.router.navigate(['../school/'+school.id+'/edit'], {relativeTo: this.route});
+  }
+
+  onDeleteSchool(school: SchoolDto){
+    this.schoolsService.deleteStudent(school.id).subscribe(() => {
+      this.loadSchools();
+    });
+
   }
 
 

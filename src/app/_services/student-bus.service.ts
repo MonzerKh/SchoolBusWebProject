@@ -37,4 +37,18 @@ export class StudentBusService {
         complete: () => console.info('complete'),
       });
   }
+
+  deleteStudentBus(id: number){
+    return this.http.delete(this.baseUrl+'Student_Bus/DelStudentBus/'+id)  .subscribe({
+      next: (v: any) => {
+        console.log(v);
+        this._snackBar.openSnackBar('this Student_Bus  is deleted');
+      },
+      error: (e: any) => {
+        console.log(e);
+        this._snackBar.openSnackBar('this Student_Bus is not deleted');
+      },
+      complete: () => console.info('complete'),
+    });
+  }
 }

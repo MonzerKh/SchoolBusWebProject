@@ -47,7 +47,7 @@ export class DriverCreateComponent implements OnInit {
   }
 
   private intitDriverForm(){
-    const company$= this.http.get<BusCompanyDto[]>(this.baseUrl+ 'Driver/GetDriverList');
+    const company$= this.http.get<BusCompanyDto[]>(this.baseUrl+ 'BusCompany/GetBusCompanyList');
     const driver$= this.driverService.getDriverById(this.id);
     if(this.editMode){
       return forkJoin([company$,driver$]).subscribe(data=>{

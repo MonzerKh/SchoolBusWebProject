@@ -89,4 +89,10 @@ export class BusCompanyService {
       );
   }
 
+  deleteBusCompany(id: number){
+    return this.http.delete(this.baseUrl+'BusCompany/DelBusCompany/'+id).pipe(map((res)=>{
+      return res;
+    }));
+  }
+
 }

@@ -22,23 +22,26 @@
         <mat-progress-bar mode="indeterminate" *ngIf="isLoading">
         </mat-progress-bar>
 
-        <table mat-table class="data-table full-width-table" [dataSource]="dataSource"
-          matSort aria-label="Elements">
+        <table mat-table class="data-table full-width-table"
+          [dataSource]="dataSource" matSort aria-label="Elements">
 
-                    <!-- Checkbox Column -->
-                    <ng-container matColumnDef="select">
-                      <th mat-header-cell *matHeaderCellDef>
-                        <mat-checkbox (change)="$event ? masterToggle() : null"
-                          [checked]="selection.hasValue() && isAllSelected()"
-                          [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                        </mat-checkbox>
-                      </th>
-                      <td mat-cell *matCellDef="let row">
-                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                          [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-                        </mat-checkbox>
-                      </td>
-                    </ng-container>
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                [checked]="selection.hasValue() && isAllSelected()"
+                [indeterminate]="selection.hasValue() && !isAllSelected()"
+                [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)"
+                [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
           <!-- Id Column -->
           <ng-container matColumnDef="id">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
@@ -55,14 +58,16 @@
 
           <!-- national_Number Column -->
           <ng-container matColumnDef="national_Number">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>national Number
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>national
+              Number
             </th>
             <td mat-cell *matCellDef="let row">{{row.national_Number}}</td>
           </ng-container>
 
           <!-- full_Name Column -->
           <ng-container matColumnDef="full_Name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Supervisor Name
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Supervisor
+              Name
             </th>
             <td mat-cell *matCellDef="let row">{{row.full_Name}}</td>
           </ng-container>
@@ -94,6 +99,16 @@
             <td mat-cell *matCellDef="let row">
               <button mat-icon-button (click)="onEdiDriver(row)">
                 <mat-icon class="mat-18">edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <!--Delete Button-->
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button (click)="onDeleteDriver(row)">
+                <mat-icon class="mat-18">delete</mat-icon>
               </button>
             </td>
           </ng-container>

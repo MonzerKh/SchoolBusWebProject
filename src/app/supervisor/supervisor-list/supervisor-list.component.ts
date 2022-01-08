@@ -23,7 +23,7 @@ export class SupervisorListComponent implements AfterViewInit, OnInit {
   id!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['select','id','full_Name', 'phone', 'email','school_Name', 'full_Address',  'edit'];
+  displayedColumns = ['select','id','full_Name', 'phone', 'email','school_Name', 'full_Address',  'edit', 'delete'];
 
     /** Selects all rows if they are not all selected; otherwise clear selection. */
     allowMultiSelect = true;
@@ -101,7 +101,11 @@ export class SupervisorListComponent implements AfterViewInit, OnInit {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
 
-
+  onDeleteSupervisor(superviser: SupervisorDto){
+    this.supervisorService.deleteSupervisor(superviser.id).subscribe(() => {
+      this.loadSupervisors();
+    });
+  }
 
 
 }

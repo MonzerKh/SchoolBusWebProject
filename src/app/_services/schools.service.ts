@@ -99,4 +99,8 @@ export class SchoolsService {
         })
       );
   }
+
+  deleteStudent(id: number){
+    return this.http.delete(this.baseUrl+'School/DelSchool/'+id);
+  }
 }

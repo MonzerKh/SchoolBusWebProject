@@ -1,4 +1,5 @@
 import { SelectionModel } from '@angular/cdk/collections';
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -32,16 +33,7 @@ export class DriverListComponent implements OnInit {
   allowMultiSelect = true;
     selection!: SelectionModel<DriverDto>;
 
-  displayedColumns = [
-    'select',
-    'id',
-    'personalImage',
-    'national_Number',
-    'full_Name',
-    'company',
-    'phone',
-    'email',
-    'edit'];
+  displayedColumns = ['select', 'id','personalImage','national_Number','full_Name','company','phone','email','edit','delete'];
 
   constructor(private driverService: DriverService,private route: ActivatedRoute, private router: Router) {
     this.selection = new SelectionModel<DriverDto>(this.allowMultiSelect, []);
@@ -54,7 +46,6 @@ export class DriverListComponent implements OnInit {
   }
 
   loadrivers() {
-    // this.schoolsService.setSchoolParams(this.schoolParams);
     this.driverService.getDriverPaging(this.driverParams).subscribe(response => {
 
       this.dataSource.data = response.result;
@@ -113,6 +104,13 @@ export class DriverListComponent implements OnInit {
   onEdiDriver(driver:DriverDto){
     this.id= driver.id;
     this.router.navigate(['../driver/'+'edit/'+this.id], {relativeTo: this.route});
+  }
+
+  onDeleteDriver(driver : DriverDto){
+    this.driverService.deleteDriver(driver.id).subscribe(response=>{
+      this.loadrivers();
+    });
+
   }
 
 }

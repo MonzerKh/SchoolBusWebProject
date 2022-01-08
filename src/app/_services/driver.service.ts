@@ -85,4 +85,10 @@ export class DriverService {
         })
       );
   }
+
+  deleteDriver(id: number){
+    return this.http.delete(this.baseUrl+'Driver/DelDriver/'+id).pipe(map((res)=>{
+      return res;
+    }));
+  }
 }

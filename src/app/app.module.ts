@@ -44,6 +44,7 @@ import { BusListComponent } from './buses/bus-list/bus-list.component';
 import { DriverCreateComponent } from './drivers/driver-create/driver-create.component';
 import { DriverListComponent } from './drivers/driver-list/driver-list.component';
 import { StudentBusComponent } from './students-buses/student-bus/student-bus.component';
+import { ImageComponent } from './shared/ImageComponents/image/image.component';
 
 @NgModule({
     declarations: [
@@ -70,7 +71,8 @@ import { StudentBusComponent } from './students-buses/student-bus/student-bus.co
         BusListComponent,
         DriverCreateComponent,
         DriverListComponent,
-        StudentBusComponent
+        StudentBusComponent,
+        ImageComponent
     ],
     imports: [
         BrowserModule,
@@ -97,7 +99,7 @@ import { StudentBusComponent } from './students-buses/student-bus/student-bus.co
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+        // { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
 })

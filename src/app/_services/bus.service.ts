@@ -73,4 +73,10 @@ export class BusService {
     );
   }
 
+  deleteBus(id: number): any{
+    return this.http.delete<any>(this.baseUrl+'Bus/DelBus/'+id).pipe(map((res)=>{
+      return res;
+    }));
+  }
+
 }

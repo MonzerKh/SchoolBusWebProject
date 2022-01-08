@@ -1,117 +1,106 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-      #drawer
-      class="sidenav"
-      fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
 
-      <div class="container-fluid">
-        <mat-toolbar>
-          <div class="logo">
-            <div class="logo-img">
-                <img src="/assets/images/img/angular2-logo-red.png"/>
-            </div>
-            <div class="logo-text">School & Bus</div>
+    <div class="container-fluid">
+      <mat-toolbar>
+        <div class="logo">
+          <div class="logo-img">
+            <img src="/assets/images/img/angular2-logo-red.png" />
           </div>
-        </mat-toolbar>
+          <div class="logo-text">School & Bus</div>
+        </div>
+      </mat-toolbar>
 
+
+      <mat-nav-list>
+        <!-- user List-->
+        <mat-list-item routerLink="/user">
+          <mat-icon matListIcon class="mat-18">person_pin</mat-icon>
+          <button mat-button>User</button>
+        </mat-list-item>
 
         <mat-nav-list>
-<!-- user List-->
-            <mat-list-item routerLink="/user">
-                <mat-icon matListIcon  class="mat-18">person_pin</mat-icon>
-                <button mat-button >User</button>
-            </mat-list-item>
-
-            <mat-nav-list>
-              <mat-list-item  routerLink="/student-bus">
-                <mat-icon matListIcon class="mat-18">person</mat-icon>
-                <button mat-button>Students & Buse</button>
-              </mat-list-item>
-            </mat-nav-list>
-<!--School list-->
-              <mat-list-item  routerLink="/school-list" >
-              <mat-icon matListIcon class="mat-18">school</mat-icon>
-              <button mat-button>School</button>
-            </mat-list-item>
-
-
-<!--Guardian  list-->
-            <mat-list-item routerLink="/guardian-list">
-              <mat-icon matListIcon  class="mat-18">person</mat-icon>
-              <button mat-button  >Guardian</button>
-            </mat-list-item>
-
-
-<!--Student list-->
-            <mat-list-item routerLink="/student-list">
-              <mat-icon matListIcon  class="mat-18">person</mat-icon>
-              <button mat-button>Student</button>
-            </mat-list-item>
-
-<!--Supervisor list-->
-            <mat-list-item routerLink="/supervisor-list">
-              <mat-icon matListIcon class="mat-18">supervisor_account</mat-icon>
-              <button mat-button routerLink="/user" >supervisor</button>
-            </mat-list-item>
-
-<!--Bus Company list-->
-            <mat-list-item  routerLink="/busCompany-list" >
-              <mat-icon matListIcon class="mat-18">business</mat-icon>
-              <button mat-button >Bus Company</button>
-            </mat-list-item>
-
-<!--Bus  list-->
-            <mat-list-item routerLink="/bus-list">
-              <mat-icon matListIcon class="mat-18">directions_bus</mat-icon>
-              <button mat-button>Bus</button>
-            </mat-list-item>
-
-
-<!--driver  list-->
-            <mat-list-item routerLink="/driver-list">
-              <mat-icon matListIcon class="mat-18">person</mat-icon>
-              <button mat-button >Driver</button>
-            </mat-list-item>
+          <mat-list-item routerLink="/student-bus">
+            <mat-icon matListIcon class="mat-18">person</mat-icon>
+            <button mat-button>Students & Buse</button>
+          </mat-list-item>
         </mat-nav-list>
+        <!--School list-->
+        <mat-list-item routerLink="/school-list">
+          <mat-icon matListIcon class="mat-18">school</mat-icon>
+          <button mat-button>School</button>
+        </mat-list-item>
 
-      </div>
+
+        <!--Guardian  list-->
+        <mat-list-item routerLink="/guardian-list">
+          <mat-icon matListIcon class="mat-18">person</mat-icon>
+          <button mat-button>Guardian</button>
+        </mat-list-item>
+
+
+        <!--Student list-->
+        <mat-list-item routerLink="/student-list">
+          <mat-icon matListIcon class="mat-18">person</mat-icon>
+          <button mat-button>Student</button>
+        </mat-list-item>
+
+        <!--Supervisor list-->
+        <mat-list-item routerLink="/supervisor-list">
+          <mat-icon matListIcon class="mat-18">supervisor_account</mat-icon>
+          <button mat-button routerLink="/user">supervisor</button>
+        </mat-list-item>
+
+        <!--Bus Company list-->
+        <mat-list-item routerLink="/busCompany-list">
+          <mat-icon matListIcon class="mat-18">business</mat-icon>
+          <button mat-button>Bus Company</button>
+        </mat-list-item>
+
+        <!--Bus  list-->
+        <mat-list-item routerLink="/bus-list">
+          <mat-icon matListIcon class="mat-18">directions_bus</mat-icon>
+          <button mat-button>Bus</button>
+        </mat-list-item>
+
+
+        <!--driver  list-->
+        <mat-list-item routerLink="/driver-list">
+          <mat-icon matListIcon class="mat-18">person</mat-icon>
+          <button mat-button>Driver</button>
+        </mat-list-item>
+      </mat-nav-list>
+
+    </div>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="warn">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button
+        (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>School Bus Web Project</span>
       <div fxShow="true" fxHide.lt-md="true" fxFlex fxLayout>
         <!-- The following menu items will be hidden on both SM and XS screen sizes -->
-        <a routerLinkActive="active" routerLink=""    mat-button>home</a>
+        <!-- <a routerLinkActive="active" routerLink=""    mat-button>home</a>
         <a routerLinkActive="active" routerLink=""   mat-button>About</a>
-        <a routerLinkActive="active" routerLink="" mat-button>Contact</a>
+        <a routerLinkActive="active" routerLink="" mat-button>Contact</a> -->
       </div>
       <span class="example-spacer"></span>
       <div>
-        <a routerLinkActive="active" routerLink="/sign-in" mat-button *ngIf="">logout</a>
-        <a routerLinkActive="active" routerLink="/sign-up" mat-button *ngIf="">Sign Up</a>
-        <button mat-button (click)="onLogout()">
-           Logout
-        </button>
+        <!-- <a routerLinkActive="active" routerLink="/sign-in" mat-button *ngIf="">logout</a>
+        <a routerLinkActive="active" routerLink="/sign-up" mat-button *ngIf="">Sign Up</a> -->
+        <button mat-button (click)="onLogout()"> Logout </button>
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->
 
 
-      <ng-content></ng-content>
+    <ng-content></ng-content>
 
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-

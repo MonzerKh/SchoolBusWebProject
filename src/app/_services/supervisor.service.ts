@@ -78,5 +78,11 @@ export class SupervisorService {
       );
   }
 
+  deleteSupervisor(id: number){
+    return this.http.delete(this.baseUrl+'Supervisor/DelSupervisor/'+id).pipe(map((res)=>{
+      return res;
+    }));
+  }
+
 
 }
