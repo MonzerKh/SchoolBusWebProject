@@ -76,6 +76,16 @@ export class GuardianService {
     );
   }
 
+  getGuardianList(): Observable<GuardianDto[]> {
+    return this.http
+      .get<GuardianDto[]>(this.baseUrl + 'Guardian/GetGuardianList')
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
+
   getGuardianById(id: number) {
     return this.http
       .get<GuardianDto>(this.baseUrl + 'Guardian/GetGuardian/' + id)

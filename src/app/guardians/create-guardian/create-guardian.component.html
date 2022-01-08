@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-danger">
             <h4 class="card-title">Register Guardian</h4>
@@ -64,11 +64,12 @@
                   <app-text-input [formControl]='guardianForm.controls["street"]' [label]='"Street"'></app-text-input>
                 </div>
                 <div class="col-md-4">
-                  <app-text-input [formControl]='guardianForm.controls["boxNumber"]' [label]='"box Number"'></app-text-input>
-                </div>
-                <div class="col-md-4">
                   <app-text-input [formControl]='guardianForm.controls["address"]' [label]='"Full Address"'></app-text-input>
                 </div>
+                <div class="col-md-4">
+                  <app-text-input [formControl]='guardianForm.controls["boxNumber"]' [label]='"box Number"'></app-text-input>
+                </div>
+
               </div>
               <div class="row buttons col-md-12">
                 <button class="col-md-4" mat-raised-button type="submit" color="primary" [disabled]="!guardianForm.valid">Submit</button>&nbsp;&nbsp;

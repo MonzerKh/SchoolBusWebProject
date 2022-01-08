@@ -9,6 +9,7 @@ import { forkJoin, Observable, pipe } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
 import { SchoolDto } from 'src/app/models/schoolDto';
+import { SchoolsService } from 'src/app/_services/schools.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class CreateGuardianComponent implements OnInit {
   constructor(  private fb: FormBuilder,
                 private http: HttpClient,
                 private guardianService: GuardianService,
+                private schoolService: SchoolsService,
                 private route: ActivatedRoute,
                 private router: Router,
                 private _snackBar: SnackBarService) { }
@@ -37,6 +39,7 @@ export class CreateGuardianComponent implements OnInit {
       if(this.id){
         this.editMode=true;
       };  console.log(this.editMode);
+      this.loadSchoolList();
       this.initGuardianForm();
     });
     // this.initGuardianForm();
@@ -63,19 +66,12 @@ export class CreateGuardianComponent implements OnInit {
 
   private initGuardianForm(){
     if(this.editMode){
-      const guardians$ = this.guardianService.getGuardianById(this.id);
-      const schools$ = this.http.get<SchoolDto[]>(this.baseUrl + 'School/GetSchoolList');
-      return forkJoin([guardians$, schools$]).subscribe((data) => {
-        this.guardian = data[0];
-        this.schools = data[1];
-        this.loadForm();
-      });
-    }else{
-      return this.guardianService.getGuardianById(this.id).subscribe(data=>{
+      this.guardianService.getGuardianById(this.id).subscribe(data=>{
         this.guardian=data;
         this.loadForm();
       })
-
+    }else{
+      this.loadForm();
     }
   }
 
@@ -89,5 +85,11 @@ export class CreateGuardianComponent implements OnInit {
     this.guardianForm.reset( 'null');
     this.router.navigate(['/guardian-list'], {relativeTo: this.route});
   }
+
+  private loadSchoolList(){
+    this.schoolService.getSchoolList().subscribe(response=>{
+      this.schools= response;
+    })
+    }
 
 }
