@@ -7,7 +7,7 @@ mat-sidenav-container {
 mat-sidenav-content .mat-toolbar{
   // // background-color: #1e88e5;
   // background-color: #26c6da;
-  position: sticky;
+  position: relative;
   top: 0;
   z-index: 5;
 }
