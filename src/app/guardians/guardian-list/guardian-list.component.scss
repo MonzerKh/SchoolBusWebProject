@@ -1,3 +1,64 @@
+// .GridView {
+//   background-color: #fff;
+//   margin: 1px auto 1px auto;
+//   box-sizing: border-box;
+//   border-radius: 0.4rem;
+//   box-shadow: 2px 2px #888888;
+// }
+
+// table {
+//   width: 100%;
+// }
+
+// .mat-filter {
+//   margin: 0.1rem;
+//   box-shadow: 1px 1px #888888;
+// }
+
+// .mat-form-field {
+//   font-size: 14px;
+//   width: 25vw;
+// }
+
+// .data-table {
+//   width: 100%;
+// }
+
+// .mat-column-schoolImage img {
+//   width: 50px;
+//   height: 50px;
+//   margin: 5px auto 5px auto;
+// }
+
+// .mat-cell {
+//   font-size: 1.1rem !important;
+//   vertical-align: middle;
+//   padding: 5px 5px  !important;
+// }
+
+// .mat-header-cell {
+//   font-size: 1.3rem !important;
+//   text-align: center;
+//   vertical-align: middle;
+//   color: rgb(80, 76, 76);
+//   padding: 5px 5px  !important;
+//   .mat-cell {
+//     color: blue;
+
+//   }
+// }
+
+// .mat-sort-cell {
+//   font-size: 1.3rem !important;
+//   text-align: center;
+//   vertical-align: middle;
+
+//   .mat-cell {
+//     margin: 5px;
+//   }
+// }
+
+
 .GridView {
   background-color: #fff;
   margin: 1px auto 1px auto;
@@ -8,16 +69,28 @@
 
 table {
   width: 100%;
+  // line-height: 1.5em;
 }
 
-.mat-filter {
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+  flex-wrap: nowrap;
+  align-items: center;
+  vertical-align: middle;
   margin: 0.1rem;
   box-shadow: 1px 1px #888888;
 }
 
 .mat-form-field {
-  font-size: 14px;
-  width: 25vw;
+  padding: 0px;
+  margin: 10px;
+  width:100%;
+}
+
+.mat-raised-button{
+  margin: 16px;
 }
 
 .data-table {
@@ -31,21 +104,22 @@ table {
 }
 
 .mat-cell {
-  font-size: 1.1rem !important;
   vertical-align: middle;
+  font-size: 0.80rem !important;
+  font-weight: 500;
   padding: 5px 5px  !important;
 }
 
 .mat-header-cell {
-  font-size: 1.3rem !important;
+  color: #9c27b0 !important;
+  font-size: 1rem !important;
+  font-family:Roboto, Helvetica, Arial, sans-serif;
   text-align: center;
   vertical-align: middle;
-  color: rgb(80, 76, 76);
-  padding: 5px 5px  !important;
-  .mat-cell {
-    color: blue;
-
-  }
+  // padding: 5px 5px  !important;
+  font-weight: 500;
+  border-top-width: 0;
+  border-bottom-width: 1px;
 }
 
 .mat-sort-cell {
@@ -57,3 +131,9 @@ table {
     margin: 5px;
   }
 }
+
+.mat-row{
+  line-height: 1.5em;
+}
+
+

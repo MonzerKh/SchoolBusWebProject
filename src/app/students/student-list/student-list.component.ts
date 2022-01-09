@@ -27,7 +27,7 @@ export class StudentListComponent  implements AfterViewInit, OnInit {
   id!: number;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['select','id','personalImage','national_Number',  'full_Name', 'guardian_Name', 'birthDate', 'full_Address', 'phone', 'email',  'edit', 'delete'];
+  displayedColumns = ['select','id','personalImage','national_Number',  'full_Name', 'guardian_Name', 'birthDate','phone', 'email',  'edit', 'delete'];
 
   constructor(private studentService: StudentService,
     private route: ActivatedRoute,
