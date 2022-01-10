@@ -42,9 +42,9 @@
 }
 
 .card .card-header {
-  // background: linear-gradient(60deg, #ef5350, #e53935);
+  background: linear-gradient(60deg, #ef5350, #e53935);
+  // background: white;
   border-radius: 3px;
-  background: white;
   margin: 10px 10px 0px 10px;
   padding: 15px;
   border-bottom: none;
@@ -95,13 +95,11 @@
   font-family: Roboto, Helvetica, Arial, sans-serif;
   text-align: center;
   vertical-align: middle;
-  // padding: 5px 5px  !important;
   margin: 5px;
   font-weight: 500;
   border-top-width: 0;
   border-bottom-width: 1px;
-  padding-left: 1.5rem;
-  // text-wrap:wrap;
+  padding-left: 2.5rem;
   height: 1.5rem;
 }
 
@@ -109,13 +107,27 @@
   font-size: 0.9rem !important;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   text-align: center;
+  // color: black;
   vertical-align: middle;
   padding: 5px 5px  !important;
-  font-weight: 300;
+  font-weight: 400;
   border-top-width: 0;
   border-bottom-width: 1px;
   vertical-align: middle;
   margin: 5px;
+}
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 0px;
+}
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  padding: 0px;
+  margin: 0px;
+}
+th.mat-header-cell.edit, td.mat-cell.edit, td.mat-footer-cell.edir {
+  padding:0px;
+  margin: 0px;
+
 }
 
 
@@ -149,3 +161,101 @@
 //   margin: 0.1rem;
 //   box-shadow: 1px 1px #888888;
 // }
+
+pagination {
+  display: -webkit-box;
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+}
+// <!-- next-->
+.pagination .paginate_button a, .pagination>.page-item>.page-link.mat-button, .pagination>.page-item>span {
+  border: 0;
+  border-radius: 30px!important;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+  padding: 0 11px;
+  margin: 0 3px;
+  min-width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: #999;
+  font-weight: 400;
+  font-size: 12px;
+  text-transform: uppercase;
+  background: transparent;
+  text-align: center;
+}
+
+// .pagination .paginate_button a {
+//   position: relative;
+//   display: block;
+// }
+
+//@last page
+// .pagination>.page-item>span {
+//   border: 0;
+//   border-radius: 30px!important;
+//   -webkit-transition: all .3s;
+//   transition: all .3s;
+//   padding: 0 11px;
+//   margin: 0 3px;
+//   min-width: 30px;
+//   height: 30px;
+//   line-height: 30px;
+//   color: #999;
+//   font-weight: 400;
+//   font-size: 12px;
+//   text-transform: uppercase;
+//   background: transparent;
+//   text-align: center;
+// }
+
+//@Active Page
+.pagination .paginate_button.active a, .pagination .paginate_button.active a:focus, .pagination .paginate_button.active a:hover, .pagination>.page-item.active>a.mat-button, .pagination>.page-item.active>a.mat-button:focus, .pagination>.page-item.active>a.mat-button:hover, .pagination>.page-item.active>span, .pagination>.page-item.active>span:focus, .pagination>.page-item.active>span:hover {
+  background-color: #9c27b0;
+  border-color: #9c27b0;
+  color: #fff;
+  box-shadow: 0 4px 5px 0 rgb(156 39 176 / 14%), 0 1px 10px 0 rgb(156 39 176 / 12%), 0 2px 4px -1px rgb(156 39 176 / 20%);
+}
+
+
+
+.pagination .paginate_button a {
+    position: relative;
+    display: block;
+}
+
+//@ Page link 1-2-3-4-5-6
+// .pagination .paginate_button a, .pagination>.page-item>.page-link.mat-button, .pagination>.page-item>span {
+//     border: 0;
+//     border-radius: 30px!important;
+//     -webkit-transition: all .3s;
+//     transition: all .3s;
+//     padding: 0 11px;
+//     margin: 0 3px;
+//     min-width: 30px;
+//     height: 30px;
+//     line-height: 30px;
+//     color: #999;
+//     font-weight: 400;
+//     font-size: 12px;
+//     text-transform: uppercase;
+//     background: transparent;
+//     text-align: center;
+// }
+
+ul {
+  margin: 2px 0;
+  white-space: nowrap;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  // display: block;
+  // list-style-type: disc;
+  // margin-block-start: 1em;
+  // margin-block-end: 1em;
+  // margin-inline-start: 0px;
+  // margin-inline-end: 0px;
+  // padding-inline-start: 40px;
+}

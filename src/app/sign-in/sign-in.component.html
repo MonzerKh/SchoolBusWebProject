@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="row main-row col-md-6 mat-elevation-z8">
+    <div class="row main-row col-md-4 mat-elevation-z8">
       <div class="row">
         <div class=" header col-md-12 ">
           <div class="image">
@@ -15,14 +15,27 @@
 
             <div class="row">
               <div class="col-md-10">
+
                 <div class="col-md-12 ">
                   <app-text-input [formControl]='logInForm.controls["userName"]' [label]='"User-Name"'></app-text-input>
                 </div>
+
                 <div class="col-md-12">
-                  <app-text-input [formControl]='logInForm.controls["password"]' [label]='"password"'></app-text-input>
+                  <mat-form-field class="example-full-width"  appearance="outline" >
+                    <mat-label>Enter your password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" [formControl]='logInForm.controls["password"]'>
+                    <button mat-icon-button matSuffix
+                      (click)="hide = !hide"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide">
+                      <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
                 </div>
+
               </div>
             </div>
+
             <div class="row">
               <div class="buttons col-md-10">
                 <button class="col-md-6" mat-raised-button type="submit" color="primary" [disabled]="!logInForm.valid">Log-In</button>&nbsp;&nbsp;

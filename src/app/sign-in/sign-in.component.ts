@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoginDto } from '../models/loginDto';
-import { AccountService } from '../services/account.service';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -11,6 +11,7 @@ import { AccountService } from '../services/account.service';
 export class SignInComponent implements OnInit {
 
   logInForm!: FormGroup;
+  hide = true;
   constructor(private fb : FormBuilder,private accountService: AccountService ) { }
 
   ngOnInit(): void {

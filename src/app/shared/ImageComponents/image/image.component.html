@@ -2,5 +2,7 @@
   <div mat-card-avatar *ngIf="!isloading" class="example-header-image"
     style="width: 100px; height:100px;"></div>
   <img *ngIf="isloading" alt="Student foto" style="width: 75px; height:75px;"
-    [src]="imageDto.imageData">
+  [src]="imageDto.imageData? imageDto.imageData : avatar_Image "
+
+    >
 </div>

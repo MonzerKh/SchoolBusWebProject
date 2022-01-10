@@ -15,10 +15,11 @@ export class AuthGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.accountService.currentUser$.pipe(
       map(user => {
-        if (user) return true;
+        if (user) {return true;}
 
         this._snackBar.openSnackBar('You shall not pass!')
         return false;
+
 
       })
     )

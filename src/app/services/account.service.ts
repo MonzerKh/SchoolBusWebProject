@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { SnackBarService } from '../services/snack-bar.service';
 import { LoginDto } from '../models/loginDto';
 import { environment } from 'src/environments/environment';
-import { ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SystemUserDto } from '../models/systemUserDto ';
 import { Router } from '@angular/router'
@@ -20,19 +20,22 @@ export class AccountService {
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  login(loginDto: LoginDto) {
+login(loginDto: LoginDto) {
 
-    return this.http.post(this.baseUrl + 'Account/login', loginDto)
-      .subscribe((res: SystemUserDto | any) => {
-        let user: SystemUserDto;
-        user = res;
-        console.log(user);
-        if (user) {
-          this.setCurrentUser(user);
-        //  this.router.navigateByUrl('/home')
-        }
-      })
-  }
+  return this.http.post<SystemUserDto>(this.baseUrl + 'Account/login', loginDto)
+    .subscribe((res: SystemUserDto| any) => {
+      let user: SystemUserDto;
+      user = res;
+      console.log(user);
+      if (user) {
+
+        this.setCurrentUser(user);
+        this.router.navigate(['../school-list']);
+      }
+    },error=>{
+      console.log(error);
+    })
+}
 
   setCurrentUser(user: SystemUserDto) {
     localStorage.setItem('user', JSON.stringify(user));
@@ -55,3 +58,18 @@ export class AccountService {
     this.router.navigateByUrl('/sign-in');
   }
 }
+
+
+// login(loginDto: LoginDto) {
+
+//   return this.http.post(this.baseUrl + 'Account/login', loginDto)
+//     .subscribe((res: SystemUserDto | any) => {
+//       let user: SystemUserDto;
+//       user = res;
+//       console.log(user);
+//       if (user) {
+//         this.setCurrentUser(user);
+//       //  this.router.navigateByUrl('/home')
+//       }
+//     })
+// }

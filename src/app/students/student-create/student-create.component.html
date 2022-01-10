@@ -13,7 +13,7 @@
             <form [formGroup]='studentForm' *ngIf="studentForm" (ngSubmit)="studentForm.valid && onSubmit()" autocomplete="on">
 
               <div class="row">
-                <div class="col-md-3">
+                <div class=" col-xs-3 col-md-3">
                   <app-text-input [formControl]='studentForm.controls["national_Number"]' [label]='"national Number"'>
                   </app-text-input>
                 </div>
