@@ -5,13 +5,11 @@
         <div class="card">
 
           <div class="card-header">
-
             <div class="col-md-8">
               <button mat-raised-button routerLink="/school/new"
-                color="primary">Add
+                color="standatd">Add
                 School</button>
             </div>
-
             <div class="input-group col-md-4">
               <input type="text" class="form-control" placeholder="Search"
                 aria-label="Recipient's username"
@@ -22,7 +20,6 @@
               </span>
             </div>
           </div>
-
           <div class="card-body col-xs-12">
 
             <div class="mat-elevation-z8">
@@ -116,10 +113,7 @@
                   <td class="mat-cell" colspan="4">No data matching the filter
                     "{{input.value}}"</td>
                 </tr>
-
-
               </table>
-
               <mat-paginator [pageSizeOptions]="[7, 10, 20]"
                 showFirstLastButtons (page)="pageChanged($event)"
                 [pageSize]="schoolParams.Pagination.itemsPerPage"
@@ -128,15 +122,10 @@
                 aria-label="Select page of periodic elements">
               </mat-paginator>
             </div>
-
             currentPage : {{schoolParams.Pagination.currentPage}} - totalItems :
             {{schoolParams.Pagination.totalItems}} - itemsPerPage :
             {{schoolParams.Pagination.itemsPerPage}}
-
-
           </div>
-
-
         </div>
       </div>
     </div>
