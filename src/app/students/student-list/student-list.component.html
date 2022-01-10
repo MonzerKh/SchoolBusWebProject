@@ -11,27 +11,7 @@
                 Add Student
               </button>
             </div>
-            <!-- <div class="col-md-4">
-              <mat-form-field class="filter" appearance="outline">
-                <mat-label>Filter</mat-label>
-                <input class="form-control" matInput (keyup)="applyFilter($event)"
-                  placeholder="Search" #input>
-                <mat-icon matSuffix color="primary">find_in_page_sharp</mat-icon>
-              </mat-form-field>
-            </div> -->
             <div class="input-group col-md-4">
-              <!-- <input
-                type="text"
-                class="form-control "
-                 placeholder="Filter"
-                 (keyup)="applyFilter($event)"
-                aria-label="Recipient's username"
-                 aria-describedby="button-addon2">
-              <button class="btn btn-outline-light" type="button" id="button-addon2" (keyup)="applyFilter($event)">
-                Serach
-                <mat-icon matSuffix color="primary">find_in_page_sharp</mat-icon>
-              </button> -->
-
               <input type="text" class="form-control" placeholder="Search"
                 aria-label="Recipient's username"
                 aria-describedby="basic-addon2" (keyup)="applyFilter($event)">
@@ -171,15 +151,15 @@
                   (click)="onClickedRow(row)"></tr>
               </table>
 
-               <mat-paginator [pageSizeOptions]="[7, 10, 20]" showFirstLastButtons
-                (page)="pageChanged($event)"
+              <mat-paginator [pageSizeOptions]="[7, 10, 20]"
+                showFirstLastButtons (page)="pageChanged($event)"
                 [pageSize]="studentParams.Pagination.itemsPerPage"
                 [length]="studentParams.Pagination.totalItems"
                 [pageIndex]="studentParams.Pagination.currentPage "
                 aria-label="Select page of periodic elements">
               </mat-paginator>
 
-<!--test paging-->
+              <!--test paging-->
               <!-- <div class="col-sm-12 col-md-7">
                 <div class="dataTables_paginate paging_full_numbers"
                   id="datatables_paginate">
@@ -218,14 +198,15 @@
                 </div>
               </div>
             </div> -->
-            currentPage : {{studentParams.Pagination.currentPage}} - totalItems
-            :
-            {{studentParams.Pagination.totalItems}} - itemsPerPage :
-            {{studentParams.Pagination.itemsPerPage}}
+              currentPage : {{studentParams.Pagination.currentPage}} -
+              totalItems
+              :
+              {{studentParams.Pagination.totalItems}} - itemsPerPage :
+              {{studentParams.Pagination.itemsPerPage}}
 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
