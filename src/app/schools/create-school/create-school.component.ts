@@ -17,8 +17,8 @@ export class CreateSchoolComponent implements OnInit {
   createScoolForm!: FormGroup;
   editMode: boolean= false;
   message!: string;
-  lat = 40.97578528;
-  lng = 28.73501366;
+  lat = 40.98802959;
+  lng = 28.72791767;
   zoom = 15;
 
   geocoder!: google.maps.Geocoder;
@@ -46,7 +46,7 @@ export class CreateSchoolComponent implements OnInit {
       'manager': [ this.school.manager, Validators.required],
       'phone': [ this.school.phone, Validators.required],
       'schoolImage': [this.school.schoolImage],
-      'address': [this.school.address, Validators.required],
+      'address': [this.school.address],
       'lat': [this.school.lat],
       'lng': [this.school.lng],
     });

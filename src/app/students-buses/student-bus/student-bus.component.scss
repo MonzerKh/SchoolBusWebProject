@@ -1,3 +1,10 @@
+.container-fluid{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #fff;
+}
+
 .row {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
@@ -12,86 +19,101 @@
 .dropList{
   width: 100%;
 }
-.GridView {
-  background-color: #fff;
-  margin: 1px auto 1px auto;
-  box-sizing: border-box;
-  border-radius: 0.4rem;
-  box-shadow: 2px 2px #888888;
-}
 
 table {
   width: 100%;
 }
-
-.mat-filter {
-  margin: 0.1rem;
-  box-shadow: 1px 1px #888888;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 25vw;
-}
-
 .data-table {
   width: 100%;
 }
 
-.mat-column-schoolImage img {
-  width: 50px;
-  height: 50px;
-  margin: 5px auto 5px auto;
-}
-
-.mat-cell {
-  font-size: 1.1rem !important;
-  vertical-align: middle;
-  padding: 5px 5px  !important;
-}
-
-.mat-header-cell {
-  font-size: 1.3rem !important;
-  text-align: center;
-  vertical-align: middle;
-  color: rgb(80, 76, 76);
-  padding: 5px 5px  !important;
-  .mat-cell {
-    color: blue;
-
-  }
-}
-
-.mat-sort-cell {
-  font-size: 1.3rem !important;
-  text-align: center;
-  vertical-align: middle;
-
-  .mat-cell {
-    margin: 5px;
-  }
-}
-
-
-agm-map{
-  height: 40vh;
-}
-
-.agm-map-container-inner { width: inherit; height: inherit; } .agm-map-content { display:none; }
-
-.container-fluid{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
 .school_column,.busCompany_column{
-  height: 55vh;
+  height: 400px;
+  max-height: 600px;
+  overflow:hidden;
+  border-radius: 5px;
+}
+
+.student-list, .bus-list{
+  height:400px;
+  overflow:scroll;
+}
+
+// .mat-row:hover{
+//   background-color: gray;
+// }
+.mat-row:focus-visible,
+.mat-row:active{
+  // background-color: #f44336;
+  background: linear-gradient(60deg, #ef5350, #e53935);
+  box-shadow: 0 4px 20px 0px rgb(0 0 0 / 20%), 0 7px 10px -5px rgb(244 67 54 / 60%);
+  color:white;
 }
 
 .buttons{
+  margin:10px;
   width: 100%;
   .mat-raised-button{
     width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
+
+
+.mat-header-cell {
+  font-size: 1rem !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  color: #9c27b0 !important;
+  // text-align: center;
+  vertical-align: middle;
+}
+
+.mat-cell {
+  vertical-align: middle;
+  font-size: 0.8rem !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-weight: 400;
+}
+
+
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 10px;
+}
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  // width: 0px;
+  margin: 0px;
+  padding:0px ;
+
+}
+
+// .mat-sort-cell {
+//   font-size: 1.3rem !important;
+//   text-align: center;
+//   vertical-align: middle;
+
+//   .mat-cell {
+//     margin: 5px;
+//   }
+// }
+
+
+agm-map{
+  height: 50vh;
+}
+
+.agm-map-container-inner {
+   width: inherit; height: inherit;
+   border: 1px solid #000;
+  }
+  .agm-map-content {
+     display:none;
+
+    }
+
+
+
+
+

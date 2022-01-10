@@ -44,8 +44,8 @@ export class StudentCreateComponent implements OnInit {
   studentForm!: FormGroup;
   id!: number;
   message!: string;
-  lat = 51.678418;
-  lng = 7.809007;
+  lat = 40.98802959;
+  lng = 28.72791767;
   zoom = 15;
   //private geoCoder :google.maps.Geocoder = new google.maps.Geocoder;
 

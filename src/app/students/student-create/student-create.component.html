@@ -6,7 +6,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-danger">
-            <h4 class="card-title">Register Student</h4>
+            <h4 class="card-title"> Student Creation</h4>
             <p class="card-category">Complete Student profile </p>
           </div>
           <div class="card-body">
@@ -72,7 +72,7 @@
                   <app-email-input [formControl]='studentForm.controls["email"]'></app-email-input>
                 </div>
                 <div class="col-md-4 col-xs-4">
-                  <app-date-input [formControl]='studentForm.controls["birthDate"]'></app-date-input>
+                  <app-date-input [formControl]='studentForm.controls["birthDate"]' [label]='"Birth-Date"'></app-date-input>
                 </div>
               </div>
 
@@ -102,9 +102,15 @@
                     <label>Enter address</label>
                     <input type="text" class="form-control" (keydown.enter)="$event.preventDefault()" placeholder="Search Nearest Location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" #search>
                   </div>
-                  <agm-map  mapTypeControl="satellite" [latitude]="lat" [longitude]="lng" (mapClick)="mapClicked($event)" [zoom]="zoom">
-                    <agm-marker draggable="true" [latitude]='student.lat' [longitude]='student.lng'
-                    [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
+                  <agm-map  mapTypeControl="satellite"
+                  [latitude]="student.lat? student.lat :lat"
+                  [longitude]="student.lng? student.lng :lng"
+                  (mapClick)="mapClicked($event)"
+                  [zoom]="zoom">
+                    <agm-marker draggable="true"
+                      [latitude]='student.lat'
+                      [longitude]='student.lng'
+                      [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"></agm-marker>
                   </agm-map>
                 </div>
 

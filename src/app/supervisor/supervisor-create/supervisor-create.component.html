@@ -11,24 +11,24 @@
             <form [formGroup]='supervisorForm' (ngSubmit)="supervisorForm.valid && onSubmit()" autocomplete="on">
 
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <app-text-input [formControl]='supervisorForm.controls["full_Name"]' [label]='"Full Name"'>
                   </app-text-input>
                 </div>
 
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <app-text-input [formControl]='supervisorForm.controls["phone"]' [label]='"Phone Number"'>
                   </app-text-input>
                 </div>
-
-                <div class="col-md-4">
-                  <app-email-input [formControl]='supervisorForm.controls["email"]'></app-email-input>
-                </div>
-
               </div>
 
               <div class="row">
-                <div class="col-md-3">
+
+                <div class="col-md-6">
+                  <app-email-input [formControl]='supervisorForm.controls["email"]'></app-email-input>
+                </div>
+
+                <div class="col-md-6">
                   <mat-form-field class="dropList" appearance="outline">
                     <mat-label>School Name</mat-label>
                     <mat-select [formControl]='supervisorForm.controls["school_Id"]'>
