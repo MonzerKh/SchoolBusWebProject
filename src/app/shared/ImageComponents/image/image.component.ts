@@ -13,6 +13,8 @@ export class ImageComponent implements OnInit {
   @Input() id!: number;
   isloading :boolean=false;
   imageDto: ImageDto= {} as ImageDto;
+  avatar_Image= "/assets/images/avatar.png";
+  
   constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {

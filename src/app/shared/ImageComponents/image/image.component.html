@@ -4,3 +4,10 @@
 
 
 <img *ngIf="isloading" style="width: 75px; height:100px;" [src]="imageDto.imageData">
+<div class="image">
+  <img *ngIf="isloading"
+  alt="Student foto"
+  [src]="imageDto.imageData? imageDto.imageData : avatar_Image "
+
+    >
+</div>

@@ -22,14 +22,14 @@ export class AccountService {
 
   login(loginDto: LoginDto) {
 
-    return this.http.post(this.baseUrl + 'Account/login', loginDto)
+    return this.http.post<SystemUserDto>(this.baseUrl + 'account/login', loginDto)
       .subscribe((res: SystemUserDto | any) => {
         let user: SystemUserDto;
         user = res;
         console.log(user);
         if (user) {
           this.setCurrentUser(user);
-        //  this.router.navigateByUrl('/home')
+          this.router.navigateByUrl('/');
         }
       })
   }

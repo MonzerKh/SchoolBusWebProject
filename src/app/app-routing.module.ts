@@ -32,10 +32,10 @@ const routes: Routes = [
     children: [
       { path: '', component: HomeComponent},
       { path: 'school', component: CreateSchoolComponent },
-      { path: 'school2', component: SchoolListComponent },
       { path: 'school/new', component: CreateSchoolComponent },
       { path: 'school/:id/edit', component: CreateSchoolComponent },
       { path: 'school-list', component: ListSchoolComponent },
+
       { path: 'guardian', component: CreateGuardianComponent },
       { path: 'guardian/new', component: CreateGuardianComponent },
       { path: 'guardian/:id/edit', component: CreateGuardianComponent },
@@ -50,12 +50,6 @@ const routes: Routes = [
       { path: 'student/new', component:StudentCreateComponent},
       { path: 'student/edit/:id', component:StudentCreateComponent},
       { path: 'student-list', component:StudentListComponent },
-
-      { path: 'guardian', component: CreateGuardianComponent},
-      { path: 'guardian/new', component:CreateGuardianComponent},
-      {path: 'guardian/:id/edit', component:CreateGuardianComponent},
-      { path: 'guardian-list', component: GuardianListComponent},
-
 
       { path: 'supervisor', component: SupervisorCreateComponent},
       { path: 'supervisor/new', component: SupervisorCreateComponent},

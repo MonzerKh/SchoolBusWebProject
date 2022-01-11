@@ -71,12 +71,12 @@ export class BusCreateComponent implements OnInit {
   private loadForm() {
     this.busForm = this.fb.group({
       id: [this.bus.id],
-      number: [this.bus.number, Validators.required],
-      marka: [this.bus.marka, Validators.required],
-      capacity: [this.bus.capacity, Validators.required],
+      number: [this.bus.number],
+      marka: [this.bus.marka],
+      capacity: [this.bus.capacity],
       minimum: [this.bus.minimum],
       large: [this.bus.large],
-      busCompany_Id: [this.bus.busCompany_Id, Validators.required],
+      busCompany_Id: [this.bus.busCompany_Id],
       createdBy:[this.bus.createdBy],
     });
   }

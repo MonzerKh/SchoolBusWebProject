@@ -5,8 +5,8 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SupervisorDto } from '../models/supervisorDto';
 import { SupervisorParams } from '../models/supervisorParams';
-import { SnackBarService } from '../services/snack-bar.service';
 import { getPaginatedResult } from './paginationHelper';
+import { SnackBarService } from './snack-bar.service';
 
 @Injectable({
   providedIn: 'root'

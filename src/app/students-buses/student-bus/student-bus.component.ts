@@ -42,8 +42,8 @@ export class StudentBusComponent implements OnInit {
   bulkStudentBus:BulkStudentBusDto= {} as BulkStudentBusDto;
 
   message!: string;
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat = 40.98802959;
+  lng = 28.72791767;
   zoom = 13;
   geocoder!: google.maps.Geocoder;
 
@@ -54,7 +54,7 @@ export class StudentBusComponent implements OnInit {
   selection!: SelectionModel<StudentBusDto>;
 
   displayedStudentColumns = ['select', 'id','full_Name', 'full_Address'];
-  displayedBustColumns = ['select','number', 'capacity','minimum','large'];
+  displayedBustColumns = ['number', 'capacity','minimum','large'];
   constructor(private studentService: StudentService,
     private schoolService: SchoolsService,
     private busService : BusService,
@@ -64,8 +64,6 @@ export class StudentBusComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.lat = 51.678418;
-    this.lng = 7.809007;
     this.loadSchoolList();
     this.loadBusCompanyList();
   }

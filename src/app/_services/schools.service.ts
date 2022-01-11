@@ -66,7 +66,7 @@ export class SchoolsService {
     );
   }
 
-  getSchoolList() {
+  getSchoolList(): Observable<SchoolDto[]> {
     return this.http
       .get<SchoolDto[]>(this.baseUrl + 'School/GetSchoolList')
       .pipe(
@@ -100,7 +100,7 @@ export class SchoolsService {
       );
   }
 
-  deleteStudent(id: number){
+  deleteSchool(id: number){
     return this.http.delete(this.baseUrl+'School/DelSchool/'+id);
   }
 }

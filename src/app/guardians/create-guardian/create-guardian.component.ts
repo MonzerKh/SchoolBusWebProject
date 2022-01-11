@@ -9,6 +9,7 @@ import { forkJoin, Observable, pipe } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment.prod';
 import { SchoolDto } from 'src/app/models/schoolDto';
+import { SchoolsService } from 'src/app/_services/schools.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class CreateGuardianComponent implements OnInit {
   constructor(  private fb: FormBuilder,
                 private http: HttpClient,
                 private guardianService: GuardianService,
+                private schoolService: SchoolsService,
                 private route: ActivatedRoute,
                 private router: Router,
                 private _snackBar: SnackBarService) { }
@@ -37,6 +39,7 @@ export class CreateGuardianComponent implements OnInit {
       if(this.id){
         this.editMode=true;
       };  console.log(this.editMode);
+      this.loadSchoolList();
       this.initGuardianForm();
     });
     // this.initGuardianForm();
@@ -45,37 +48,30 @@ export class CreateGuardianComponent implements OnInit {
   private loadForm(){
     this.guardianForm= this.fb.group({
       id : [  this.guardian.id],
-      nationality_Id:[  this.guardian.nationality_Id, Validators.required],
-      full_Name:[  this.guardian.full_Name, Validators.required],
-      email: [  this.guardian.email, [Validators.required, Validators.email]],
-      phone:[  this.guardian.phone, Validators.required],
-      imagePath:[  this.guardian.imagePath, Validators.required],
-      school_Id:[  this.guardian.school_Id, Validators.required],
-      country :[  this.guardian.country, Validators.required],
-      city :[  this.guardian.city, Validators.required],
-      town :[  this.guardian.town, Validators.required],
-      street :[  this.guardian.street, Validators.required],
-      boxNumber :[  this.guardian.boxNumber, Validators.required],
-      address:[  this.guardian.address, Validators.required],
+      nationality_Id:[  this.guardian.nationality_Id],
+      full_Name:[  this.guardian.full_Name],
+      email: [  this.guardian.email ],
+      phone:[  this.guardian.phone],
+      imagePath:[  this.guardian.imagePath],
+      school_Id:[  this.guardian.school_Id],
+      country :[  this.guardian.country],
+      city :[  this.guardian.city],
+      town :[  this.guardian.town],
+      street :[  this.guardian.street],
+      boxNumber :[  this.guardian.boxNumber],
+      address:[  this.guardian.address],
       createdBy: [this.guardian.createdBy],
     });
   }
 
   private initGuardianForm(){
     if(this.editMode){
-      const guardians$ = this.guardianService.getGuardianById(this.id);
-      const schools$ = this.http.get<SchoolDto[]>(this.baseUrl + 'School/GetSchoolList');
-      return forkJoin([guardians$, schools$]).subscribe((data) => {
-        this.guardian = data[0];
-        this.schools = data[1];
-        this.loadForm();
-      });
-    }else{
-      return this.guardianService.getGuardianById(this.id).subscribe(data=>{
+      this.guardianService.getGuardianById(this.id).subscribe(data=>{
         this.guardian=data;
         this.loadForm();
       })
-
+    }else{
+      this.loadForm();
     }
   }
 
@@ -89,5 +85,11 @@ export class CreateGuardianComponent implements OnInit {
     this.guardianForm.reset( 'null');
     this.router.navigate(['/guardian-list'], {relativeTo: this.route});
   }
+
+  private loadSchoolList(){
+    this.schoolService.getSchoolList().subscribe(response=>{
+      this.schools= response;
+    })
+    }
 
 }

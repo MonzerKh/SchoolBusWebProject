@@ -81,12 +81,12 @@ export class SupervisorCreateComponent implements OnInit {
       email: [this.supervisor.email],
       phone: [this.supervisor.phone],
       school_Id: [this.supervisor.school_Id],
-      country: [this.supervisor.country, Validators.required],
-      city: [this.supervisor.city, Validators.required],
-      town: [this.supervisor.town, Validators.required],
-      street: [this.supervisor.street, Validators.required],
-      address: [this.supervisor.address, Validators.required],
-      boxNumber: [this.supervisor.boxNumber, Validators.required],
+      country: [this.supervisor.country],
+      city: [this.supervisor.city],
+      town: [this.supervisor.town],
+      street: [this.supervisor.street],
+      address: [this.supervisor.address],
+      boxNumber: [this.supervisor.boxNumber],
       createdBy:[this.supervisor.createdBy],
     });
   }

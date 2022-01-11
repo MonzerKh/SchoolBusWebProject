@@ -4,7 +4,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-danger">
-            <h4 class="card-title">Register Driver</h4>
+            <h4 class="card-title"> Driver Creation</h4>
             <p class="card-category">Complete Driver profile </p>
           </div>
           <div class="card-body">
@@ -21,7 +21,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <mat-form-field class="dropList" appearance="outline">
                     <mat-label>Company Name</mat-label>
                     <mat-select [formControl]='driverForm.controls["busCompany_Id"]'>
@@ -30,7 +30,7 @@
                   </mat-form-field>
                 </div>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                   <app-image-uploade
                   [formControl]='driverForm.controls["personalImage"]'
                   [label]='"Select Image"'

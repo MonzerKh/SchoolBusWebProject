@@ -1,6 +1,17 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  NgZone,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl, } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { GuardianDto } from 'src/app/models/guardianDto';
 import { SchoolDto } from 'src/app/models/schoolDto';
 import { StudentDto } from 'src/app/models/studentDto';
@@ -33,13 +44,10 @@ export class StudentCreateComponent implements OnInit {
   studentForm!: FormGroup;
   id!: number;
   message!: string;
-  lat = 51.678418;
-  lng = 7.809007;
+  lat = 40.98802959;
+  lng = 28.72791767;
   zoom = 15;
   //private geoCoder :google.maps.Geocoder = new google.maps.Geocoder;
-
-
-
 
   @ViewChild('search')
   public searchElementRef!: ElementRef;
@@ -56,7 +64,7 @@ export class StudentCreateComponent implements OnInit {
     private guardianService: GuardianService,
     public mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
-  ) { }
+  ) {}
 
   geocoder!: google.maps.Geocoder;
   ngOnInit(): void {
@@ -67,42 +75,21 @@ export class StudentCreateComponent implements OnInit {
         this.editMode = true;
         console.log(this.editMode);
       }
+      this.loadScools();
+      this.loadGuardians();
       this.intitStudenForm();
-
     });
   }
 
   intitStudenForm() {
     if (this.editMode) {
-
-      const student$ = this.http.get<StudentDto>(
-        this.baseUrl + 'Student/GetStudent/' + this.id
-      );
-      const schools$ = this.http.get<SchoolDto[]>(
-        this.baseUrl + 'School/GetSchoolList'
-      );
-      const guardians$ = this.http.get<GuardianDto[]>(
-        this.baseUrl + 'Guardian/GetGuardianList'
-      );
-      return forkJoin([student$, schools$, guardians$]).subscribe((data) => {
-        this.student = data[0];
-        this.schools = data[1];
-        this.guardians = data[2];
+      this.studentService.getstudentById(this.id).subscribe((response) => {
+        this.student = response;
         this.loadForm();
         this.setCurrentLocation();
       });
     } else {
-      const schools$ = this.http.get<SchoolDto[]>(
-        this.baseUrl + 'School/GetSchoolList'
-      );
-      const guardians$ = this.http.get<GuardianDto[]>(
-        this.baseUrl + 'Guardian/GetGuardianList'
-      );
-      return forkJoin([schools$, guardians$]).subscribe((data) => {
-        this.schools = data[0];
-        this.guardians = data[1];
-        this.loadForm();
-      });
+      this.loadForm();
     }
   }
 
@@ -119,12 +106,12 @@ export class StudentCreateComponent implements OnInit {
       personalImage: [this.student.personalImage],
       guardian_Id: [this.student.guardian_Id],
       school_Id: [this.student.school_Id],
-      country: [this.student.country, Validators.required],
-      city: [this.student.city, Validators.required],
-      town: [this.student.town, Validators.required],
-      street: [this.student.street, Validators.required],
-      address: [this.student.address, Validators.required],
-      boxNumber: [this.student.boxNumber, Validators.required],
+      country: [this.student.country],
+      city: [this.student.city],
+      town: [this.student.town],
+      street: [this.student.street],
+      address: [this.student.address],
+      boxNumber: [this.student.boxNumber],
       lat: [this.student.lat],
       lng: [this.student.lng],
       createdBy: [this.student.createdBy],
@@ -145,21 +132,38 @@ export class StudentCreateComponent implements OnInit {
     this.router.navigate(['../student-list']);
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(CreateGuardianComponent, {
-      width: '800px', // height:'800px',
-      data: {}
-    });
-    dialogRef.afterClosed().subscribe(res => {
-      this.router.navigate(['../guardian-new']);
-
-      console.timeLog("dialog is closed")
+  private getStudentById(id: number) {
+    this.studentService.getstudentById(id).subscribe((response) => {
+      this.student = response;
     });
   }
 
-  resetForm() { }
+  private loadGuardians() {
+    this.guardianService.getGuardianList().subscribe((response) => {
+      this.guardians = response;
+    });
+  }
 
-  ngOnDestroy() { }
+  private loadScools() {
+    this.schoolService.getSchoolList().subscribe((response) => {
+      this.schools = response;
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(CreateGuardianComponent, {
+      width: '800px', // height:'800px',
+      data: {},
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      this.loadGuardians();
+      console.log('dialog is closed');
+    });
+  }
+
+  resetForm() {}
+
+  ngOnDestroy() {}
 
   mapClicked(event: any) {
     console.log(event);
@@ -175,36 +179,36 @@ export class StudentCreateComponent implements OnInit {
     this.getAddress(this.student.lat!, this.student.lng!);
   }
 
-
   private setCurrentLocation() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.lat = this.student.lat! > 0 ? this.student.lat! : position.coords.latitude;
-        this.lng = this.student.lng! > 0 ? this.student.lng! : position.coords.longitude;
+        this.lat =
+          this.student.lat! > 0 ? this.student.lat! : position.coords.latitude;
+        this.lng =
+          this.student.lng! > 0 ? this.student.lng! : position.coords.longitude;
         this.zoom = 15;
       });
     }
   }
 
-
-
   getAddress(latitude: number, longitude: number) {
     this.geocoder = new google.maps.Geocoder();
-    this.geocoder.geocode({ 'location': { lat: latitude, lng: longitude } }, (results, status) => {
-      console.log(results);
-      console.log(status);
-      if (status === 'OK') {
-        if (results![0]) {
-          this.zoom = 12;
-          this.student.address = results![0].formatted_address;
+    this.geocoder.geocode(
+      { location: { lat: latitude, lng: longitude } },
+      (results, status) => {
+        console.log(results);
+        console.log(status);
+        if (status === 'OK') {
+          if (results![0]) {
+            this.zoom = 12;
+            this.student.address = results![0].formatted_address;
+          } else {
+            window.alert('No results found');
+          }
         } else {
-          window.alert('No results found');
+          window.alert('Geocoder failed due to: ' + status);
         }
-      } else {
-        window.alert('Geocoder failed due to: ' + status);
       }
-
-    });
+    );
   }
 }
-

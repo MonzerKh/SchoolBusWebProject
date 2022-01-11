@@ -124,7 +124,7 @@ export class ListSchoolComponent implements AfterViewInit, OnInit {
   }
 
   onDeleteSchool(school: SchoolDto){
-    this.schoolsService.deleteStudent(school.id).subscribe(() => {
+    this.schoolsService.deleteSchool(school.id).subscribe(() => {
       this.loadSchools();
     });
 

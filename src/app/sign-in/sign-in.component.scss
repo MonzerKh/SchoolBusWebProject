@@ -3,18 +3,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 90%;
+width: 100%;
+height: 100%;
 }
 .container-fluid{
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
 }
 .main-row{
-  height: 90%;
+  height: 65%;
   // border: 1px solid gray;
 }
 .row{
@@ -48,4 +49,8 @@
   display: flex;
   justify-content: space-between;
   // flex-direction: column;
+}
+
+.example-full-width{
+  width: 100%;
 }

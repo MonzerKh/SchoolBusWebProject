@@ -77,7 +77,7 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="warn">
+    <mat-toolbar color="warn" >
       <button type="button" aria-label="Toggle sidenav" mat-icon-button
         (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
@@ -91,8 +91,6 @@
       </div>
       <span class="example-spacer"></span>
       <div>
-        <!-- <a routerLinkActive="active" routerLink="/sign-in" mat-button *ngIf="">logout</a>
-        <a routerLinkActive="active" routerLink="/sign-up" mat-button *ngIf="">Sign Up</a> -->
         <button mat-button (click)="onLogout()"> Logout </button>
       </div>
     </mat-toolbar>
