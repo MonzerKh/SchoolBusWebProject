@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-import { Component, OnInit } from '@angular/core';
 
-=======
 import { Component, OnInit } from '@angular/core';
->>>>>>> 592f8c8bb6ecdad3ba401fa07f75ac89256dc6c3
 
 @Component({
   selector: 'app-google-map',
@@ -18,7 +14,4 @@ export class GoogleMapComponent implements OnInit {
   }
 
 }
-
-
-
 
