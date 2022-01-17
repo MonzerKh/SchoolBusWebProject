@@ -1,0 +1,78 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <!--school-list-->
+    <div class="row school-list">
+      <div class="col-lg-2 col-md-3 col-sm-3" *ngFor="let school of schools">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>school</mat-icon>
+            </div>
+            <!-- <p class="card-category">{{school.school_Name}}</p> -->
+            <h3 class="card-title">{{school.school_Name}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+
+              <button mat-raised-button
+                (click)="showStudentBusLists(school.id)">Show Buses</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student-Bus List-->
+    <div class="row bus-list">
+      <div class="col-lg-2 col-md-3 col-sm-3"
+        *ngFor="let studentBuse of studentBuses">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>directions_bus</mat-icon>
+            </div>
+            <!-- <p class="card-category">{{school.school_Name}}</p> -->
+            <h3 class="card-title">{{studentBuse.bus_Marka_Number}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <!-- <i class="material-icons text-danger">warning</i> -->
+              <button mat-raised-button (click)="showBulkStudentBusLists(studentBuse.bus_Id)">Show Students</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student-Bus-details List-->
+    <div class="row student-bus-list-details">
+      <div class="col-lg-2 col-md-3 col-sm-3"
+        *ngFor="let bulkStudentBus of bulkStudentBus">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>person</mat-icon>
+            </div>
+            <!-- <p class="card-category">{{school.school_Name}}</p> -->
+            <h3 class="card-title">{{bulkStudentBus.student_Full_Name}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <!-- <i class="material-icons text-danger">warning</i> -->
+              <!-- <button mat-raised-button (click)="getBulkStudentBusDetails(studentBuse.bus_Id)">Show Details</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <agm-map
+      [zoom]="zoom"
+      [latitude]="lat"
+      [longitude]="lng"
+      (mapReady)="onMapReady($event)">
+
+    </agm-map>
+
+  </div>
+</div>

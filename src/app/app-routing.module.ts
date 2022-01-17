@@ -20,6 +20,9 @@ import { BusListComponent } from './buses/bus-list/bus-list.component';
 import { DriverCreateComponent } from './drivers/driver-create/driver-create.component';
 import { DriverListComponent } from './drivers/driver-list/driver-list.component';
 import { StudentBusComponent } from './students-buses/student-bus/student-bus.component';
+// import { GoogleMapComponent } from './_googleMap/google-map/google-map.component';
+import { StudentBusListComponent } from './students-buses/student-bus-list/student-bus-list.component';
+import { GoogleMapComponent } from './_googleMap/google-map/google-map.component';
 
 const routes: Routes = [
 
@@ -66,7 +69,10 @@ const routes: Routes = [
       { path: 'driver/edit/:id', component: DriverCreateComponent},
       { path: 'driver-list', component: DriverListComponent},
 
-      { path: 'student-bus', component: StudentBusComponent}
+      { path: 'student-bus', component: StudentBusComponent},
+      { path: 'student-bus-list', component: StudentBusListComponent},
+
+      { path: 'google-map', component: GoogleMapComponent}
     ],
   },
 

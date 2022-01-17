@@ -35,6 +35,7 @@ export class CreateSchoolComponent implements OnInit {
       if(this.id){
         this.editMode=true;
       };  console.log(this.editMode);
+      this.setCurrentLocation();
       this.intitSchoolForm();
     });
   }
