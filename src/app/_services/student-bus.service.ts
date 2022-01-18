@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment.prod';
 import { BulkStudentBusDto } from '../models/bulkStudentBus';
-import { StudentBusDto } from '../models/studentBusDto';
+import { StudentBusDto, StudentBusList, StudentBusTSP } from '../models/studentBusDto';
 import { StudentDto } from '../models/studentDto';
 import { SnackBarService } from './snack-bar.service';
 
@@ -54,15 +54,21 @@ export class StudentBusService {
   }
 
   getStudentBusList(scool_Id: number){
-    return this.http.get<StudentBusDto[]>(this.baseUrl+'Student_Bus/GetStudentBusList').pipe(map(response=>{
+    return this.http.get<StudentBusList[]>(this.baseUrl+'Student_Bus/GetStudentBusList').pipe(map(response=>{
       // response.bus_Id== id;
       return response;
     }))
   }
 
   getBulkStudentBusDetails(bus_Id: number){
-    return this.http.get<StudentBusDto[]>(this.baseUrl+'Student_Bus/GetStudentBusList?IsActive=true&bus_Id='+bus_Id).pipe(map(response=>{
+    return this.http.get<StudentBusList[]>(this.baseUrl+'Student_Bus/GetStudentBusList?IsActive=true&bus_Id='+bus_Id).pipe(map(response=>{
       // response.bus_Id== id;
+      return response;
+    }))
+  }
+
+  getStudentBusTSP(bus_Id: number){
+    return this.http.get<StudentBusTSP[]>(this.baseUrl+'Student_Bus/GetStudentBusTSP?bus_Id='+bus_Id).pipe(map(response=>{
       return response;
     }))
   }

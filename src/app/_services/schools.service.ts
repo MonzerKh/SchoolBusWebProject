@@ -66,7 +66,7 @@ export class SchoolsService {
     );
   }
 
-  getSchoolList(): Observable<SchoolDto[]> {
+  getSchoolList() {
     return this.http
       .get<SchoolDto[]>(this.baseUrl + 'School/GetSchoolList')
       .pipe(
