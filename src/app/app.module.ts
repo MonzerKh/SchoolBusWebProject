@@ -91,7 +91,7 @@ import { ImageComponent } from './shared/ImageComponents/image/image.component';
         MatCheckboxModule,
         MatProgressBarModule,
          AgmCoreModule.forRoot({
-           apiKey: 'AIzaSyC2SQnvRvx0B820_DWvYNZDwMgbnQzl79w',
+           apiKey: 'AIzaSyAF_sSGzXAL_oKh-GJQkTjsDAKttN2UAug',
            libraries: ['places']
          }),
 

@@ -53,7 +53,7 @@ export class StudentBusComponent implements OnInit {
   allowMultiSelect = true;
   selection!: SelectionModel<StudentBusDto>;
 
-  displayedStudentColumns = ['select', 'id','full_Name', 'full_Address'];
+  displayedStudentColumns = ['select', 'id','full_Name','bus_Name', 'full_Address'];
   displayedBustColumns = ['number', 'capacity','minimum','large'];
   constructor(private studentService: StudentService,
     private schoolService: SchoolsService,
