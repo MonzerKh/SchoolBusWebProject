@@ -1,18 +1,100 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SchoolDto } from 'src/app/models/schoolDto';
 import { SchoolsService } from 'src/app/_services/schools.service';
 import { StudentBusService } from 'src/app/_services/student-bus.service';
-import { MapDirectionsService } from '@angular/google-maps';
-import {
-  StudentBusDto,
-  StudentBusList,
-  StudentBusTSP,
-  StudentMarker,
-} from '../../models/studentBusDto';
+import { GoogleMap, MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
+import { StudentBusDto, StudentBusList, StudentBusTSP, StudentMarker,} from '../../models/studentBusDto';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 declare const google: any;
+const studentMarker = [
+  {
+    id: 35,
+    full_Name: 'hurria',
+    phone: '05558887799',
+    lat: 40.98309619,
+    lng: 28.72480765,
+    position: { lat: 40.98309619, lng: 28.72480765 },
+    label: {
+      color: "blue",
+      text: "Marker Label"
+    },
+    title: "Marker Title",
+    info: "Marker info",
+    options: {
+      animation: google.maps.Animation.BOUNCE
+    }
+  },
+  {
+    id: 40,
+    full_Name: 'Aygül Can',
+    phone: '0556664332',
+    lat: 40.97440853,
+    lng: 28.71475396,
+    position: { lat: 40.97440853, lng: 28.71475396 },
+    label: {
+      color: "blue",
+      text: "Marker Label"
+    },
+    title: "Marker Title",
+    info: "Marker info",
+    options: {
+      animation: google.maps.Animation.BOUNCE
+    }
+  },
+  {
+    id: 39,
+    full_Name: 'Nazli Tekin',
+    phone: '05566332211',
+    lat: 40.97199236,
+    lng: 28.72693062,
+    position: { lat: 40.97199236, lng: 28.72693062 },
+    label: {
+      color: "blue",
+      text: "Marker Label"
+    },
+    title: "Marker Title",
+    info: "Marker info",
+    options: {
+      animation: google.maps.Animation.BOUNCE
+    }
+  },
+  {
+    id: 43,
+    full_Name: 'Yağmur Kaya',
+    phone: '05564432344',
+    lat: 40.98350193,
+    lng: 28.731941,
+    position: { lat: 40.98350193, lng: 28.731941 },
+    label: {
+      color: "blue",
+      text: "Marker Label"
+    },
+    title: "Marker Title",
+    info: "Marker info",
+    options: {
+      animation: google.maps.Animation.BOUNCE
+    }
+  },
+  {
+    id: 42,
+    full_Name: 'Derya  Aydin',
+    phone: '05564432344',
+    lat: 40.98121972,
+    lng: 28.74447228,
+    position: { lat: 40.98121972, lng: 28.74447228 },
+    label: {
+      color: "blue",
+      text: "Marker Label"
+    },
+    title: "Marker Title",
+    info: "Marker info",
+    options: {
+      animation: google.maps.Animation.BOUNCE
+    }
+  },
+];
 
 @Component({
   selector: 'app-student-bus-list',
@@ -20,41 +102,89 @@ declare const google: any;
   styleUrls: ['./student-bus-list.component.scss'],
 })
 export class StudentBusListComponent implements OnInit {
+  @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
+  @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow;
+
   isLoading: boolean = false;
   schools: SchoolDto[] = [];
   studentBuses: StudentBusList[] = [];
   bulkStudentBus: StudentBusList[] = [];
   studentBusTSP: StudentBusTSP[] = [];
-  studentMarkers!: [
-    {
-      id: 'number';
-      full_Name: 'string';
-      phone: 'string';
-      lat: 'number';
-      lng: 'number';
-      position: { lat: 'number'; lng: 'number' };
-    }
-  ];
   lat!: number;
   lng!: number;
+  googleMapType = 'satellite';
 
+  // pointList: { lat: number; lng: number }[] = [];
+  // selectedArea = 0;
+  // drawingManager: any;
+
+  infoContent = "";
+  studentMarkers!: [{ id: 'number'; full_Name: 'string'; phone: 'string'; lat: 'number';lng: 'number';
+                      position: { lat: 'number'; lng: 'number' };}];
+
+
+  path:google.maps.DirectionsWaypoint[]=[
+
+                  // {
+                  //   location: google.maps.LatLng({lat:40.98309619, lng:28.72480765}, true) ,
+                  //   stopover: true
+                  // },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.97440853, lng: 28.71475396 }, true) ,
+                    stopover: true
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.97199236, lng: 28.72693062 }, true) ,
+                    stopover: true
+                  },
+                  // {
+                  //   location:new google.maps.LatLng({ lat: 40.98350193, lng: 28.731941 }, true) ,
+                  //   stopover: true
+                  // },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.98121972, lng: 28.74447228 }, true) ,
+                    stopover: true
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.99121212, lng: 28.74447450 }, true) ,
+                    stopover: true
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.98121912, lng: 28.74447267 }, true) ,
+                    stopover: true
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.98121999, lng: 28.74447260 }, true) ,
+                    stopover: true
+                  },{
+                    location:new google.maps.LatLng({ lat: 40.98121972, lng: 28.74447228 }, true) ,
+                    stopover: true
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.98121955, lng: 28.74447278 }, true) ,
+                    stopover: true
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.98121945, lng: 28.74447265 }, true) ,
+                    stopover: true
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.98121932, lng: 28.74447228 }, true) ,
+                    stopover: true
+                  }
+  ]
   zoom = 14;
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
     // mapTypeId: 'hybrid',
-    zoomControl: false,
-    scrollwheel: false,
+    zoomControl: true,
+    scrollwheel: true,
     disableDoubleClickZoom: true,
     disableDefaultUI: true,
     zoom: 13,
     maxZoom: 15,
     minZoom: 0,
   };
-  googleMapType = 'satellite';
-
-  pointList: { lat: number; lng: number }[] = [];
-  selectedArea = 0;
-  drawingManager: any;
 
   studentMarker = [
     {
@@ -64,6 +194,15 @@ export class StudentBusListComponent implements OnInit {
       lat: 40.98309619,
       lng: 28.72480765,
       position: { lat: 40.98309619, lng: 28.72480765 },
+      label: {
+        color: "blue",
+        text: "Marker Label"
+      },
+      title: "Marker Title",
+      info: "Marker info",
+      options: {
+        animation: google.maps.Animation.BOUNCE
+      }
     },
     {
       id: 40,
@@ -72,6 +211,15 @@ export class StudentBusListComponent implements OnInit {
       lat: 40.97440853,
       lng: 28.71475396,
       position: { lat: 40.97440853, lng: 28.71475396 },
+      label: {
+        color: "blue",
+        text: "Marker Label"
+      },
+      title: "Marker Title",
+      info: "Marker info",
+      options: {
+        animation: google.maps.Animation.BOUNCE
+      }
     },
     {
       id: 39,
@@ -80,6 +228,15 @@ export class StudentBusListComponent implements OnInit {
       lat: 40.97199236,
       lng: 28.72693062,
       position: { lat: 40.97199236, lng: 28.72693062 },
+      label: {
+        color: "blue",
+        text: "Marker Label"
+      },
+      title: "Marker Title",
+      info: "Marker info",
+      options: {
+        animation: google.maps.Animation.BOUNCE
+      }
     },
     {
       id: 43,
@@ -88,6 +245,15 @@ export class StudentBusListComponent implements OnInit {
       lat: 40.98350193,
       lng: 28.731941,
       position: { lat: 40.98350193, lng: 28.731941 },
+      label: {
+        color: "blue",
+        text: "Marker Label"
+      },
+      title: "Marker Title",
+      info: "Marker info",
+      options: {
+        animation: google.maps.Animation.BOUNCE
+      }
     },
     {
       id: 42,
@@ -96,6 +262,15 @@ export class StudentBusListComponent implements OnInit {
       lat: 40.98121972,
       lng: 28.74447228,
       position: { lat: 40.98121972, lng: 28.74447228 },
+      label: {
+        color: "blue",
+        text: "Marker Label"
+      },
+      title: "Marker Title",
+      info: "Marker info",
+      options: {
+        animation: google.maps.Animation.BOUNCE
+      }
     },
   ];
 
@@ -107,21 +282,19 @@ export class StudentBusListComponent implements OnInit {
     { lat: 40.98121972, lng: 28.74447228 },
   ];
 
-  path:google.maps.DirectionsWaypoint[]=[]
 
-  readonly directionsResults$:
-    | Observable<google.maps.DirectionsResult | undefined>
-    | undefined;
+  readonly directionsResults$:| Observable<google.maps.DirectionsResult | undefined>| undefined;
   constructor(
     private schoolService: SchoolsService,
     private studentBusService: StudentBusService,
     private mapDirectionsService: MapDirectionsService
   ) {
     const request: google.maps.DirectionsRequest = {
-      destination: { lat: 40.98121972, lng: 28.74447228 },
-      origin: { lat: 40.98309619, lng: 28.72480765 },
+      destination: { lat: 40.98309619, lng: 28.72480765 },
+      origin: { lat: 40.98350193, lng: 28.731941 },
       travelMode: google.maps.TravelMode.DRIVING,
-      // waypoints:this.vertices;
+      waypoints: this.path,
+      optimizeWaypoints:true,
     };
     this.directionsResults$ = mapDirectionsService
       .route(request)
@@ -218,6 +391,11 @@ export class StudentBusListComponent implements OnInit {
 
   zoomOut() {
     if (this.zoom > this.options.minZoom!) this.zoom--;
+  }
+
+  openInfo(marker: MapMarker, info: string) {
+    this.infoContent = info;
+     this.info.open(marker);
   }
 
   // initMap(): void {
@@ -381,6 +559,4 @@ export class StudentBusListComponent implements OnInit {
   //   );
   // }
 }
-function ngOnInit() {
-  throw new Error('Function not implemented.');
-}
+

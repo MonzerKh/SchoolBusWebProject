@@ -73,22 +73,28 @@
       <div class="col-md-12">
 
         <div class="my-google-map" style="width: 100%; height: 100%;">
-          <google-map height="500px" width="100%" [zoom]="zoom"
+          <google-map height="600px" width="100%" [zoom]="zoom"
             [center]="center" [options]="options">
 
-            <map-marker
+            <!-- <map-marker
               *ngFor="let marker of studentMarker"
               [position]="marker.position"
-              [label]="marker.id+1"
-              [title]="marker.full_Name"
+              [label]="marker.full_Name"
+              [title]="marker.id+1"
               [options]="marker.options"
               >
-            </map-marker>
+            </map-marker> -->
+
             <map-directions-renderer
               *ngIf="(directionsResults$ | async) as directionsResults"
-              [directions]="directionsResults">
+              [directions]="directionsResults"
+              >
             </map-directions-renderer>
             <map-polyline *ngFor="let marker of studentMarker" [path]="vertices"></map-polyline>
+
+            <map-info-window >
+              {{infoContent}}
+              </map-info-window>
           </google-map>
           <!-- Use custom zoom buttons -->
           <button (click)="zoomIn()">Zoom in</button>
