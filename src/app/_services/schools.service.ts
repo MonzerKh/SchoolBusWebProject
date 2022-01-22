@@ -91,6 +91,16 @@ export class SchoolsService {
       );
   }
 
+  getSchoolList2() {
+    return this.http
+      .get<SchoolDto[]>(this.baseUrl + 'School/GetSchoolList')
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
+
   getSchoolsPaging(Params: SchoolParams) {
     return getPaginatedResult<SchoolDto[]>(
       this.baseUrl + 'School/GetSchoolPaging',

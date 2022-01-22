@@ -14,7 +14,8 @@ export interface SchoolDto {
   createdBy: number;
   updateBy: number;
   createUser_Id:number;
-
+  studentCount:number;
+  busCount:number;
   lat?: number;
 
   lng?: number;

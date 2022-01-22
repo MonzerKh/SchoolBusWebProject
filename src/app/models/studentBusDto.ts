@@ -17,8 +17,10 @@ export interface StudentBusList {
   student_Id: number;
   bus_Id: number;
   bus_Marka_Number: string;
+  marka:string;
   lat: number;
   lng:number;
+  studentCount:number;
 }
 
 export interface StudentBusTSP {

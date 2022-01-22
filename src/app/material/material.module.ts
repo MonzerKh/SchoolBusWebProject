@@ -21,7 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 const materials=[
   MatToolbarModule,
@@ -47,6 +47,7 @@ const materials=[
   MatSelectModule,
   MatSelectModule,
   MatDialogModule,
+  MatTabsModule
 ]
 
 
