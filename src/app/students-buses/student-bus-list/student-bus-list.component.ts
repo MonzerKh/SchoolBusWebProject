@@ -146,30 +146,35 @@ export class StudentBusListComponent implements OnInit {
                     stopover: true
                   },
                   {
-                    location:new google.maps.LatLng({ lat: 40.99121212, lng: 28.74447450 }, true) ,
+                    location:new google.maps.LatLng({ lat: 40.97631794, lng: 28.72748852 }, true) ,
+                    stopover: true
+
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.98174476, lng: 28.71384144 }, true) ,
                     stopover: true
                   },
                   {
-                    location:new google.maps.LatLng({ lat: 40.98121912, lng: 28.74447267 }, true) ,
-                    stopover: true
-                  },
-                  {
-                    location:new google.maps.LatLng({ lat: 40.98121999, lng: 28.74447260 }, true) ,
+                    location:new google.maps.LatLng({ lat: 40.97393648, lng: 28.7103653 }, true) ,
                     stopover: true
                   },{
-                    location:new google.maps.LatLng({ lat: 40.98121972, lng: 28.74447228 }, true) ,
+                    location:new google.maps.LatLng({ lat: 40.97490851, lng: 28.74289513 }, true) ,
                     stopover: true
                   },
                   {
-                    location:new google.maps.LatLng({ lat: 40.98121955, lng: 28.74447278 }, true) ,
+                    location:new google.maps.LatLng({ lat: 40.98822445, lng: 28.71504214 }, true) ,
                     stopover: true
                   },
                   {
-                    location:new google.maps.LatLng({ lat: 40.98121945, lng: 28.74447265 }, true) ,
+                    location:new google.maps.LatLng({ lat: 40.98146987, lng: 28.73096373 }, true) ,
                     stopover: true
                   },
                   {
-                    location:new google.maps.LatLng({ lat: 40.98121932, lng: 28.74447228 }, true) ,
+                    location:new google.maps.LatLng({ lat: 40.98278556, lng: 28.7031975 }, true) ,
+                    stopover: true
+                  },
+                  {
+                    location:new google.maps.LatLng({ lat: 40.97973836, lng: 28.72929003 }, true) ,
                     stopover: true
                   }
   ]
