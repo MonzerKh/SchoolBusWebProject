@@ -25,4 +25,14 @@ export interface StudentBusTSP {
   phone: string;
   lat: number;
   lng: number;
+  position: {lat: number,lng: number }
+}
+
+export interface StudentMarker {
+  id: number;
+  full_Name: string;
+  phone: string;
+  lat: number;
+  lng: number;
+  position: {lat: number,lng: number }
 }

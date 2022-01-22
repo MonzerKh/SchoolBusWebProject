@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from "@angular/router";
+import { GoogleMapsModule } from '@angular/google-maps'
 import { AgmCoreModule,AgmMap } from '@agm/core';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from "./_interceptors/loading.interceptor";
@@ -92,8 +93,9 @@ import { StudentBusListComponent } from './students-buses/student-bus-list/stude
         MatSortModule,
         MatCheckboxModule,
         MatProgressBarModule,
+        GoogleMapsModule,
          AgmCoreModule.forRoot({
-           apiKey: 'AIzaSyC2SQnvRvx0B820_DWvYNZDwMgbnQzl79w',
+           apiKey: 'AIzaSyDIQ_Pz_jj5Ylht3F1E5YrxHqXrS-UvWuM',
            libraries: ['places', 'drawing', 'geometry']
          }),
 
@@ -104,7 +106,7 @@ import { StudentBusListComponent } from './students-buses/student-bus-list/stude
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-        // { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
 })
