@@ -21,6 +21,7 @@ export class StudentService {
   studentParams!: StudentParams;
   editMode!: boolean;
   studentBus: StudentBusDto[] = [];
+  ImageDto : ImageDto [] = [];
 
   constructor(private http: HttpClient, private _snackBar: SnackBarService) {}
 
@@ -40,6 +41,10 @@ export class StudentService {
         next: (v: any) => {
           console.log(v);
           this._snackBar.openSnackBar('Student Creation is Successed');
+          var item = this.ImageDto.find(r=>r.id = studentDto.id);
+          if(item !=null){
+            item.imageData = studentDto.personalImage;
+          }
         },
         error: (e: any) => {
           console.log(e);
@@ -93,7 +98,13 @@ export class StudentService {
 
 
   getStudentImage(id: number):Observable<ImageDto>{
+
+    var item = this.ImageDto.find(x=>x.id == id);
+    if(item !=null)
+    return of(item);
+
     return this.http.get<ImageDto>(this.baseUrl+'Student/GetStudentImage/'+id).pipe(map(response=>{
+      this.ImageDto.push(response);
       return response;
     }))
   }
