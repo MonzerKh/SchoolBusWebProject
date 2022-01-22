@@ -256,10 +256,10 @@ export class StudentBusListComponent implements OnInit {
         this.isLoading = true;
       }
     );
-    // for (let i = 0; i < this.bulkStudentBus.length; i++) {
-    //   this.practicalPointList[i].location =new google.maps.LatLng( {lat:this.bulkStudentBus[i].lat, lng:this.bulkStudentBus[i].lng},true);
-    //   this.practicalPointList[i].stopover= true;
-    // }
+    for (let i = 0; i < this.bulkStudentBus.length; i++) {
+      this.practicalPointList[i].location =new google.maps.LatLng( {lat:this.bulkStudentBus[i].lat, lng:this.bulkStudentBus[i].lng},true);
+      this.practicalPointList[i].stopover= true;
+    }
 
     // this.getStudentBusTSP(bus_Id);
   }
