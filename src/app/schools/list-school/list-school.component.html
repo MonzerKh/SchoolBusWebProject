@@ -54,9 +54,9 @@
 
                 <ng-container matColumnDef="schoolImage">
                   <th mat-header-cell *matHeaderCellDef>Logo</th>
-                  <td mat-cell *matCellDef="let row"> <img
-                      [src]="row.schoolImage ?? '/assets/images/empty_image.png'"
-                      class="rounded" [alt]="row.school_Name"></td>
+                  <td mat-cell *matCellDef="let row">
+                    <app-image [id]="row.id" [IMGType] ="1"></app-image>
+                  </td>
                 </ng-container>
 
                 <ng-container matColumnDef="school_Name">

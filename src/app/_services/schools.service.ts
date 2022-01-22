@@ -1,3 +1,4 @@
+import { ImageDto } from './../models/imageDto';
 import { MatTableDataSource } from '@angular/material/table';
 import { SchoolDto } from './../models/schoolDto';
 import { Injectable } from '@angular/core';
@@ -16,6 +17,7 @@ export class SchoolsService {
   schoolCache = new Map();
   baseUrl = environment.apiUrl;
   schools: SchoolDto[] = [];
+  ImageDto: ImageDto[] = [];
   school!: SchoolDto;
 
   editModSchool!: SchoolDto;
@@ -64,6 +66,19 @@ export class SchoolsService {
         return response;
       })
     );
+  }
+
+  getSchoolImage(id: number):Observable<ImageDto>{
+
+    var item =  this.ImageDto.find(x => x.id == id);
+
+    if(item != null)
+       return of(item);
+
+    return this.http.get<ImageDto>(this.baseUrl+'School/GetSchoolImage/'+id).pipe(map(response=>{
+      this.ImageDto.push(response);
+      return response;
+    }))
   }
 
   getSchoolList() {
