@@ -1,0 +1,62 @@
+.school-list, .bus-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: nowrap;
+  overflow: scroll;
+}
+
+
+.card-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+
+
+  background: linear-gradient(60deg, #ef5350, #e53935);
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: -20px;
+  border-radius: 3px;
+  padding: 15px;
+  border-bottom: none;
+  position: relative;
+  z-index: 3 !important;
+
+  justify-content: start;
+  align-items: start;
+  color: azure;
+
+  box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(244 67 54 / 40%);
+
+  .card-title{
+    font-size: 1vw;
+  }
+  .card-category{
+    font-size: 1.0rem;
+  }
+
+}
+
+.card {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  border: 1px solid #eeeeee;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  background-clip: border-box;
+  color: #333333;
+  font-size: 0.875rem;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  word-wrap: break-word;
+  box-shadow: 0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 20%), 0 1px 5px 0 rgb(0 0 0 / 12%);
+}
+
+agm-map{
+  height: 500px;
+}

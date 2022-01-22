@@ -1,7 +1,7 @@
-export interface StudentBusDto{
+export interface StudentBusDto {
   id: number;
-  full_Name :string;
-  full_Address:string ;
+  full_Name: string;
+  full_Address: string;
   lat: number;
   lng: number;
   school_Id: number;
@@ -11,10 +11,18 @@ export interface StudentBusDto{
   company: string;
 }
 
+export interface StudentBusList {
+  id: number;
+  student_Full_Name: string;
+  student_Id: number;
+  bus_Id: number;
+  bus_Marka_Number: string;
+}
 
-
-
-
-
-
-
+export interface StudentBusTSP {
+  id: number;
+  full_Name: string;
+  phone: string;
+  lat: number;
+  lng: number;
+}

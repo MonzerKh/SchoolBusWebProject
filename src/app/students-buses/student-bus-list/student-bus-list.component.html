@@ -1,0 +1,92 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <!--school-list-->
+    <div class="row school-list">
+      <div class="col-lg-2 col-md-3 col-sm-3"
+           *ngFor="let school of schools">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>school</mat-icon>
+            </div>
+            <!-- <p class="card-category">{{school.school_Name}}</p> -->
+            <h3 class="card-title">{{school.school_Name}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+
+              <button mat-raised-button
+                (click)="showStudentBusLists(school.id)">Show Buses</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student-Bus List-->
+    <div class="row bus-list">
+      <div class="col-lg-2 col-md-3 col-sm-3"
+        *ngFor="let studentBus of studentBuses">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>directions_bus</mat-icon>
+            </div>
+            <!-- <p class="card-category">{{school.school_Name}}</p> -->
+            <h3 class="card-title">{{studentBus.bus_Marka_Number}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+              <button mat-raised-button
+                (click)="showBulkStudentBusLists(studentBus.bus_Id)">Show
+                Students</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student-Bus-details List-->
+    <div class="row student-bus-list-details">
+      <div class="col-lg-2 col-md-3 col-sm-3"
+        *ngFor="let bulkStudentBus of bulkStudentBus">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon">
+              <mat-icon>person</mat-icon>
+            </div>
+            <h3 class="card-title">{{bulkStudentBus.student_Full_Name}}</h3>
+          </div>
+          <div class="card-footer">
+            <div class="stats">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <agm-map [latitude]="lat" [longitude]="lng" [fullscreenControl]='true'
+          [mapTypeControl]='true' [fitBounds]="true">
+
+          <agm-marker *ngFor="let studentBusItem of studentBusTSP; let i=index"
+            [latitude]="studentBusItem.lat" [longitude]="studentBusItem.lng"
+            [agmFitBounds]="true">
+          </agm-marker>
+
+          <agm-polyline [visible]="true" [strokeWeight]="3"
+            [strokeColor]="'#07b57a'">
+
+            <agm-polyline-point *ngFor="let studentBusItem of studentBusTSP; let i=index"
+            [latitude]="studentBusItem.lat" [longitude]="studentBusItem.lng">
+            </agm-polyline-point>
+
+          </agm-polyline>
+        </agm-map>
+      </div>
+    </div>
+
+  </div>
+</div>

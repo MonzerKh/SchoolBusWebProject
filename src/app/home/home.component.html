@@ -72,12 +72,26 @@
           <mat-icon matListIcon class="mat-18">person</mat-icon>
           <button mat-button>Driver</button>
         </mat-list-item>
+
+        <!--student-bus-list  list-->
+        <mat-list-item routerLink="/student-bus-list">
+          <mat-icon matListIcon class="mat-18">departure_board</mat-icon>
+          <button mat-button>Student Bus-List</button>
+        </mat-list-item>
+
+        <!--google map  list-->
+        <mat-list-item routerLink="/google-map">
+          <mat-icon matListIcon class="mat-18">Location_on</mat-icon>
+          <button mat-button>google-map</button>
+        </mat-list-item>
+
+
       </mat-nav-list>
 
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="warn" >
+    <mat-toolbar color="warn">
       <button type="button" aria-label="Toggle sidenav" mat-icon-button
         (click)="drawer.toggle()" *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>

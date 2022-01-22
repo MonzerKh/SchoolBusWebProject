@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
 import { RouterModule } from "@angular/router";
+import { AgmCoreModule,AgmMap } from '@agm/core';
 import { JwtInterceptor } from './_interceptors/jwt.interceptor';
 import { LoadingInterceptor } from "./_interceptors/loading.interceptor";
 import { MaterialModule } from './material/material.module';
@@ -34,17 +35,16 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { AgmCoreModule,AgmMap } from '@agm/core';
 import { SupervisorCreateComponent } from './supervisor/supervisor-create/supervisor-create.component';
 import { SupervisorListComponent } from './supervisor/supervisor-list/supervisor-list.component';
-// import { google } from "google-maps";
-import { google } from 'google-maps';
 import { BusCreateComponent } from './buses/bus-create/bus-create.component';
 import { BusListComponent } from './buses/bus-list/bus-list.component';
 import { DriverCreateComponent } from './drivers/driver-create/driver-create.component';
 import { DriverListComponent } from './drivers/driver-list/driver-list.component';
 import { StudentBusComponent } from './students-buses/student-bus/student-bus.component';
 import { ImageComponent } from './shared/ImageComponents/image/image.component';
+// import { GoogleMapComponent } from './_googleMap/google-map/google-map.component';
+import { StudentBusListComponent } from './students-buses/student-bus-list/student-bus-list.component';
 
 @NgModule({
     declarations: [
@@ -72,7 +72,9 @@ import { ImageComponent } from './shared/ImageComponents/image/image.component';
         DriverCreateComponent,
         DriverListComponent,
         StudentBusComponent,
-        ImageComponent
+        ImageComponent,
+        // GoogleMapComponent,
+        StudentBusListComponent
     ],
     imports: [
         BrowserModule,
@@ -91,9 +93,12 @@ import { ImageComponent } from './shared/ImageComponents/image/image.component';
         MatCheckboxModule,
         MatProgressBarModule,
          AgmCoreModule.forRoot({
-           apiKey: 'AIzaSyAF_sSGzXAL_oKh-GJQkTjsDAKttN2UAug',
-           libraries: ['places']
+           apiKey: 'AIzaSyC2SQnvRvx0B820_DWvYNZDwMgbnQzl79w',
+           libraries: ['places', 'drawing', 'geometry']
          }),
+
+
+
 
 
     ],
