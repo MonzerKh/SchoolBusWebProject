@@ -19,7 +19,7 @@
             <div class="stats">
 
               <button mat-raised-button
-                (click)="showStudentBusLists(school.id)">Show Buses</button>
+                (click)="getSchoolBusList(school.id)">Show Buses</button>
             </div>
           </div>
         </div>
@@ -36,7 +36,7 @@
               <mat-icon>directions_bus</mat-icon>
             </div>
             <!-- <p class="card-category">{{school.school_Name}}</p> -->
-            <h3 class="card-title">{{studentBus.bus_Marka_Number}}</h3>
+            <h3 class="card-title">{{studentBus.number}}</h3>
           </div>
           <div class="card-footer">
             <div class="stats">
@@ -67,6 +67,19 @@
         </div>
       </div>
 
+    </div>
+    <div class="row">
+      <div class="col-md-12 buttotns">
+        <div class="button-item">
+          <button mat-raised-button (click)="createPracticalShortPath()" color="primary">Practical Short Path</button>
+        </div>
+        <div class="button-item">
+          <button mat-raised-button (click)="createMathmaticalShortPath()" color="primary">Mathmatical Short Path</button>
+        </div>
+
+
+
+      </div>
     </div>
 
     <div class="row">
@@ -101,24 +114,6 @@
           <button (click)="zoomOut()">Zoom out</button>
         </div>
 
-        <!-- <agm-map [latitude]="lat" [longitude]="lng" [fullscreenControl]='true'
-          [mapTypeControl]='true' [fitBounds]="true">
-
-          <agm-marker *ngFor="let studentBusItem of studentBusTSP; let i=index"
-            [latitude]="studentBusItem.lat" [longitude]="studentBusItem.lng"
-            [agmFitBounds]="true">
-          </agm-marker>
-
-          <agm-polyline [visible]="true" [strokeWeight]="3"
-            [strokeColor]="'#07b57a'">
-
-            <agm-polyline-point
-              *ngFor="let studentBusItem of studentBusTSP; let i=index"
-              [latitude]="studentBusItem.lat" [longitude]="studentBusItem.lng">
-            </agm-polyline-point>
-
-          </agm-polyline>
-        </agm-map> -->
       </div>
     </div>
 

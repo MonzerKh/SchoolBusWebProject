@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiUrl: 'https://busschool.itm-techsoft.com/api/',
-  apiUrl: 'https://localhost:44344/api/',
+  apiUrl: 'https://busschool.itm-techsoft.com/api/',
+  // apiUrl: 'https://localhost:44344/api/',
   apiKey: 'AIzaSyDIQ_Pz_jj5Ylht3F1E5YrxHqXrS-UvWuM',
 };
 

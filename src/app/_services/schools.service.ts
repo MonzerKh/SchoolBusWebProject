@@ -68,7 +68,7 @@ export class SchoolsService {
 
   getSchoolList() {
     return this.http
-      .get<SchoolDto[]>(this.baseUrl + 'School/GetSchoolList')
+      .get<SchoolDto[]>(this.baseUrl + 'School/GetSchool')
       .pipe(
         map((response) => {
           return response;

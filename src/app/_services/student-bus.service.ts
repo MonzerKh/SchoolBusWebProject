@@ -53,8 +53,8 @@ export class StudentBusService {
     });
   }
 
-  getStudentBusList(scool_Id: number){
-    return this.http.get<StudentBusList[]>(this.baseUrl+'Student_Bus/GetStudentBusList').pipe(map(response=>{
+  getSchoolBusList(scool_Id: number){
+    return this.http.get<StudentBusList[]>(this.baseUrl+'Student_Bus/GetBusBySchool?School_Id='+scool_Id).pipe(map(response=>{
       // response.bus_Id== id;
       return response;
     }))
