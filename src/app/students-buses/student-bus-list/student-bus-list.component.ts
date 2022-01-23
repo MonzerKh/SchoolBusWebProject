@@ -2,13 +2,22 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SchoolDto } from 'src/app/models/schoolDto';
 import { SchoolsService } from 'src/app/_services/schools.service';
 import { StudentBusService } from 'src/app/_services/student-bus.service';
-import { GoogleMap, MapDirectionsService, MapInfoWindow, MapMarker } from '@angular/google-maps';
-import { StudentBusDto, StudentBusList, StudentBusTSP, StudentMarker } from '../../models/studentBusDto';
+import {
+  GoogleMap,
+  MapDirectionsService,
+  MapInfoWindow,
+  MapMarker,
+} from '@angular/google-maps';
+import {
+  StudentBusDto,
+  StudentBusList,
+  StudentBusTSP,
+  StudentMarker,
+} from '../../models/studentBusDto';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 declare const google: any;
-
 
 @Component({
   selector: 'app-student-bus-list',
@@ -23,21 +32,19 @@ export class StudentBusListComponent implements OnInit {
   schools: SchoolDto[] = [];
   SchoolSel!: SchoolDto;
   studentBuses: StudentBusList[] = [];
-  BusSel!: StudentBusList;
+  BusSel: StudentBusList={} as StudentBusList;
   bulkStudentBus: StudentBusList[] = [];
   studentBusTSP: StudentBusTSP[] = [];
   lat!: number;
   lng!: number;
   googleMapType = 'satellite';
-  directionsResults$: Observable<google.maps.DirectionsResult | undefined> | undefined;
-
+  directionsResults$:
+    | Observable<google.maps.DirectionsResult | undefined>
+    | undefined;
+  practicalPointList: google.maps.DirectionsWaypoint[] = [];
   mathmaticalPointList: google.maps.DirectionsWaypoint[] = [];
-  // selectedArea = 0;
-  // drawingManager: any;
-
-  infoContent = "";
-
   studentMarkers: google.maps.Marker[] = [];
+  infoContent = '';
 
   zoom = 14;
   center!: google.maps.LatLngLiteral;
@@ -53,65 +60,69 @@ export class StudentBusListComponent implements OnInit {
     minZoom: 0,
   };
 
-  getPosition(lat: number, lng: number) {
-    return { lat: 40.98309619, lng: 28.72480765 };
+  getcurrentPosition() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        return { lat: position.coords.latitude,lng: position.coords.longitude}
+      });
+    }
   }
 
-  path: google.maps.DirectionsWaypoint[] = [
+  // path: google.maps.DirectionsWaypoint[] = [
 
-    // {
-    //   location: google.maps.LatLng({lat:40.98309619, lng:28.72480765}, true) ,
-    //   stopover: true
-    // },
-    {
-      location: new google.maps.LatLng({ lat: 40.97440853, lng: 28.71475396 }, true),
-      stopover: true
-    },
-    {
-      location: new google.maps.LatLng({ lat: 40.97199236, lng: 28.72693062 }, true),
-      stopover: true
-    },
-    // {
-    //   location:new google.maps.LatLng({ lat: 40.98350193, lng: 28.731941 }, true) ,
-    //   stopover: true
-    // },
-    {
-      location: new google.maps.LatLng({ lat: 40.98121972, lng: 28.74447228 }, true),
-      stopover: true
-    },
-    {
-      location: new google.maps.LatLng({ lat: 40.97631794, lng: 28.72748852 }, true),
-      stopover: true
+  //   // {
+  //   //   location:new google.maps.LatLng({lat:40.98309619, lng:28.72480765}, true) ,
+  //   //   stopover: true
+  //   // },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.97440853, lng: 28.71475396 }, true),
+  //     stopover: true
+  //   },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.97199236, lng: 28.72693062 }, true),
+  //     stopover: true
+  //   },
+  //   // {
+  //   //   location:new google.maps.LatLng({ lat: 40.98350193, lng: 28.731941 }, true) ,
+  //   //   stopover: true
+  //   // },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.98121972, lng: 28.74447228 }, true),
+  //     stopover: true
+  //   },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.97631794, lng: 28.72748852 }, true),
+  //     stopover: true
 
-    },
-    {
-      location: new google.maps.LatLng({ lat: 40.98174476, lng: 28.71384144 }, true),
-      stopover: true
-    },
-    {
-      location: new google.maps.LatLng({ lat: 40.97393648, lng: 28.7103653 }, true),
-      stopover: true
-    }, {
-      location: new google.maps.LatLng({ lat: 40.97490851, lng: 28.74289513 }, true),
-      stopover: true
-    },
-    {
-      location: new google.maps.LatLng({ lat: 40.98822445, lng: 28.71504214 }, true),
-      stopover: true
-    },
-    {
-      location: new google.maps.LatLng({ lat: 40.98146987, lng: 28.73096373 }, true),
-      stopover: true
-    },
-    {
-      location: new google.maps.LatLng({ lat: 40.98278556, lng: 28.7031975 }, true),
-      stopover: true
-    },
-    {
-      location: new google.maps.LatLng({ lat: 40.97973836, lng: 28.72929003 }, true),
-      stopover: true
-    }
-  ]
+  //   },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.98174476, lng: 28.71384144 }, true),
+  //     stopover: true
+  //   },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.97393648, lng: 28.7103653 }, true),
+  //     stopover: true
+  //   }, {
+  //     location: new google.maps.LatLng({ lat: 40.97490851, lng: 28.74289513 }, true),
+  //     stopover: true
+  //   },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.98822445, lng: 28.71504214 }, true),
+  //     stopover: true
+  //   },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.98146987, lng: 28.73096373 }, true),
+  //     stopover: true
+  //   },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.98278556, lng: 28.7031975 }, true),
+  //     stopover: true
+  //   },
+  //   {
+  //     location: new google.maps.LatLng({ lat: 40.97973836, lng: 28.72929003 }, true),
+  //     stopover: true
+  //   }
+  // ]
 
   // studentMarker = [
   //   {
@@ -209,13 +220,11 @@ export class StudentBusListComponent implements OnInit {
   //   { lat: 40.98121972, lng: 28.74447228 },
   // ];
 
-
-
   constructor(
     private schoolService: SchoolsService,
     private studentBusService: StudentBusService,
     private mapDirectionsService: MapDirectionsService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // this.initMap();
@@ -226,7 +235,7 @@ export class StudentBusListComponent implements OnInit {
   private loadSchoolList() {
     this.schoolService.getSchoolList2().subscribe(
       (res) => {
-        this.schools = res.filter(x => x.busCount > 0);
+        this.schools = res.filter((x) => x.busCount > 0);
         this.isLoading = true;
       },
       (error) => {
@@ -241,7 +250,7 @@ export class StudentBusListComponent implements OnInit {
     this.SchoolSel = school;
     this.studentBusService.getSchoolBusList(school.id).subscribe(
       (response) => {
-        this.studentBuses = response.filter(x => x.studentCount > 0);
+        this.studentBuses = response.filter((x) => x.studentCount > 0);
         this.isLoading = true;
       },
       (error) => {
@@ -250,7 +259,6 @@ export class StudentBusListComponent implements OnInit {
       }
     );
   }
-
 
   showBulkStudentBusLists(bus: StudentBusList) {
     this.isLoading = false;
@@ -258,24 +266,7 @@ export class StudentBusListComponent implements OnInit {
     this.studentBusService.getBulkStudentBusDetails(bus.bus_Id).subscribe(
       (response) => {
         this.bulkStudentBus = response;
-        this.isLoading = true;
         this.createPracticalShortPath();
-      },
-      (error) => {
-        console.log(error);
-        this.isLoading = true;
-      }
-    );
-
-
-    // this.getStudentBusTSP(bus_Id);
-  }
-
-  getStudentBusTSP(bus_Id: number) {
-    this.isLoading = false;
-    this.studentBusService.getStudentBusTSP(bus_Id).subscribe(
-      (response) => {
-        this.studentBusTSP = response;
         this.isLoading = true;
       },
       (error) => {
@@ -283,65 +274,93 @@ export class StudentBusListComponent implements OnInit {
         this.isLoading = true;
       }
     );
-
-    for (let i = 0; i < this.studentBusTSP.length; i++) {
-      this.mathmaticalPointList[i].location = new google.maps.LatLng({ lat: this.studentBusTSP[i].lat, lng: this.studentBusTSP[i].lng }, true);
-      this.mathmaticalPointList[i].stopover = true;
-    }
-
-    // this.createMathmaticalShortPath();
   }
-
-  practicalPointList: google.maps.DirectionsWaypoint[] = []
 
   createPracticalShortPath() {
-
     this.practicalPointList = [];
-    this.studentMarkers =[];
+    this.studentMarkers = [];
 
     for (let i = 0; i < this.bulkStudentBus.length; i++) {
-      this.practicalPointList.push(
-        {
-          location: new google.maps.LatLng(
-            {
-              lat: this.bulkStudentBus[i].lat,
-              lng: this.bulkStudentBus[i].lng
-            }, true),
-          stopover: true
-        }
+      this.practicalPointList.push({
+        location: new google.maps.LatLng(
+          {
+            lat: this.bulkStudentBus[i].lat,
+            lng: this.bulkStudentBus[i].lng,
+          },
+          true
+        ),
+        stopover: true,
+      });
+      this.studentMarkers.push(
+        new google.maps.Marker({
+          position: {
+            lat: this.bulkStudentBus[i].lat,
+            lng: this.bulkStudentBus[i].lng,
+          },
+          label: {
+            color: 'darkblue',
+            text: this.bulkStudentBus[i].student_Full_Name,
+          },
+        })
       );
-
-
-      this.studentMarkers.push(new google.maps.Marker({
-
-        position: { lat: this.bulkStudentBus[i].lat, lng: this.bulkStudentBus[i].lng },
-        label: {
-          color: "darkblue",
-          text: this.bulkStudentBus[i].student_Full_Name
-        },
-
-
-      }));
-
-
     }
 
-
     const request: google.maps.DirectionsRequest = {
-      destination: { lat: 41.98309619, lng: 28.72480765 },
-      origin: { lat: 40.98350193, lng: 27.731941 },
+      destination: { lat: 40.98309619, lng: 28.72480765 },
+      origin: { lat: 40.98350193, lng: 28.731941 },
       travelMode: google.maps.TravelMode.DRIVING,
       waypoints: this.practicalPointList,
       optimizeWaypoints: true,
     };
-
     this.directionsResults$ = this.mapDirectionsService
       .route(request)
       .pipe(map((response) => response.result));
+  }
 
+  getStudentBusTSP() {
+    this.isLoading = false;
+
+    this.studentBusService.getStudentBusTSP(this.BusSel.bus_Id).subscribe(
+      (response) => {
+        this.studentBusTSP = response;
+        this.createMathmaticalShortPath();
+        this.isLoading = true;
+      },
+      (error) => {
+        console.log(error);
+        this.isLoading = true;
+      }
+    );
   }
 
   createMathmaticalShortPath() {
+    this.mathmaticalPointList = [];
+    this.studentMarkers = [];
+
+    for (let i = 0; i < this.studentBusTSP.length; i++) {
+      this.mathmaticalPointList.push({
+        location: new google.maps.LatLng(
+          {
+            lat: this.studentBusTSP[i].lat,
+            lng: this.studentBusTSP[i].lng,
+          },
+          true
+        ),
+        stopover: true,
+      });
+      this.studentMarkers.push(
+        new google.maps.Marker({
+          position: {
+            lat: this.studentBusTSP[i].lat,
+            lng: this.studentBusTSP[i].lng,
+          },
+          label: {
+            color: 'darkblue',
+            text: this.studentBusTSP[i].full_Name,
+          },
+        })
+      );
+    }
     const request: google.maps.DirectionsRequest = {
       destination: { lat: 40.98309619, lng: 28.72480765 },
       origin: { lat: 40.98350193, lng: 28.731941 },
@@ -352,7 +371,6 @@ export class StudentBusListComponent implements OnInit {
     this.directionsResults$ = this.mapDirectionsService
       .route(request)
       .pipe(map((response) => response.result));
-
   }
 
   private setCurrentPosition() {
@@ -364,14 +382,6 @@ export class StudentBusListComponent implements OnInit {
         };
       });
     }
-  }
-
-  zoomIn() {
-    if (this.zoom < this.options.maxZoom!) this.zoom++;
-  }
-
-  zoomOut() {
-    if (this.zoom > this.options.minZoom!) this.zoom--;
   }
 
   openInfo(marker: MapMarker, info: string) {
@@ -540,4 +550,3 @@ export class StudentBusListComponent implements OnInit {
   //   );
   // }
 }
-

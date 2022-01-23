@@ -5,46 +5,35 @@
     </div>
 
     <div>
+      <!-- School_list row befor select School-->
       <div class="row school-list" *ngIf="!SchoolSel">
         <div class="col-lg-2 col-md-3 col-sm-3" *ngFor="let school of schools">
 
           <div class="card" (click)="getSchoolBusList(school)">
             <div class="card-header">
-              <!-- <div class="card-icon">
-                <mat-icon>school</mat-icon>
-              </div> -->
-              <!-- <p class="card-category">{{school.school_Name}}</p> -->
               <div>
                 <h3 class="card-title">School : {{school.school_Name}}</h3>
                 <h3 class="card-title"> Buses : {{school.busCount}}</h3>
                 <h3 class="card-title">Students : {{school.studentCount}}</h3>
               </div>
-
             </div>
             <div class="card-footer">
               <div class="stats">
-
               </div>
             </div>
           </div>
         </div>
-
       </div>
 
 
-      <!--school-list-->
+      <!--school-list After selecting school-->
       <div class="row">
         <div class="card-header col-md-2" *ngIf="SchoolSel">
-          <!-- <div class="card-icon">
-              <mat-icon>school</mat-icon>
-            </div> -->
-          <!-- <p class="card-category">{{school.school_Name}}</p> -->
           <div>
             <h3 class="card-title">School : {{SchoolSel.school_Name}}</h3>
             <h3 class="card-title"> Buses : {{SchoolSel.busCount}}</h3>
             <h3 class="card-title">Students : {{SchoolSel.studentCount}}</h3>
           </div>
-
         </div>
 
         <div class="col-md-9">
@@ -53,33 +42,22 @@
             <div class="col-3" *ngFor="let studentBus of studentBuses">
               <div class="card" (click)="showBulkStudentBusLists(studentBus)">
                 <div class="card-header">
-
                   <div>
                     <h3 class="card-title"> Bus: {{studentBus.number}} - {{studentBuses.marka}}</h3>
                     <h3 class="card-title"> Students: {{studentBus.studentCount}}</h3>
                   </div>
-
                 </div>
                 <div class="card-footer">
                   <div class="stats">
-                    <button mat-raised-button>Show
-                      Students</button>
+                    <!-- <button mat-raised-button>Show Students</button> -->
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
-
-
       </div>
-
-
     </div>
-
-
-
 
     <mat-tab-group dynamicHeight >
       <mat-tab label="Google Map">
@@ -90,12 +68,9 @@
                 Path</button>
             </div>
             <div class="button-item">
-              <button mat-raised-button (click)="createMathmaticalShortPath()" color="primary">Mathmatical Short
+              <button mat-raised-button (click)="getStudentBusTSP()" color="primary">Mathmatical Short
                 Path</button>
             </div>
-
-
-
           </div>
         </div>
 
@@ -105,17 +80,17 @@
             <div class="my-google-map" style="width: 100%; height: 100%;">
               <google-map height="700px" width="100%" [zoom]="zoom" [center]="center" >
 
-                 <map-marker *ngFor="let marker of studentMarkers"
+                 <!-- <map-marker *ngFor="let marker of studentMarkers"
                   [position]="marker.position"
                   [label]="marker.label"
                   [title]="marker.label"
                   >
-                </map-marker>
+                </map-marker> -->
 
                 <map-directions-renderer *ngIf="(directionsResults$ | async) as directionsResults"
-                  [directions]="directionsResults$">
+                  [directions]="directionsResults">
                 </map-directions-renderer>
-                <!-- <map-polyline *ngFor="let marker of studentMarker" [path]="vertices"></map-polyline> -->
+                <!-- <map-polyline *ngFor="let marker of studentMarkers" [path]="vertices"></map-polyline> -->
 
                 <map-info-window>
                   {{infoContent}}
