@@ -16,6 +16,7 @@ import {
 } from '../../models/studentBusDto';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Position } from 'src/app/models/positionDto';
 
 declare const google: any;
 
@@ -32,7 +33,7 @@ export class StudentBusListComponent implements OnInit {
   schools: SchoolDto[] = [];
   SchoolSel!: SchoolDto;
   studentBuses: StudentBusList[] = [];
-  BusSel: StudentBusList={} as StudentBusList;
+  BusSel: StudentBusList = {} as StudentBusList;
   bulkStudentBus: StudentBusList[] = [];
   studentBusTSP: StudentBusTSP[] = [];
   lat!: number;
@@ -41,11 +42,14 @@ export class StudentBusListComponent implements OnInit {
   directionsResults$:
     | Observable<google.maps.DirectionsResult | undefined>
     | undefined;
+    // currentPosition$: | Observable<google.maps.LatLng| undefined>| undefined;
   practicalPointList: google.maps.DirectionsWaypoint[] = [];
   mathmaticalPointList: google.maps.DirectionsWaypoint[] = [];
   studentMarkers: google.maps.Marker[] = [];
+  pathPolyline!: google.maps.Polyline;
+  vertices:Position[]=[];
+  currentPosition:Position={}as Position;
   infoContent = '';
-
   zoom = 14;
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
@@ -63,10 +67,13 @@ export class StudentBusListComponent implements OnInit {
   getcurrentPosition() {
     if ('geolocation' in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        return { lat: position.coords.latitude,lng: position.coords.longitude}
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
+    //    return { lat: position.coords.latitude,lng: position.coords.longitude}
       });
     }
   }
+
 
   // path: google.maps.DirectionsWaypoint[] = [
 
@@ -212,13 +219,13 @@ export class StudentBusListComponent implements OnInit {
   //   },
   // ];
 
-  // vertices: google.maps.LatLngLiteral[] = [
-  //   { lat: 40.98309619, lng: 28.72480765 },
-  //   { lat: 40.97440853, lng: 28.71475396 },
-  //   { lat: 40.97199236, lng: 28.72693062 },
-  //   { lat: 40.98350193, lng: 28.731941 },
-  //   { lat: 40.98121972, lng: 28.74447228 },
-  // ];
+  verticess: google.maps.LatLngLiteral[] = [
+    { lat: 40.98309619, lng: 28.72480765 },
+    { lat: 40.97440853, lng: 28.71475396 },
+    { lat: 40.97199236, lng: 28.72693062 },
+    { lat: 40.98350193, lng: 28.731941 },
+    { lat: 40.98121972, lng: 28.74447228 },
+  ];
 
   constructor(
     private schoolService: SchoolsService,
@@ -230,6 +237,7 @@ export class StudentBusListComponent implements OnInit {
     // this.initMap();
     this.setCurrentPosition();
     this.loadSchoolList();
+    this.getcurrentPosition()
   }
 
   private loadSchoolList() {
@@ -279,6 +287,7 @@ export class StudentBusListComponent implements OnInit {
   createPracticalShortPath() {
     this.practicalPointList = [];
     this.studentMarkers = [];
+    this.vertices = [];
 
     for (let i = 0; i < this.bulkStudentBus.length; i++) {
       this.practicalPointList.push({
@@ -304,10 +313,12 @@ export class StudentBusListComponent implements OnInit {
         })
       );
     }
-
+    this.getcurrentPosition()
     const request: google.maps.DirectionsRequest = {
-      destination: { lat: 40.98309619, lng: 28.72480765 },
-      origin: { lat: 40.98350193, lng: 28.731941 },
+      origin:  { lat: 40.97309620, lng: 28.71480766 },
+      destination: { lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! },
+      // origin:  { lat: 40.98907847, lng: 28.72452736 },
+      // destination: { lat: 40.98907847, lng: 28.72452736 },
       travelMode: google.maps.TravelMode.DRIVING,
       waypoints: this.practicalPointList,
       optimizeWaypoints: true,
@@ -320,7 +331,7 @@ export class StudentBusListComponent implements OnInit {
   getStudentBusTSP() {
     this.isLoading = false;
 
-    this.studentBusService.getStudentBusTSP(this.BusSel.bus_Id).subscribe(
+    this.studentBusService.getStudentBusTSP(this.BusSel.bus_Id,this.SchoolSel.id).subscribe(
       (response) => {
         this.studentBusTSP = response;
         this.createMathmaticalShortPath();
@@ -336,6 +347,7 @@ export class StudentBusListComponent implements OnInit {
   createMathmaticalShortPath() {
     this.mathmaticalPointList = [];
     this.studentMarkers = [];
+    this.vertices = [];
 
     for (let i = 0; i < this.studentBusTSP.length; i++) {
       this.mathmaticalPointList.push({
@@ -348,6 +360,7 @@ export class StudentBusListComponent implements OnInit {
         ),
         stopover: true,
       });
+
       this.studentMarkers.push(
         new google.maps.Marker({
           position: {
@@ -360,10 +373,18 @@ export class StudentBusListComponent implements OnInit {
           },
         })
       );
+
+      this.vertices.push(
+        {
+           lat:this.studentBusTSP[i].lat,
+           lng:this.studentBusTSP[i].lng,
+        })
+
     }
+    this.getcurrentPosition();
     const request: google.maps.DirectionsRequest = {
-      destination: { lat: 40.98309619, lng: 28.72480765 },
-      origin: { lat: 40.98350193, lng: 28.731941 },
+      destination: { lat: 40.97309620, lng: 28.71480766 },
+      origin: { lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! },
       travelMode: google.maps.TravelMode.DRIVING,
       waypoints: this.mathmaticalPointList,
       optimizeWaypoints: true,

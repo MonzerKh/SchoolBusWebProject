@@ -67,8 +67,8 @@ export class StudentBusService {
     }))
   }
 
-  getStudentBusTSP(bus_Id: number){
-    return this.http.get<StudentBusTSP[]>(this.baseUrl+'Student_Bus/GetStudentBusTSP?bus_Id='+bus_Id).pipe(map(response=>{
+  getStudentBusTSP(bus_Id: number , school_Id: number){
+    return this.http.get<StudentBusTSP[]>(this.baseUrl+'Student_Bus/GetStudentBusTSP?IsActive=true&bus_Id='+bus_Id+'&school_Id='+school_Id).pipe(map(response=>{
       return response;
     }))
   }
