@@ -38,11 +38,11 @@ export class StudentBusListComponent implements OnInit {
   studentBusTSP: StudentBusTSP[] = [];
   lat!: number;
   lng!: number;
+  tripType: string='FromSchool';
   googleMapType = 'satellite';
   directionsResults$:
     | Observable<google.maps.DirectionsResult | undefined>
     | undefined;
-    // currentPosition$: | Observable<google.maps.LatLng| undefined>| undefined;
   practicalPointList: google.maps.DirectionsWaypoint[] = [];
   mathmaticalPointList: google.maps.DirectionsWaypoint[] = [];
   studentMarkers: google.maps.Marker[] = [];
@@ -51,6 +51,7 @@ export class StudentBusListComponent implements OnInit {
   currentPosition:Position={}as Position;
   infoContent = '';
   zoom = 14;
+
   center!: google.maps.LatLngLiteral;
   options: google.maps.MapOptions = {
     // mapTypeId: 'hybrid',
@@ -69,155 +70,9 @@ export class StudentBusListComponent implements OnInit {
       navigator.geolocation.getCurrentPosition((position) => {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
-    //    return { lat: position.coords.latitude,lng: position.coords.longitude}
       });
     }
   }
-
-
-  // path: google.maps.DirectionsWaypoint[] = [
-
-  //   // {
-  //   //   location:new google.maps.LatLng({lat:40.98309619, lng:28.72480765}, true) ,
-  //   //   stopover: true
-  //   // },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.97440853, lng: 28.71475396 }, true),
-  //     stopover: true
-  //   },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.97199236, lng: 28.72693062 }, true),
-  //     stopover: true
-  //   },
-  //   // {
-  //   //   location:new google.maps.LatLng({ lat: 40.98350193, lng: 28.731941 }, true) ,
-  //   //   stopover: true
-  //   // },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.98121972, lng: 28.74447228 }, true),
-  //     stopover: true
-  //   },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.97631794, lng: 28.72748852 }, true),
-  //     stopover: true
-
-  //   },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.98174476, lng: 28.71384144 }, true),
-  //     stopover: true
-  //   },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.97393648, lng: 28.7103653 }, true),
-  //     stopover: true
-  //   }, {
-  //     location: new google.maps.LatLng({ lat: 40.97490851, lng: 28.74289513 }, true),
-  //     stopover: true
-  //   },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.98822445, lng: 28.71504214 }, true),
-  //     stopover: true
-  //   },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.98146987, lng: 28.73096373 }, true),
-  //     stopover: true
-  //   },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.98278556, lng: 28.7031975 }, true),
-  //     stopover: true
-  //   },
-  //   {
-  //     location: new google.maps.LatLng({ lat: 40.97973836, lng: 28.72929003 }, true),
-  //     stopover: true
-  //   }
-  // ]
-
-  // studentMarker = [
-  //   {
-  //     id: 35,
-  //     full_Name: 'hurria',
-  //     phone: '05558887799',
-  //     lat: 40.98309619,
-  //     lng: 28.72480765,
-  //     position: { lat: 40.98309619, lng: 28.72480765 },
-  //     label: {
-  //       color: "blue",
-  //       text: "Marker Label"
-  //     },
-  //     title: "1",
-  //     info: "Marker info",
-  //     options: {
-  //       animation: google.maps.Animation.BOUNCE
-  //     }
-  //   },
-  //   {
-  //     id: 40,
-  //     full_Name: 'Aygül Can',
-  //     phone: '0556664332',
-  //     lat: 40.97440853,
-  //     lng: 28.71475396,
-  //     position: { lat: 40.97440853, lng: 28.71475396 },
-  //     label: {
-  //       color: "blue",
-  //       text: "Marker Label"
-  //     },
-  //     title: "2",
-  //     info: "Marker info",
-  //     options: {
-  //       animation: google.maps.Animation.BOUNCE
-  //     }
-  //   },
-  //   {
-  //     id: 39,
-  //     full_Name: 'Nazli Tekin',
-  //     phone: '05566332211',
-  //     lat: 40.97199236,
-  //     lng: 28.72693062,
-  //     position: { lat: 40.97199236, lng: 28.72693062 },
-  //     label: {
-  //       color: "blue",
-  //       text: "Marker Label"
-  //     },
-  //     title: "3",
-  //     info: "Marker info",
-  //     options: {
-  //       animation: google.maps.Animation.BOUNCE
-  //     }
-  //   },
-  //   {
-  //     id: 43,
-  //     full_Name: 'Yağmur Kaya',
-  //     phone: '05564432344',
-  //     lat: 40.98350193,
-  //     lng: 28.731941,
-  //     position: { lat: 40.98350193, lng: 28.731941 },
-  //     label: {
-  //       color: "blue",
-  //       text: "Marker Label"
-  //     },
-  //     title: "4",
-  //     info: "Marker info",
-  //     options: {
-  //       animation: google.maps.Animation.BOUNCE
-  //     }
-  //   },
-  //   {
-  //     id: 42,
-  //     full_Name: 'Derya  Aydin',
-  //     phone: '05564432344',
-  //     lat: 40.98121972,
-  //     lng: 28.74447228,
-  //     position: { lat: 40.98121972, lng: 28.74447228 },
-  //     label: {
-  //       color: "blue",
-  //       text: "Marker Label"
-  //     },
-  //     title: "5",
-  //     info: "Marker info",
-  //     options: {
-  //       animation: google.maps.Animation.BOUNCE
-  //     }
-  //   },
-  // ];
 
   verticess: google.maps.LatLngLiteral[] = [
     { lat: 40.98309619, lng: 28.72480765 },
@@ -274,7 +129,7 @@ export class StudentBusListComponent implements OnInit {
     this.studentBusService.getBulkStudentBusDetails(bus.bus_Id).subscribe(
       (response) => {
         this.bulkStudentBus = response;
-        this.createPracticalShortPath();
+        // this.createPracticalShortPath();
         this.isLoading = true;
       },
       (error) => {
@@ -315,8 +170,8 @@ export class StudentBusListComponent implements OnInit {
     }
     this.getcurrentPosition()
     const request: google.maps.DirectionsRequest = {
-      origin:  { lat: 40.97309620, lng: 28.71480766 },
-      destination: { lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! },
+      origin: this.tripType=="FromSchool"?{ lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! }: { lat: 40.97309620, lng: 28.71480766 },
+      destination: this.tripType=="FromSchool"?{ lat: 40.97309620, lng: 28.71480766 }:{ lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! },
       // origin:  { lat: 40.98907847, lng: 28.72452736 },
       // destination: { lat: 40.98907847, lng: 28.72452736 },
       travelMode: google.maps.TravelMode.DRIVING,
