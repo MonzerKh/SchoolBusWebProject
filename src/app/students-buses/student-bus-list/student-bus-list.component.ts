@@ -29,6 +29,9 @@ export class StudentBusListComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map!: GoogleMap;
   @ViewChild(MapInfoWindow, { static: false }) info!: MapInfoWindow;
 
+   directionsService = new google.maps.DirectionsService();
+   directionsRenderer = new google.maps.DirectionsRenderer();
+
   isLoading: boolean = false;
   schools: SchoolDto[] = [];
   SchoolSel!: SchoolDto;
@@ -169,18 +172,52 @@ export class StudentBusListComponent implements OnInit {
       );
     }
     this.getcurrentPosition()
+    this.calculateAndDisplayRoute();
     const request: google.maps.DirectionsRequest = {
       origin: this.tripType=="FromSchool"?{ lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! }: { lat: 40.97309620, lng: 28.71480766 },
       destination: this.tripType=="FromSchool"?{ lat: 40.97309620, lng: 28.71480766 }:{ lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! },
       // origin:  { lat: 40.98907847, lng: 28.72452736 },
       // destination: { lat: 40.98907847, lng: 28.72452736 },
-      travelMode: google.maps.TravelMode.DRIVING,
       waypoints: this.practicalPointList,
+      travelMode: google.maps.TravelMode.DRIVING,
       optimizeWaypoints: true,
     };
     this.directionsResults$ = this.mapDirectionsService
       .route(request)
       .pipe(map((response) => response.result));
+  }
+
+  calculateAndDisplayRoute() {
+    this.directionsService
+      .route({
+        origin: this.tripType=="FromSchool"?{ lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! }: { lat: 40.97309620, lng: 28.71480766 },
+        destination: this.tripType=="FromSchool"?{ lat: 40.97309620, lng: 28.71480766 }:{ lat: this.SchoolSel.lat!, lng: this.SchoolSel.lng! },
+        waypoints: this.practicalPointList,
+        optimizeWaypoints: true,
+        travelMode: google.maps.TravelMode.DRIVING,
+      })
+      .then((response: { routes: any[]; }) => {
+        this.directionsRenderer.setDirections(response);
+
+        const route = response.routes[0];
+        const summaryPanel = document.getElementById(
+          "directions-panel"
+        ) as HTMLElement;
+
+        summaryPanel.innerHTML = "";
+
+        // For each route, display summary information.
+        for (let i = 0; i < route.legs.length; i++) {
+          const routeSegment = i + 1;
+
+          summaryPanel.innerHTML +=
+            "<b>Route Segment: " + routeSegment + "</b><br>";
+          summaryPanel.innerHTML += route.legs[i].start_address + " to ";
+          summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
+          summaryPanel.innerHTML += route.legs[i].distance!.text + "<br><br>";
+        }
+      })
+      .catch((e: any) => window.alert("Directions request failed due to " + status));
   }
 
   getStudentBusTSP() {
