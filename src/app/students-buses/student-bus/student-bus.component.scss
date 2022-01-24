@@ -42,13 +42,15 @@ table {
 // .mat-row:hover{
 //   background-color: gray;
 // }
-.mat-row:focus-visible,
-.mat-row:active{
+.mat-cell:focus-visible,
+.mat-cell:active{
   // background-color: #f44336;
   background: linear-gradient(60deg, #ef5350, #e53935);
   box-shadow: 0 4px 20px 0px rgb(0 0 0 / 20%), 0 7px 10px -5px rgb(244 67 54 / 60%);
   color:white;
 }
+
+
 
 .buttons{
   margin:10px;
@@ -101,7 +103,7 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 
 
 agm-map{
-  height: 50vh;
+  height: 70vh;
 }
 
 .agm-map-container-inner {

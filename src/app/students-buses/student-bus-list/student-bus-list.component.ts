@@ -210,8 +210,8 @@ export class StudentBusListComponent implements OnInit {
         for (let i = 0; i < route.legs.length; i++) {
           const routeSegment = i + 1;
           summaryPanel.innerHTML +=
-          // "<b>Route Segment: " + routeSegment + "</b><br>";
-          "<b>"+this.bulkStudentBus[i].student_Full_Name+": " + routeSegment + "</b><br>";
+          "<b>Route Segment: " + routeSegment + "</b><br>";
+          // "<b>"+this.bulkStudentBus[i].student_Full_Name+": " + routeSegment + "</b><br>";
           summaryPanel.innerHTML += route.legs[i].start_address + " to ";
           summaryPanel.innerHTML += route.legs[i].end_address + "<br>";
           summaryPanel.innerHTML += route.legs[i].distance!.text + "<br><br>";
@@ -237,6 +237,7 @@ export class StudentBusListComponent implements OnInit {
   }
 
   createMathmaticalShortPath() {
+    this.practicalPointList = [];
     this.mathmaticalPointList = [];
     this.studentMarkers = [];
     this.vertices = [];
